@@ -20,7 +20,7 @@ class WixMediaService(object):
         return WixMediaImage(metadata['file_url'])
 
     def _upload_to_pm_from_path(self, filepath):
-        return dict()
+        return dict(uri='uri')
 
     def _upload_to_pm_from_stream(self, fp, filename):
-        return dict()
+        return dict(uri='uri')
