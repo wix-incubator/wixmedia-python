@@ -1,7 +1,5 @@
-wixmedia-python
-===============
-
-# wixmedia-python SDK #
+wixmedia-python SDK
+===================
 
 This library allows you to upload files and perform various manipulations on uploaded images. 
 These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
