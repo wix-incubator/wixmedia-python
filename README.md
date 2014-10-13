@@ -9,7 +9,7 @@ The resulting files are saved for later usage, so image processing occurs only o
 ## License ##
 Licensed under .......
 
-## Dwnloading ##
+## Downloading ##
 
 Installing the Wixmedia package is as simple as adding it to your project's include path.  
 
