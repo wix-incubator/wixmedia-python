@@ -1,0 +1,25 @@
+application: wixmedia-example-gae
+module: default
+version: snapshot
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+- name: django
+  version: latest
+
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'settings'
+
+
+# appcfg.py update -v --oauth2 app-test.yaml
