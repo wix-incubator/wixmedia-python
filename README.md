@@ -91,8 +91,29 @@ Parameter | value | Description
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` ```[c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image. [f]: face-recognition based alignment.```
-us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` see values in the table below.
+us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. ```(default value: 0.00).```
+
+a optional values:
+Value | Description
+------|------------
+c|center of the image. 
+t|central top part of the image.
+tl|top left part of the image.
+tr|top right part of the image.
+b|central bottom part of the image. 
+bl|bottom left part of the image.
+br|bottom right part of the image. 
+l|central left part of the image. 
+r|central right part of the image. 
+f|face-recognition based alignment.
+
+us optional values:
+Value | Description
+------|------------
+r|the unsharp mask radius. default value: 0.50.
+a|the unsharp mask amount default value: 0.20
+t|the unsharp mask threshold.
 
 sample request:
 ```
@@ -133,7 +154,19 @@ Parameter | value | Description
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.```                                                                   ```[c]: Focus on the center of the image, both vertical and horizontal center.                                                      [t]: Focus on the top of the image, horizontal center.                                                                           [tl]: Focus on the top left side of the image.                                                                                   [tr]: Focus on the top right side of the image.                                                                                  [b]: Focus on the bottom of the image, horizontal center.                                                                        [bl]: Focus on the bottom left side of the image.                                                                                [br]: Focus on the bottom right side of the image.                                                                               [l]: Focus on the left side of the image, vertical center.                                                                       [r]: Focus on the right side of the image, vertical center.                                                                      [f]: Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.                                                                                          [fs]: Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.```
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.
+
+a optional values:
+Value | Description
+------|------------
+c|Focus on the center of the image, both vertical and horizontal center.
+t|Focus on the top of the image, horizontal center.
+tl|Focus on the top left side of the image.
+tr|Focus on the top right side of the image.
+b|Focus on the bottom of the image, horizontal center.
+bl|Focus on the bottom left side of the image.                                                                                br|Focus on the bottom right side of the image.                                                                               l|Focus on the left side of the image, vertical center.                                                                       r|Focus on the right side of the image, vertical center.
+f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
+fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
 Sample Request
 ```
