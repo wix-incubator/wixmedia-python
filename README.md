@@ -95,6 +95,7 @@ a (optional)|string|The position pointing the place from which to start cropping
 us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. ```(default value: 0.00).```
 
 a optional values:
+
 Value | Description
 ------|------------
 c|center of the image. 
@@ -109,6 +110,7 @@ r|central right part of the image.
 f|face-recognition based alignment.
 
 us optional values:
+
 Value | Description
 ------|------------
 r|the unsharp mask radius. default value: 0.50.
@@ -166,6 +168,7 @@ q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and
 a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.
 
 a optional values:
+
 Value | Description
 ------|------------
 c|Focus on the center of the image, both vertical and horizontal center.
