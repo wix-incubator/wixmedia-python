@@ -34,13 +34,11 @@ class WixMediaImage(object):
         self.transform_command = WixMediaImage.COMMAND_SRZ
 
         self.transform_params = {
-            "width":     width,
-            "height":    height,
-            "quality":   quality,
-            "alignment": alignment,
-            "radius":    radius,
-            "amount":    amount,
-            "threshold": threshold
+            "w":  width,
+            "h":  height,
+            "q":  quality,
+            "a":  alignment,
+            "us": "%.2f_%.2f_%.2f" % (radius, amount, threshold)
         }
 
         return self
@@ -53,12 +51,10 @@ class WixMediaImage(object):
         self.transform_command = WixMediaImage.COMMAND_SRB
 
         self.transform_params = {
-            "width":     width,
-            "height":    height,
-            "quality":   quality,
-            "radius":    radius,
-            "amount":    amount,
-            "threshold": threshold
+            "w":  width,
+            "h":  height,
+            "q":  quality,
+            "us": "%.2f_%.2f_%.2f" % (radius, amount, threshold)
         }
 
         return self
@@ -71,10 +67,10 @@ class WixMediaImage(object):
         self.transform_command = WixMediaImage.COMMAND_CANVAS
 
         self.transform_params = {
-            "width":     width,
-            "height":    height,
-            "quality":   quality,
-            "alignment": alignment
+            "w": width,
+            "h": height,
+            "q": quality,
+            "a": alignment
         }
 
         return self
@@ -87,11 +83,11 @@ class WixMediaImage(object):
         self.transform_command = WixMediaImage.COMMAND_CROP
 
         self.transform_params = {
-            "width":   width,
-            "height":  height,
-            "quality": quality,
-            "x":       x,
-            "y":       y
+            "w": width,
+            "h": height,
+            "q": quality,
+            "x": x,
+            "y": y
         }
 
         return self
@@ -104,9 +100,9 @@ class WixMediaImage(object):
         self.transform_command = WixMediaImage.COMMAND_FILL
 
         self.transform_params = {
-            "width":   width,
-            "height":  height,
-            "quality": quality
+            "w": width,
+            "h": height,
+            "q": quality
         }
 
         return self
