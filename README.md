@@ -68,6 +68,8 @@ For example:
 ```
 http://endpont.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
+generated with the python API explained below. 
+
 
 ##### Image Transformation Operations #####
 
@@ -82,7 +84,7 @@ Applies one (or more) of the following transformation operations to an image:
 
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
-```
+```python
 srz(self, w, h, q, a, radius, amount, threshold)
 ```
 
@@ -117,8 +119,8 @@ r|the unsharp mask radius. default value: 0.50.
 a|the unsharp mask amount default value: 0.20
 t|the unsharp mask threshold.
 
-####### Sample Request #######
-```
+**Sample Request**
+```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.srz(w=480, h=240, q=75, a='tl', radius=0.50, amount=1.20, threshold=0.00)
 ```
@@ -132,7 +134,7 @@ http://endpoint.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00
 Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. 
 The resulting image will maintain the same aspect ratio of the input image.
 
-```
+```python
 srb(self, w, h, q, radius, amount, threshold)
 ```
 
@@ -143,8 +145,8 @@ h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
 us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
 
-####### Sample Request #######
-```
+**Sample Request**
+```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.srb(w=480, h=240, q=75)
 ```
@@ -156,7 +158,7 @@ http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.
 
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
-```
+```python
 canvas(self, w, h, q, a)
 ```
 
@@ -180,8 +182,8 @@ bl|Focus on the bottom left side of the image.                                  
 f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-####### Sample Request ####### 
-```
+*Sample Request*
+```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.canvas(w=480, h=240, q=75, a='fs')
 ```
@@ -190,7 +192,7 @@ would generate the URL:
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75,a_fs/dog.jpg
 ```
 and:
-```
+```python
 image.canvas(w=480, h=240, q=75)
 ```
 would generate: (giving a its default values)
@@ -222,7 +224,7 @@ Enables users to apply watermark such as copyright notice in order to protect th
 
 Enables users to apply watermark such as copyright notice in order to protect their images. The system allows to replace watermark if needed.
 
-```
+```python
 watermark(self, op, a, scl)
 ```
 
@@ -247,7 +249,7 @@ l|central left part of the image.
 r|central right part of the image. 
 f|face-recognition based alignment.
 
--Sample Request-
+**Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.watermark(op=45, scl=0)
@@ -265,7 +267,7 @@ would generate: (giving a its default values)
 http://endpoint.com/5d958389e0a2.jpg/wm/op_100,a_tl,scl_50/dog.jpg
 ```
 
--Sample Response-
+**Sample Response**
 ```
 { "error": 0, "error_description": "success", "wm_filepath": "/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg" }
 ```
