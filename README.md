@@ -180,7 +180,7 @@ bl|Focus on the bottom left side of the image.                                  
 f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-####### Sample Request #######
+####### Sample Request ####### 
 ```
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.canvas(w=480, h=240, q=75, a='fs')
@@ -223,22 +223,49 @@ Enables users to apply watermark such as copyright notice in order to protect th
 Enables users to apply watermark such as copyright notice in order to protect their images. The system allows to replace watermark if needed.
 
 ```
-/wix_image_id/wm/op_{op},a_{a},scl_{scl}/original_image_name.ext
+watermark(self, op, a, scl)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 op (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op=auto would give the default value: 100.```
-a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``````[c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image.```
+a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``` for more details, see the table below.
 scl (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl=auto would give the default value: 0```
 
-sample requests:
+a optional values:
+
+Value | Description
+------|------------
+c|center of the image. 
+t|central top part of the image.
+tl|top left part of the image.
+tr|top right part of the image.
+b|central bottom part of the image. 
+bl|bottom left part of the image.
+br|bottom right part of the image. 
+l|central left part of the image. 
+r|central right part of the image. 
+f|face-recognition based alignment.
+
+####### Sample Request ####### 
+```
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.watermark(op=45, scl=0)
+```
+would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
+```
+and:
+```
+image.watermark(op=100, a='tl', scl=50)
+```
+would generate: (giving a its default values)
+```
 http://endpoint.com/5d958389e0a2.jpg/wm/op_100,a_tl,scl_50/dog.jpg
 ```
 
-sample response: 
+####### Sample Response ####### 
 ```
 { "error": 0, "error_description": "success", "wm_filepath": "/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg" }
 ```
