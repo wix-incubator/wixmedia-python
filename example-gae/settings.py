@@ -55,5 +55,5 @@ INSTALLED_APPS = (
 
 SECRET_KEY = 'SECRET_KEY'
 
-WIXMEDIA_ROOT = 'http://media.example.com'
+WIXMEDIA_ROOT = 'http://endpoint.com'
 WIXIMAGE_CLASS = 'wixmedia.WixMediaImage'
