@@ -120,6 +120,42 @@ sample request:
 http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
 
+###### Canvas ######
+
+Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
+
+```
+/wix_image_id/canvas/w_{w},h_{h},q_{q},a{a}/original_image_name.ext
+```
+
+Parameter | value | Description
+----------|-------|------------
+w (mandatory)|Integer|The width constraint (pixels).
+h (mandatory)|Integer|The height constraint (pixels).
+q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.```                                                                  ```[c]: Focus on the center of the image, both vertical and horizontal center.                                                      [t]: Focus on the top of the image, horizontal center.                                                                           [tl]: Focus on the top left side of the image. [tr]: Focus on the top right side of the image. [b]: Focus on the bottom of the image, horizontal center. [bl]: Focus on the bottom left side of the image. [br]: Focus on the bottom right side of the image. [l]: Focus on the left side of the image, vertical center. [r]: Focus on the right side of the image, vertical center. [f]: Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them. [fs]: Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.```
+
+
+##### Image Adjustment Operation #####
+
+Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
+
+##### Image Filter Operation #####
+
+Applies one (or more) of the following effects to an image: 
+- Oil paint effect
+- Negative effect
+- Pixelate effect 
+- Regular
+- Based on facial recognition
+- Blur
+- Sharpen
+
+##### Image Watermark Operation #####
+
+Enables users to apply watermark such as copyright notice in order to protect their images. 
+* The system allows replacing watermark if needed.
+
 ###### Watermarks ######
 
 Enables users to apply watermark such as copyright notice in order to protect their images. The system allows to replace watermark if needed.
@@ -144,23 +180,3 @@ sample response:
 ```
 { "error": 0, "error_description": "success", "wm_filepath": "/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg" }
 ```
-
-##### Image Adjustment Operation #####
-
-Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
-
-##### Image Filter Operation #####
-
-Applies one (or more) of the following effects to an image: 
-- Oil paint effect
-- Negative effect
-- Pixelate effect 
-- Regular
-- Based on facial recognition
-- Blur
-- Sharpen
-
-##### Image Watermark Operation #####
-
-Enables users to apply watermark such as copyright notice in order to protect their images. 
-* The system allows replacing watermark if needed.
