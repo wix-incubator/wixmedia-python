@@ -324,6 +324,18 @@ image.adjust(br(100))
 ```
 
 
+##### Image Filter Operation #####
+
+Applies one (or more) of the following effects to an image: 
+- Oil paint effect
+- Negative effect
+- Pixelate effect 
+- Regular
+- Based on facial recognition
+- Blur
+- Sharpen
+
+
 ###### Filter ######
 
 Applies a filter (or multiple filters) on an image. Parameters value can be either specific values.
@@ -371,18 +383,6 @@ image.filter(oil(), neg(), pixfs(125), sharpen(radius=100, amount=30, thershold=
 
 ```
 
-
-
-##### Image Filter Operation #####
-
-Applies one (or more) of the following effects to an image: 
-- Oil paint effect
-- Negative effect
-- Pixelate effect 
-- Regular
-- Based on facial recognition
-- Blur
-- Sharpen
 
 ##### Image Watermark Operation #####
 
