@@ -139,8 +139,8 @@ Sample Request
 ```
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75,a_fs/dog.jpg
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
-```
                                                                  ^-- this request would use the default value for a (c)
+```
 
 ##### Image Adjustment Operation #####
 
