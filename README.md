@@ -99,6 +99,52 @@ sample request:
 http://endpoint.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.jpg
 ```
 
+###### srb - scaled resize without crop ######
+
+Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. 
+The resulting image will maintain the same aspect ratio of the input image.
+
+```
+/wix_image_id/srb/w_{w},h_{h},q_{q},us_{r}_{a}_{t}/original_image_name.ext
+```
+
+Parameter | value | Description
+----------|-------|------------
+w (mandatory)|Integer|The width constraint (pixels).
+h (mandatory)|Integer|The height constraint (pixels).
+q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
+
+sample request:
+```
+http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
+```
+
+###### Watermarks ######
+
+Enables users to apply watermark such as copyright notice in order to protect their images. The system allows to replace watermark if needed.
+
+```
+/wix_image_id/wm/op_{op},a_{a},scl_{scl}/original_image_name.ext
+```
+
+Parameter | value | Description
+----------|-------|------------
+op (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op=auto would give the default value: 100.```
+a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``` ```[c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image.```
+scl (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl=auto would give the default value: 0```
+
+sample requests:
+```
+http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
+http://endpoint.com/5d958389e0a2.jpg/wm/op_100,a_tl,scl_50/dog.jpg
+```
+
+sample response: 
+```
+{ "error": 0, "error_description": "success", "wm_filepath": "/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg" }
+```
+
 ##### Image Adjustment Operation #####
 
 Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
