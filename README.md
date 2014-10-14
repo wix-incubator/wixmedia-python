@@ -91,8 +91,13 @@ Parameter | value | Description
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` ```*c: center of the image. *t: central top part of the image. *tl: top left part of the image. ```
-us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius), a (the unsharp mask amount), t (the unsharp mask threshold).
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` ```[c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image. [f]: face-recognition based alignment.```
+us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
+
+sample request:
+```
+http://endpoint.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.jpg
+```
 
 ##### Image Adjustment Operation #####
 
