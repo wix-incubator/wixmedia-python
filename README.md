@@ -65,7 +65,7 @@ All the APIs conform to a URI structure in the form of:
 http(s)://endpoint.com/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
 For example:
-```
+```url
 http://endpont.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
 generated with the python API explained below. 
