@@ -78,6 +78,19 @@ Applies one (or more) of the following transformation operations to an image:
 - Fill
 - Crop
 
+###### srz - scaled resize with aligned crop ######
+
+Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
+
+```
+/wix_image_id/srz/w_{w},h_{h},q_{q},a_{a},us_{r}_{a}_{t}/original_image_name.ext
+```
+
+Parameter | value | Description
+----------|-------|------------
+w (mandatory)|Integer|The width constraint (pixels).
+h (mandatory)|Integer|The height constraint (pixels).
+
 ##### Image Adjustment Operation #####
 
 Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
