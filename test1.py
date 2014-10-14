@@ -8,6 +8,8 @@ print image.get_img_tag()
 print image.crop(x=10,y=10, w=120, h=120).adjust().filter().get_img_tag()
 image.reset()
 print image.srz(w=120, h=120).adjust().filter("oil", blur=22).get_img_tag()
+image.reset()
+print image.srz(w=120, h=120).adjust("auto", con=53).filter("oil", blur=22).get_img_tag()
 ############
 
 ## from wixmedia import wixmedia_service
