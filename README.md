@@ -90,6 +90,8 @@ Parameter | value | Description
 ----------|-------|------------
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
+q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.
 
 ##### Image Adjustment Operation #####
 
