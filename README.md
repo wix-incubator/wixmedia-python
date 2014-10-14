@@ -80,6 +80,7 @@ Applies one (or more) of the following transformation operations to an image:
 - Fill
 - Crop
 
+
 ###### srz - scaled resize with aligned crop ######
 
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
@@ -115,9 +116,9 @@ us optional values:
 
 Value | Description
 ------|------------
-r|the unsharp mask radius. default value: 0.50.
-a|the unsharp mask amount default value: 0.20
-t|the unsharp mask threshold.
+radius|the unsharp mask radius. default value: 0.50.
+amount|the unsharp mask amount default value: 0.20
+threshold|the unsharp mask threshold.
 
 **Sample Request**
 ```python
@@ -128,6 +129,7 @@ would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.jpg
 ```
+
 
 ###### srb - scaled resize without crop ######
 
@@ -143,7 +145,15 @@ Parameter | value | Description
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
+us (optional)|float_float_float|The unshark mask, built from three values: see details in the table below. 
+
+us optional values:
+
+Value | Description
+------|------------
+radius|the unsharp mask radius. ```default value: 0.50.```
+amount|the unsharp mask amount ```default value: 0.20```
+threshold|the unsharp mask threshold. ```default value: 0.00).```
 
 **Sample Request**
 ```python
@@ -154,6 +164,8 @@ would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
+
+
 ###### Canvas ######
 
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
@@ -200,9 +212,166 @@ would generate: (giving a its default values)
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
 ```
 
+
+###### fill ######
+
+Create an image with the exact given width and height while retaining original proportions. Use only part of the image that fills the given dimensions. Only part of the original image might be visible if the required proportions are different than the original ones.
+
+```python
+fill(self, w, h ,q)
+```
+
+Parameter | value | Description
+----------|-------|------------
+w (mandatory)|Integer|The width constraint (pixels).
+h (mandatory)|Integer|The height constraint (pixels).
+q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+
+**Sample Request**
+
+```python
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.fill(w=480, h=240, q=75)
+```
+would generate the URL:
+```
+http://endpoint.com/5d958389e0a2.jpg/fill/w_480,h_240,q_75/dog.jpg
+```
+and:
+```
+image.fill(w=480, h=240)
+```
+would generate: (with q's default value)
+```
+http://endpoint.com/5d958389e0a2.jpg/fill/w_480,h_240/dog.jpg   
+```
+
+
+###### crop ######
+
+Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
+
+```python
+crop(x, y, w, h, q)
+```
+
+Parameter | Value | Description
+----------|-------|------------
+x (mandatory)|Integer|The x-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
+y (mandatory)|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
+w (mandatory)|Integer|The width constraint (pixels).
+h (mandatory)|Integer|The height constraint (pixels).
+q (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q=auto would give the default value:75```
+
+**Sample Request**
+```python
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.crop(x=120, y=120, w=480, h=240, q=75)
+```
+would generate the URL:
+```
+http://endpoint.com/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240,q_75/dog.jpg
+```
+and:
+```
+image.crop(x=120, y=120, w=480, h=240)
+```
+would generate: (with q's default value)
+```
+http://endpoint.com/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.jpg
+```
+
+
 ##### Image Adjustment Operation #####
 
 Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
+
+
+###### Adjust ######
+
+Applies adjustment on an image. Parameters value can be either specific values or “auto”. auto parameter with no values performs auto enhancement.
+
+```python
+adjust(self, *props, **adjust_props)
+```
+the parameters may be one or more of the following options:
+
+function | parameter(s) | Description
+---------|--------------|------------
+br (optional)|Integer (%)|brightness
+con (optional)|Integer (%)|contrast
+sat (optional)|Integer (%)|saturation
+hue (optional)|Integer (%)|hue
+vib (optional)|Integer (%)|vibrance
+auto(optional)|-|auto adjust
+
+**Sample Requests**
+```python
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+
+image.adjust(auto())  
+# would generate the URL: http://endpoint.com/5d958389e0a2.jpg/adjust/auto/dog.jpg
+
+image.adjust(br(-82), con(12), hue(50), vib(32))  
+# would generate: http://endpoint.com/5d958389e0a2.jpg/adjust/br_-82,con_12,hue_50,vib_32/dog.jpg
+
+image.adjust(con(60)) 
+# would generate: http://endpoint.com/5d958389e0a2.jpg/adjust/con_60/dog.jpg
+
+image.adjust(br(100))  
+# would generate: http://endpoint.com/5d958389e0a2.jpg/adjust/br_100/dog.jpg
+
+```
+
+
+###### Filter ######
+
+Applies a filter (or multiple filters) on an image. Parameters value can be either specific values.
+
+```python
+filter(self, *funcs, **filter_funcs)
+```
+the parameters may be one or more of the following options:
+
+function | parameter(s) | Description
+---------|--------------|------------
+oil|-|Applies an oil paint effect on an image.
+neg|-|Negates the colors of the image.
+pix|Integer|Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
+pixfs|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
+blur|Integer (%)|Applies a blur effect to the image. The parameter value indicates the blur in percents.
+sharpen|Integer_Integer_Ingteger|Sharpens the image using radius, amount & threshold parameters. (see table below) ``` when no values are supplied, sharpen is auto```
+
+sharpen optional values:
+Value | Description | Valid values
+------|-------------|-------------
+radius|sharpening mask radius|0 to image size
+amount|sharpening mask amount|0 to 100
+threshold|shapening mask threshold|0 to 255
+
+
+**Sample Requests**
+```python
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+
+image.filter(blur(50))
+# would generate the URL: http://endpoint.com/5d958389e0a2.jpg/filter/blur_50/dog.jpg
+
+image.filter(oil(),neg())
+# would generate: http://endpoint.com/5d958389e0a2.jpg/filter/oil, neg/dog.jpg
+
+image.filter(neg(), pixfs(108))
+# would generate: http://endpoint.com/5d958389e0a2.jpg/filter/neg, pixfs_108/dog.jpg
+
+image.filter(sharpen(radius=100, amount=30, thershold=217))
+# would generate: http://endpoint.com/5d958389e0a2.jpg/filter/sharpen_100_30_217/dog.jpg
+
+image.filter(oil(), neg(), pixfs(125), sharpen(radius=100, amount=30, thershold=217))
+# would generate: http://endpoint.com/5d958389e0a2.jpg/filter/oil, neg, pixfs_125, sharpen_100_30_217/dog.jpg
+
+```
+
+
 
 ##### Image Filter Operation #####
 
