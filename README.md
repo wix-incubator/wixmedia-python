@@ -167,7 +167,7 @@ Enables users to apply watermark such as copyright notice in order to protect th
 Parameter | value | Description
 ----------|-------|------------
 op (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op=auto would give the default value: 100.```
-a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``` ```[c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image.```
+a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``` ```              [c]: center of the image. [t]: central top part of the image. [tl]: top left part of the image. [tr]: top right part of the image. [b]: central bottom part of the image. [bl]: bottom left part of the image. [br]: bottom right part of the image. [l]: central left part of the image. [r]: central right part of the image.```
 scl (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl=auto would give the default value: 0```
 
 sample requests:
