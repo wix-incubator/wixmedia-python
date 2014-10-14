@@ -248,7 +248,7 @@ r|central right part of the image.
 f|face-recognition based alignment.
 
 -Sample Request-
-```
+```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.watermark(op=45, scl=0)
 ```
@@ -257,7 +257,7 @@ would generate the URL:
 http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
 ```
 and:
-```
+```python
 image.watermark(op=100, a='tl', scl=50)
 ```
 would generate: (giving a its default values)
