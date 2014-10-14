@@ -32,7 +32,7 @@ Wix provides Wixmedia library for uploading files and performing manipulations o
 It’s easy to upload files using the Wixmedia Python Library.
 For example:
 
-```
+```python
 from wixmedia import wixmedia_service
 
 service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
@@ -47,7 +47,7 @@ print image.crop().adjust().filter().get_img_tag()
 After uploading an image, you can easily apply any manipulation suggested by Wix using the API documented here. 
 For example:
 
-```
+```python
 from wixmedia import wixmedia_image
 
 image = wixmedia_image.WixMediaImage('uri')
@@ -61,11 +61,11 @@ print image.crop().adjust().filter().get_img_tag()
 #### API List ####
 All the APIs conform to a URI structure in the form of: 
 
-```
+```python
 http(s)://endpoint.com/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
 For example:
-```url
+```python
 http://endpont.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
 generated with the python API explained below. 
