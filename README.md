@@ -194,7 +194,7 @@ bl|Focus on the bottom left side of the image.                                  
 f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-*Sample Request*
+**Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
 image.canvas(w=480, h=240, q=75, a='fs')
