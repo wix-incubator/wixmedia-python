@@ -83,7 +83,7 @@ Applies one (or more) of the following transformation operations to an image:
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```
-/wix_image_id/srz/w_{w},h_{h},q_{q},a_{a},us_{r}_{a}_{t}/original_image_name.ext
+srz(self, w, h, q, a, radius, amount, threshold)
 ```
 
 Parameter | value | Description
@@ -115,7 +115,12 @@ r|the unsharp mask radius. default value: 0.50.
 a|the unsharp mask amount default value: 0.20
 t|the unsharp mask threshold.
 
-sample request:
+####### Sample Request #######
+```
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.srz(w=480, h=240, q=75, a='tl', radius=0.50, amount=1.20, threshold=0.00)
+```
+would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.jpg
 ```
@@ -126,7 +131,7 @@ Resizes the image to fit within the width and height boundaries without cropping
 The resulting image will maintain the same aspect ratio of the input image.
 
 ```
-/wix_image_id/srb/w_{w},h_{h},q_{q},us_{r}_{a}_{t}/original_image_name.ext
+srb(self, w, h, q, radius, amount, threshold)
 ```
 
 Parameter | value | Description
@@ -136,17 +141,21 @@ h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
 us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius. default value: 0.50.), a (the unsharp mask amount default value: 0.20), t (the unsharp mask threshold.  default value: 0.00).
 
-sample request:
+####### Sample Request #######
+```
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.srb(w=480, h=240, q=75)
+```
+would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 ```
-
 ###### Canvas ######
 
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```
-/wix_image_id/canvas/w_{w},h_{h},q_{q},a{a}/original_image_name.ext
+canvas(self, w, h, q, a)
 ```
 
 Parameter | value | Description
@@ -168,11 +177,22 @@ bl|Focus on the bottom left side of the image.                                  
 f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-Sample Request
+####### Sample Request #######
+```
+image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
+image.canvas(w=480, h=240, q=75, a='fs')
+```
+would generate the URL:
 ```
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75,a_fs/dog.jpg
+```
+and:
+```
+image.canvas(w=480, h=240, q=75)
+```
+would generate: (giving a its default values)
+```
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
-                                                                 ^-- this request would use the default value for a (c)
 ```
 
 ##### Image Adjustment Operation #####
