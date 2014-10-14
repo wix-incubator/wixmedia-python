@@ -91,7 +91,8 @@ Parameter | value | Description
 w (mandatory)|Integer|The width constraint (pixels).
 h (mandatory)|Integer|The height constraint (pixels).
 q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.
+a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` ```*c: center of the image. *t: central top part of the image. *tl: top left part of the image. 
+us (optional)|float_float_float|The unshark mask, built from three values: r (the unsharp mask radius), a (the unsharp mask amount), t (the unsharp mask threshold).
 
 ##### Image Adjustment Operation #####
 
