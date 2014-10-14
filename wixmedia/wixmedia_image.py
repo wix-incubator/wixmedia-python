@@ -9,14 +9,14 @@ class WixMediaImage(object):
     COMMAND_FILL   = "fill"
     COMMAND_CROP   = "crop"
 
-    def __init__(self, file_uri, org_name):
+    def __init__(self, file_uri, original_filename):
         self.transform_command = None
         self.transform_params  = None
         self.adjustment_params = None
         self.filter_params     = None
 
         self.file_uri          = file_uri
-        self.org_name          = org_name
+        self.org_name          = original_filename
 
         self.reset()
 
