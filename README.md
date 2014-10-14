@@ -265,7 +265,7 @@ would generate: (giving a its default values)
 http://endpoint.com/5d958389e0a2.jpg/wm/op_100,a_tl,scl_50/dog.jpg
 ```
 
-####### Sample Response ####### 
+####### Sample Response #######
 ```
 { "error": 0, "error_description": "success", "wm_filepath": "/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg" }
 ```
