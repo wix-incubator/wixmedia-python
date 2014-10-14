@@ -5,7 +5,7 @@ print image
 print image.get_img_tag(width=4, alt="golan")
 print image.get_img_tag()
 
-print image.crop(x=10,y=10, w=120, h=120).adjust().filter().get_img_tag()
+print image.crop(x=10, y=10, w=120, h=120).adjust().filter().get_img_tag()
 image.reset()
 print image.srz(w=120, h=120).adjust().filter("oil", blur=22).get_img_tag()
 image.reset()
