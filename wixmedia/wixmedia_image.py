@@ -65,7 +65,8 @@ class WixMediaImage(object):
                                "q": q}
         return self
 
-    def adjust(self, **adjust_props):
+    def adjust(self, *props, **adjust_props):
+        adjust_props.update({p:True for p in props})
         self.adjustment_params.update(adjust_props)
         return self
 
@@ -90,7 +91,8 @@ class WixMediaImage(object):
 
         if self.adjustment_params:
             params.extend(["adjust",
-                           ",".join(["%s_%s" % (key, val) for key,val in self.adjustment_params.iteritems()])
+                           ",".join(["%s_%s" % (key, val) if val!=True else key
+                                      for key,val in self.adjustment_params.iteritems()])
                            ])
         if self.filter_params:
             params.extend(["filter",
