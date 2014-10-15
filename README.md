@@ -86,44 +86,44 @@ Applies one (or more) of the following transformation operations to an image:
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(self, w, h, q, a, radius, amount, threshold)
+srz(width, height, quality=75, align='center', radius=0.50, amount=0.20, threshold=0.00)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
-w (mandatory)|Integer|The width constraint (pixels).
-h (mandatory)|Integer|The height constraint (pixels).
-q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a=auto would give the default option: Central cropping.``` see values in the table below.
-us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. ```(default value: 0.00).```
+width (mandatory)|Integer|The width constraint (pixels).
+height (mandatory)|Integer|The height constraint (pixels).
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
+align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a default option: Central cropping.``` see values in the table below.
+us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. 
 
-a optional values:
+align optional values:
 
 Value | Description
 ------|------------
-c|center of the image. 
-t|central top part of the image.
-tl|top left part of the image.
-tr|top right part of the image.
-b|central bottom part of the image. 
-bl|bottom left part of the image.
-br|bottom right part of the image. 
-l|central left part of the image. 
-r|central right part of the image. 
-f|face-recognition based alignment.
+center|center of the image. 
+top|central top part of the image.
+top-left|top left part of the image.
+top-right|top right part of the image.
+bottom|central bottom part of the image. 
+bottom-left|bottom left part of the image.
+bottom-right|bottom right part of the image. 
+left|central left part of the image. 
+right|central right part of the image. 
+face|face-recognition based alignment.
 
 us optional values:
 
 Value | Description
 ------|------------
 radius|the unsharp mask radius. default value: 0.50.
-amount|the unsharp mask amount default value: 0.20
-threshold|the unsharp mask threshold.
+amount|the unsharp mask amount. default value: 0.20.
+threshold|the unsharp mask threshold. default value: 0.00.
 
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.srz(w=480, h=240, q=75, a='tl', radius=0.50, amount=1.20, threshold=0.00)
+image.srz(width=480, height=240, quality=75, align='top-left', radius=0.50, amount=1.20, threshold=0.00)
 ```
 would generate the URL:
 ```
@@ -137,14 +137,14 @@ Resizes the image to fit within the width and height boundaries without cropping
 The resulting image will maintain the same aspect ratio of the input image.
 
 ```python
-srb(self, w, h, q, radius, amount, threshold)
+srb(width, height, quality=75, radius=0.50, amount=0.20, threshold=0.00)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
-w (mandatory)|Integer|The width constraint (pixels).
-h (mandatory)|Integer|The height constraint (pixels).
-q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+width (mandatory)|Integer|The width constraint (pixels).
+height (mandatory)|Integer|The height constraint (pixels).
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q default value: 75```
 us (optional)|float_float_float|The unshark mask, built from three values: see details in the table below. 
 
 us optional values:
@@ -158,7 +158,7 @@ threshold|the unsharp mask threshold. ```default value: 0.00).```
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.srb(w=480, h=240, q=75)
+image.srb(width=480, height=240, quality=75)
 ```
 would generate the URL:
 ```
@@ -171,33 +171,36 @@ http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(self, w, h, q, a)
+canvas(width, height, quality=75, align='center')
 ```
 
 Parameter | value | Description
 ----------|-------|------------
-w (mandatory)|Integer|The width constraint (pixels).
-h (mandatory)|Integer|The height constraint (pixels).
-q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
-a (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.
+width (mandatory)|Integer|The width constraint (pixels).
+height (mandatory)|Integer|The height constraint (pixels).
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
+align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.
 
-a optional values:
+align optional values:
 
 Value | Description
 ------|------------
-c|Focus on the center of the image, both vertical and horizontal center.
-t|Focus on the top of the image, horizontal center.
-tl|Focus on the top left side of the image.
-tr|Focus on the top right side of the image.
-b|Focus on the bottom of the image, horizontal center.
-bl|Focus on the bottom left side of the image.                                                                                br|Focus on the bottom right side of the image.                                                                               l|Focus on the left side of the image, vertical center.                                                                       r|Focus on the right side of the image, vertical center.
-f|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
-fs|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
+center|Focus on the center of the image, both vertical and horizontal center.
+top|Focus on the top of the image, horizontal center.
+top-left|Focus on the top left side of the image.
+top-right|Focus on the top right side of the image.
+bottom|Focus on the bottom of the image, horizontal center.
+bottom-left|Focus on the bottom left side of the image.
+bottom-right|Focus on the bottom right side of the image.
+left|Focus on the left side of the image, vertical center.
+right|Focus on the right side of the image, vertical center.
+face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
+all-faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.canvas(w=480, h=240, q=75, a='fs')
+image.canvas(width=480, height=240, quality=75, align='all-faces')
 ```
 would generate the URL:
 ```
@@ -205,7 +208,7 @@ http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75,a_fs/dog.jpg
 ```
 and:
 ```python
-image.canvas(w=480, h=240, q=75)
+image.canvas(width=480, height=240, quality=75)
 ```
 would generate: (giving a its default values)
 ```
@@ -218,20 +221,20 @@ http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
 Create an image with the exact given width and height while retaining original proportions. Use only part of the image that fills the given dimensions. Only part of the original image might be visible if the required proportions are different than the original ones.
 
 ```python
-fill(self, w, h ,q)
+fill(width, height ,quality=75)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
-w (mandatory)|Integer|The width constraint (pixels).
-h (mandatory)|Integer|The height constraint (pixels).
-q (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q=auto would give the default falue: 75```
+width (mandatory)|Integer|The width constraint (pixels).
+height (mandatory)|Integer|The height constraint (pixels).
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
 
 **Sample Request**
 
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.fill(w=480, h=240, q=75)
+image.fill(width=480, height=240, quality=75)
 ```
 would generate the URL:
 ```
@@ -239,7 +242,7 @@ http://endpoint.com/5d958389e0a2.jpg/fill/w_480,h_240,q_75/dog.jpg
 ```
 and:
 ```
-image.fill(w=480, h=240)
+image.fill(width=480, height=240)
 ```
 would generate: (with q's default value)
 ```
@@ -252,21 +255,21 @@ http://endpoint.com/5d958389e0a2.jpg/fill/w_480,h_240/dog.jpg
 Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
 
 ```python
-crop(x, y, w, h, q)
+crop(x, y, width, height, quality=75)
 ```
 
 Parameter | Value | Description
 ----------|-------|------------
 x (mandatory)|Integer|The x-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
 y (mandatory)|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
-w (mandatory)|Integer|The width constraint (pixels).
-h (mandatory)|Integer|The height constraint (pixels).
-q (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q=auto would give the default value:75```
+width (mandatory)|Integer|The width constraint (pixels).
+height (mandatory)|Integer|The height constraint (pixels).
+quality (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q default value:75```
 
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.crop(x=120, y=120, w=480, h=240, q=75)
+image.crop(x=120, y=120, width=480, hdight=240, quality=75)
 ```
 would generate the URL:
 ```
@@ -274,7 +277,7 @@ http://endpoint.com/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240,q_75/dog.jpg
 ```
 and:
 ```
-image.crop(x=120, y=120, w=480, h=240)
+image.crop(x=120, y=120, width=480, height=240)
 ```
 would generate: (with q's default value)
 ```
@@ -284,15 +287,10 @@ http://endpoint.com/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.jpg
 
 ##### Image Adjustment Operation #####
 
-Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement
-
-
-###### Adjust ######
-
-Applies adjustment on an image. Parameters value can be either specific values or “auto”. auto parameter with no values performs auto enhancement.
+Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement.
 
 ```python
-adjust(self, *props, **adjust_props)
+adjust(*props, **adjust_props)
 ```
 the parameters may be one or more of the following options:
 
@@ -335,22 +333,17 @@ Applies one (or more) of the following effects to an image:
 - Blur
 - Sharpen
 
-
-###### Filter ######
-
-Applies a filter (or multiple filters) on an image. Parameters value can be either specific values.
-
 ```python
-filter(self, *funcs, **filter_funcs)
+filter(*funcs, **filter_funcs)
 ```
-the parameters may be one or more of the following options:
+Parameters value can be either specific values:
 
 function | parameter(s) | Description
 ---------|--------------|------------
 oil|-|Applies an oil paint effect on an image.
 neg|-|Negates the colors of the image.
 pix|Integer|Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
-pixfs|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
+pix_faces|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
 blur|Integer (%)|Applies a blur effect to the image. The parameter value indicates the blur in percents.
 sharpen|Integer_Integer_Ingteger|Sharpens the image using radius, amount & threshold parameters. (see table below) ``` when no values are supplied, sharpen is auto```
 
@@ -372,13 +365,13 @@ image.filter(blur(50))
 image.filter(oil(),neg())
 # would generate: http://endpoint.com/5d958389e0a2.jpg/filter/oil, neg/dog.jpg
 
-image.filter(neg(), pixfs(108))
+image.filter(neg(), pix_faces(108))
 # would generate: http://endpoint.com/5d958389e0a2.jpg/filter/neg, pixfs_108/dog.jpg
 
 image.filter(sharpen(radius=100, amount=30, thershold=217))
 # would generate: http://endpoint.com/5d958389e0a2.jpg/filter/sharpen_100_30_217/dog.jpg
 
-image.filter(oil(), neg(), pixfs(125), sharpen(radius=100, amount=30, thershold=217))
+image.filter(oil(), neg(), pix_faces(125), sharpen(radius=100, amount=30, thershold=217))
 # would generate: http://endpoint.com/5d958389e0a2.jpg/filter/oil, neg, pixfs_125, sharpen_100_30_217/dog.jpg
 
 ```
@@ -389,39 +382,35 @@ image.filter(oil(), neg(), pixfs(125), sharpen(radius=100, amount=30, thershold=
 Enables users to apply watermark such as copyright notice in order to protect their images. 
 * The system allows replacing watermark if needed.
 
-###### Watermarks ######
-
-Enables users to apply watermark such as copyright notice in order to protect their images. The system allows to replace watermark if needed.
-
 ```python
-watermark(self, op, a, scl)
+watermark(op=100, a='ceneter', scl=0)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
-op (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op=auto would give the default value: 100.```
-a (optional)|string|The watermark position. ``` a=auto would give the default option: center.``` for more details, see the table below.
-scl (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl=auto would give the default value: 0```
+opacity (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
+align (optional)|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
+scale (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
 
 a optional values:
 
 Value | Description
 ------|------------
-c|center of the image. 
-t|central top part of the image.
-tl|top left part of the image.
-tr|top right part of the image.
-b|central bottom part of the image. 
-bl|bottom left part of the image.
-br|bottom right part of the image. 
-l|central left part of the image. 
-r|central right part of the image. 
-f|face-recognition based alignment.
+center|center of the image. 
+top|central top part of the image.
+top-left|top left part of the image.
+top-right|top right part of the image.
+bottom|central bottom part of the image. 
+bottom-left|bottom left part of the image.
+bottom-right|bottom right part of the image. 
+left|central left part of the image. 
+right|central right part of the image. 
+face|face-recognition based alignment.
 
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.watermark(op=45, scl=0)
+image.watermark(opacity=45, scale=0)
 ```
 would generate the URL:
 ```
@@ -429,7 +418,7 @@ http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
 ```
 and:
 ```python
-image.watermark(op=100, a='tl', scl=50)
+image.watermark(opacity=100, align='tl', scale=50)
 ```
 would generate: (giving a its default values)
 ```
