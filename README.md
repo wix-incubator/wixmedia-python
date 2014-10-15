@@ -1,12 +1,13 @@
 wixmedia-python SDK
 ===================
 
-This library allows you to upload files and perform various manipulations on uploaded images. 
+This package is a Python wrapper for Wixmedia Image RESTful API, which allows you to upload files and perform various manipulations on them. 
 These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 This functionality eliminates the need for offline processing in order to optimize images for web development. 
 The resulting files are saved for later usage, so image processing occurs only once per each permutation.
 
 ## Overview ##
+
 Uses [Google App Engine](http://appengine.google.com) with [Wix](http://wix.com) for image manupulaitons for web developers.
 
 ## Downloading ##
@@ -23,7 +24,11 @@ __Note__: If you don't have git or would rather install by unpacking a Zip or Ta
 
 
 ## Wixmedia API ##
-Wix provides Wixmedia library for uploading files and performing manipulations on images.
+
+Wixmedia provides web developers a versatile infrastructure for image manipulations easily accessable through Wixmedia's RESTful Image API. 
+In addition, Wixmedia offers the fllowing Python wrapper, which provides easier access to the Image API (by automatically generating Wixmedia URL requests).
+
+For more details about Wixmedia Image RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia/master/README.md). 
 
 ## Wixmedia Usage ##
 
@@ -93,8 +98,8 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
-align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` a default option: Central cropping.``` see values in the table below.
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default option: Central cropping.``` see values in the table below.
 us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. 
 
 align optional values:
@@ -116,9 +121,9 @@ us optional values:
 
 Value | Description
 ------|------------
-radius|the unsharp mask radius. default value: 0.50.
-amount|the unsharp mask amount. default value: 0.20.
-threshold|the unsharp mask threshold. default value: 0.00.
+radius|the unsharp mask radius. ```default value: 0.50.```
+amount|the unsharp mask amount. ```default value: 0.20.```
+threshold|the unsharp mask threshold. ```default value: 0.00.```
 
 **Sample Request**
 ```python
@@ -144,7 +149,7 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q default value: 75```
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
 us (optional)|float_float_float|The unshark mask, built from three values: see details in the table below. 
 
 us optional values:
@@ -178,8 +183,8 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
-align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
 
 align optional values:
 
@@ -210,7 +215,7 @@ and:
 ```python
 image.canvas(width=480, height=240, quality=75)
 ```
-would generate: (giving a its default values)
+would generate: (giving 'align' its default values)
 ```
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
 ```
@@ -228,7 +233,7 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ``` q default falue: 75```
+quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 
 **Sample Request**
 
@@ -244,7 +249,7 @@ and:
 ```
 image.fill(width=480, height=240)
 ```
-would generate: (with q's default value)
+would generate: (with the quality's default value)
 ```
 http://endpoint.com/5d958389e0a2.jpg/fill/w_480,h_240/dog.jpg   
 ```
@@ -264,7 +269,7 @@ x (mandatory)|Integer|The x-pixel-coordinate to start cropping from. (represents
 y (mandatory)|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```q default value:75```
+quality (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value:75```
 
 **Sample Request**
 ```python
@@ -279,7 +284,7 @@ and:
 ```
 image.crop(x=120, y=120, width=480, height=240)
 ```
-would generate: (with q's default value)
+would generate: (with the quality's default value)
 ```
 http://endpoint.com/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.jpg
 ```
@@ -418,7 +423,7 @@ http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
 ```
 and:
 ```python
-image.watermark(opacity=100, align='tl', scale=50)
+image.watermark(opacity=100, align='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```
