@@ -1,8 +1,10 @@
 wixmedia-python SDK
 ===================
 
-This package is a Python wrapper for Wixmedia Image RESTful API, which allows you to upload files and perform various manipulations on them. 
+This package is a Python wrapper for Wixmedia Image RESTful API, which allows you to upload files and perform various manipulations on them.
+
 These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
+
 This functionality eliminates the need for offline processing in order to optimize images for web development. 
 The resulting files are saved for later usage, so image processing occurs only once per each permutation.
 
@@ -26,7 +28,7 @@ __Note__: If you don't have git or would rather install by unpacking a Zip or Ta
 ## Wixmedia API ##
 
 Wixmedia provides web developers a versatile infrastructure for image manipulations easily accessable through Wixmedia's RESTful Image API. 
-In addition, Wixmedia offers the fllowing Python wrapper, which provides easier access to the Image API (by automatically generating Wixmedia URL requests).
+In addition, Wixmedia offers the following Python wrapper, which provides easier access to the Image API (by automatically generating Wixmedia URL requests).
 
 For more details about Wixmedia Image RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia/master/README.md). 
 
