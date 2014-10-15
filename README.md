@@ -8,11 +8,7 @@ These manipulations include, but are not limited to, resizing, cropping, rotatin
 This functionality eliminates the need for offline processing in order to optimize images for web development. 
 The resulting files are saved for later usage, so image processing occurs only once per each permutation.
 
-## Overview ##
-
-Uses [Google App Engine](http://appengine.google.com) with [Wix](http://wix.com) for image manupulaitons for web developers.
-
-## Downloading ##
+## Setup ##
 
 Installing the Wixmedia package is as simple as adding it to your project's include path.  
 
