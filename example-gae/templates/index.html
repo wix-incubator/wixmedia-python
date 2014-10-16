@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+<head><meta charset="utf-8" />
+</head>
+<body>
+
+<h2>TODO: make this doc better</h2>
+
+<h1>How to use WixMediaImage in django</h1>
+
+<ul>
+  <li>Add wixmedia-django to INSTALLED_APPS</li>
+  <li>Add WIXMEDIA_ROOT to settings.
+    <pre>example:
+      WIXMEDIA_ROOT = 'http://endpoint.com'</pre>
+  </li>
+  <li>Add
+    <pre>
+      {% load wixmediatags %}</pre>
+    to template
+  </li>
+  <li>Use tag image_url in template.</li>
+  <li>See example in example_django.html file.</li>
+  <li><a href="/django">See it working</a>.</li>
+</ul>
+
+<h1>How to use WixMediaImage in jinja</h1>
+<ul>
+  <li>Add image_url helper to jinja2 environment
+    <pre>
+      JINJA_ENVIRONMENT.globals['image_url'] = image_url</pre>
+  </li>
+  <li>Use image_url in template.</li>
+  <li>See example in example_jinja2.html file.</li>
+  <li><a href="/jinja2">See it working</a>.</li>
+</ul>
+
+
+
+
+</body>
+</html>

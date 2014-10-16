@@ -9,10 +9,7 @@ class Handler(webapp2.RequestHandler):
     def example(self, *args, **kwargs):
         context = {}
 
-        html = render_to_string('example.html', context)
+        html = render_to_string('example_django.html', context)
 
         self.response.out.write(html)
-
-
-
 
