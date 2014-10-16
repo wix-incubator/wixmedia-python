@@ -8,7 +8,7 @@ In addition, Wixmedia offers the following Python wrapper, which provides easier
 
 For more details about Wixmedia RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia/master/README.md). 
 
-## Wixmedia Usage ##
+## Wixmedia Image Manipulation Usage ##
 
 ### Uploading files ###
 
