@@ -1,7 +1,7 @@
 # -*- encoding: UTF-8 -*-
 
-import os
-import sys
+# import os
+# import sys
 from webapp2 import WSGIApplication, Route
 
 
@@ -13,10 +13,9 @@ app = WSGIApplication(
     debug=True,
     routes=[
         # [GET] /
-        Route('/', handler='handlers.Handler', handler_method='example'),
+        Route('/django', handler='handlers_django.Handler', handler_method='example'),
+        Route('/jinja2', handler='handlers_jinja2.Handler', handler_method='example'),
 
-        # Route('/ping', handler='service.handlers.Handler', handler_method='ping'),
-        # Route('/dummy/examples', handler='service.handlers_dummy.DummyHandler', handler_method='examples'),
     ]
 )
 

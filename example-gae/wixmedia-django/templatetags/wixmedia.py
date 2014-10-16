@@ -9,13 +9,13 @@ from django.conf import settings
 from django import template
 register = template.Library()
 
-image_class = webapp2.import_string(settings.WIXIMAGE_CLASS)
+from wixmedia.wixmedia_image import WixMediaImage
 
 
 @register.simple_tag
-def mediaurl(filename='', original_filename='i.jpg', **params):
+def image_url(filename='', original_filename='i.jpg', **params):
 
-    image = image_class(settings.WIXMEDIA_ROOT + '/' + filename, original_filename)
+    image = WixMediaImage(settings.WIXMEDIA_ROOT + '/' + filename, original_filename)
 
     for oper, args in params.items():
         kwargs = dict([a.split('_') for a in args.split(',')])
