@@ -6,7 +6,7 @@ Wixmedia provides web developers a versatile infrastructure for image manipulati
 
 In addition, Wixmedia offers the following Python wrapper, which provides easier access to the Image API (by automatically generating Wixmedia URL requests).
 
-For more details about Wixmedia RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia/master/README.md). 
+For more details about Wixmedia RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia-python/blob/master/README.md). 
 
 ## Wixmedia Image Manipulation Usage ##
 
