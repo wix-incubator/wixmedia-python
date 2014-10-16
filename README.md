@@ -45,6 +45,12 @@ print image.srz(width=120, height=120) \
            .get_img_tag(alt="dog")
 ```
 
+The above code snippet prints a HTML img tag that can be used to render the image when embedded in a web page:
+
+```html
+<img src="http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
+```
+
 ### Rendering files ###
 
 #### Images ####
