@@ -9,6 +9,25 @@ class WixMediaImage(object):
     COMMAND_FILL   = "fill"
     COMMAND_CROP   = "crop"
 
+    adjust_parameter_map = {
+        "brightness": "br",
+        "contrast":   "con",
+        "saturation": "sat",
+        "hue":        "hue",
+        "vibrance":   "vib",
+        "auto":       "auto"
+    }
+
+    filter_params_map = {
+        "oil":            "oil",
+        "negative":       "neg",
+        "pixelate":       "pix",
+        "pixelate-faces": "pixfs",
+        "blur":           "blur",
+        "unsharp":        "us",   # TODO: these command are built from 3 parameters so we need to combing and emit one in url
+        "sharpen":        "shrp"  # TODO: these command are built from 3 parameters so we need to combing and emit one in url
+    }
+
     def __init__(self, file_uri, original_filename):
         self.transform_command = None
         self.transform_params  = None
@@ -134,14 +153,14 @@ class WixMediaImage(object):
         if self.adjustment_params:
             params.extend(
                 ["adjust",
-                 ",".join(["%s_%s" % (key, val) if val is not True else key
+                 ",".join(["%s_%s" % (WixMediaImage.adjust_parameter_map.get(key, key), val) if val is not True else key
                            for key, val in self.adjustment_params.iteritems()])]
             )
 
         if self.filter_params:
             params.extend(
                 ["filter",
-                 ",".join(["%s_%s" % (key, val) if val is not True else key
+                 ",".join(["%s_%s" % (WixMediaImage.filter_params_map.get(key, key), val) if val is not True else key
                           for key, val in self.filter_params.iteritems()])]
             )
 
