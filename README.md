@@ -52,7 +52,7 @@ print image.srz(width=120, height=120) \
 Images can be uploaded to the Wix Media Services platform the followind SDK.
 Once an image was uploaded, the service can apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 
-For more information about image manipulation in your apps, browse the Wix Media Services - Images documentation.
+For more information about image manipulation in your apps, browse the Wix Media Services - [Images documentation.](https://github.com/wix/wixmedia-python/blob/master/ImagesDoc.md).
 
 #### Audio ####
 
