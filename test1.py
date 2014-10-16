@@ -1,15 +1,17 @@
 from wixmedia import wixmedia_image
 
-image = wixmedia_image.WixMediaImage('uri', "dog.png")
+url   = 'http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png'
+image = wixmedia_image.WixMediaImage(url, "dog.png")
 print image
-print image.get_img_tag(width=4, alt="golan")
-print image.get_img_tag()
 
-print image.crop(x=10, y=10, w=120, h=120).adjust().filter().get_img_tag()
+print image.crop(x=10, y=10, width=120, height=120).adjust().filter().get_img_tag()
 image.reset()
-print image.srz(w=120, h=120).adjust().filter("oil", blur=22).get_img_tag()
+
+print image.srz(width=120, height=120).adjust(brightness=60).filter("oil", blur=22).get_img_tag(alt="dog")
 image.reset()
-print image.srz(w=120, h=120).adjust("auto", con=53).filter("oil", blur=22).get_img_tag()
+
+print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil", blur=22).get_img_tag()
+
 ############
 
 ## from wixmedia import wixmedia_service
