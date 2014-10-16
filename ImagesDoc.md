@@ -1,5 +1,7 @@
-wixmedia-python SDK // Wixmedia Image Manipulation
-==================================================
+wixmedia-python SDK - 
+=======================
+Wixmedia Image Manipulation
+===========================
 
 This package is a Python wrapper for Wixmedia Image RESTful API, which allows you to upload files and perform various manipulations on them.
 
