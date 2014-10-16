@@ -1,5 +1,5 @@
-wixmedia-python SDK - 
-=======================
+wixmedia-python SDK
+-------------------
 Wixmedia Image Manipulation
 ===========================
 
