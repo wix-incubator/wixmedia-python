@@ -25,7 +25,7 @@ __Note__: If you don't have git or would rather install by unpacking a Zip or Ta
 Wixmedia provides web developers a versatile infrastructure for file manipulations easily accessable through Wixmedia's RESTful Image API. 
 In addition, Wixmedia offers the following Python wrapper, which provides easier access to the Wixmedia API (by automatically generating Wixmedia URL requests).
 
-For more details about Wixmedia Image RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia/master/README.md). 
+For more details about Wixmedia Image RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia-python/master/README.md). 
 
 ## Wixmedia Usage ##
 
