@@ -29,17 +29,17 @@ class WixMediaImage(object):
     }
 
     alignment_value_map = {
-        "center": "c",
-        "top": "t",
-        "top-left": "tl",
-        "top-right": "tr",
-        "bottom": "b",
-        "bottom-left": "bl",
+        "center":       "c",
+        "top":          "t",
+        "top-left":     "tl",
+        "top-right":    "tr",
+        "bottom":       "b",
+        "bottom-left":  "bl",
         "bottom-right": "br",
-        "left": "l",
-        "right": "r",
-        "face": "f"
-        "faces" "fs"
+        "left":         "l",
+        "right":        "r",
+        "face":         "f",
+        "faces":        "fs"
     }
 
     def __init__(self, file_uri, original_filename):
