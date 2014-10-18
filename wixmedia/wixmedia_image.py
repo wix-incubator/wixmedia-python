@@ -1,4 +1,5 @@
 from .exceptions import WixMediaCmdNotAllowed
+import os
 
 
 class WixMediaImage(object):
@@ -22,7 +23,7 @@ class WixMediaImage(object):
         "oil":            "oil",
         "negative":       "neg",
         "pixelate":       "pix",
-        "pixelate-faces": "pixfs",
+        "pixelate_faces": "pixfs",
         "blur":           "blur",
         "unsharp":        "us",   # TODO: these command are built from 3 parameters so we need to combing and emit one in url
         "sharpen":        "shrp"  # TODO: these command are built from 3 parameters so we need to combing and emit one in url
@@ -42,14 +43,15 @@ class WixMediaImage(object):
         "faces":        "fs"
     }
 
-    def __init__(self, file_uri, original_filename):
+    def __init__(self, file_uri):
+        """
+        @param file_uri: must be of a format: http(s)://host/...
+        """
         self.transform_command = None
         self.transform_params  = None
         self.adjustment_params = None
         self.filter_params     = None
-
         self.file_uri          = file_uri
-        self.org_name          = original_filename
 
         self.reset()
 
@@ -156,7 +158,8 @@ class WixMediaImage(object):
 
     def get_rest_url(self):
 
-        params = [self.file_uri]
+        file_uri_path, org_file_name = os.path.split(self.file_uri)
+        params = [file_uri_path]
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             params.extend(
@@ -178,7 +181,7 @@ class WixMediaImage(object):
                           for key, val in self.filter_params.iteritems()])]
             )
 
-        params.append(self.org_name)
+        params.append(org_file_name)
 
         url = "/".join(params)
 
@@ -190,6 +193,6 @@ class WixMediaImage(object):
         return '<img src="%s"%s>' % (self.get_rest_url(), img_params)
     
     def __str__(self):
-        return "<WixMediaImage %s (%s ), command=%s [%s]>" % (
-            self.file_uri, self.org_name, self.transform_command, self.transform_params
+        return "<WixMediaImage %s, command=%s [%s]>" % (
+            self.file_uri, self.transform_command, self.transform_params
         )
