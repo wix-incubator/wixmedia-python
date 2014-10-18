@@ -63,7 +63,7 @@ Using this python package eliminates the need to manually construct such urls.
 
 ##### Image Transformation Operations #####
 
-The follwoing image transformations are available (one per image maipulation request):
+The following image transformations are available (one per image maipulation request):
 - Scaled resize with aligned crop   [srz]
 - Scaled resize (without crop)   [srb]
 - Canvas
