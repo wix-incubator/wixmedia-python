@@ -315,6 +315,7 @@ blur|Integer (%)|Applies a blur effect to the image. The parameter value indicat
 sharpen|Integer_Integer_Ingteger|Sharpens the image using radius, amount & threshold parameters. (see table below) ``` when no values are supplied, sharpen is auto```
 
 sharpen optional values:
+
 Value | Description | Valid values
 ------|-------------|-------------
 radius|sharpening mask radius|0 to image size
