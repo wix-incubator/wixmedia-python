@@ -44,6 +44,11 @@ print image.srz(width=120, height=120) \
            .get_img_tag(alt="dog")
 ```
 
+The above code snippet uploads an image to your account at Wix Media Services prints a HTML img tag that can be used to render the image when embedded in a web page:
+
+```html
+<img src="http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
+```
 #### API ####
 All the APIs conform to a URI structure in the form of: 
 
@@ -52,15 +57,13 @@ http(s)://endpoint.com/user-id/file-id/operation/params(p_value, comma-separated
 ```
 For example:
 ```python
-http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
 http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png
 ```
-Using this python package eliminates the need to manually construct such requests' urls. 
-
+Using this python package eliminates the need to manually construct such urls. 
 
 ##### Image Transformation Operations #####
 
-Applies one (or more) of the following transformation operations to an image:
+The follwoing image transformations are available (one per image maipulation request):
 - Scaled resize with aligned crop   [srz]
 - Scaled resize (without crop)   [srb]
 - Canvas
@@ -73,7 +76,7 @@ Applies one (or more) of the following transformation operations to an image:
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, quality=75, align='center', radius=0.50, amount=0.20, threshold=0.00)
+srz(width, height, quality=75, alignment='center', radius=0.50, amount=0.20, threshold=0.00)
 ```
 
 Parameter | value | Description
@@ -81,10 +84,10 @@ Parameter | value | Description
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
 quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default option: Central cropping.``` see values in the table below.
+alignment (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default option: Central cropping.``` see values in the table below.
 us (optional)|float_float_float|The unshark mask, built from three values, described in the table below. 
 
-align optional values:
+alignment optional values:
 
 Value | Description
 ------|------------
@@ -97,7 +100,8 @@ bottom-left|bottom left part of the image.
 bottom-right|bottom right part of the image. 
 left|central left part of the image. 
 right|central right part of the image. 
-face|face-recognition based alignment.
+face|focus on a face on the image..
+faces|focus on all faces in the image.
 
 us optional values:
 
@@ -110,7 +114,7 @@ threshold|the unsharp mask threshold. ```default value: 0.00.```
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.srz(width=480, height=240, quality=75, align='top-left', radius=0.50, amount=1.20, threshold=0.00)
+image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, amount=1.20, threshold=0.00)
 ```
 would generate the URL:
 ```
@@ -158,7 +162,7 @@ http://endpoint.com/5d958389e0a2.jpg/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(width, height, quality=75, align='center')
+canvas(width, height, quality=75, alignment='center')
 ```
 
 Parameter | value | Description
@@ -166,9 +170,9 @@ Parameter | value | Description
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
 quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-align (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
+alignment (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
 
-align optional values:
+alignment optional values:
 
 Value | Description
 ------|------------
@@ -187,7 +191,7 @@ all-faces|Focus on all faces in the image. Detects multiple faces and centers on
 **Sample Request**
 ```python
 image = wixmedia_image.WixMediaImage('uri', "dog.jpg")
-image.canvas(width=480, height=240, quality=75, align='all-faces')
+image.canvas(width=480, height=240, quality=75, alignment='all-faces')
 ```
 would generate the URL:
 ```
@@ -197,7 +201,7 @@ and:
 ```python
 image.canvas(width=480, height=240, quality=75)
 ```
-would generate: (giving 'align' its default values)
+would generate: (giving 'alignment' its default values)
 ```
 http://endpoint.com/5d958389e0a2.jpg/canvas/w_480,h_240,q_75/dog.jpg
 ```
@@ -376,7 +380,7 @@ watermark(op=100, a='ceneter', scl=0)
 Parameter | value | Description
 ----------|-------|------------
 opacity (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
-align (optional)|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
+alignment (optional)|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
 scale (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
 
 a optional values:
@@ -405,7 +409,7 @@ http://endpoint.com/5d958389e0a2.jpg/wm/op_45,scl_0/dog.jpg
 ```
 and:
 ```python
-image.watermark(opacity=100, align='top-left', scale=50)
+image.watermark(opacity=100, alignment='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```

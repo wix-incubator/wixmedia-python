@@ -4,17 +4,16 @@ url   = 'http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2
 image = wixmedia_image.WixMediaImage(url, "dog.png")
 print image
 
-print image.crop(x=10, y=10, width=120, height=120).adjust().filter().get_img_tag()
-image.reset()
+#print image.crop(x=10, y=10, width=120, height=120).adjust().filter().get_img_tag()
+#image.reset()
 
-print image.srz(width=120, height=120) \
+print image.srz(width=120, height=120, alignment="top-left") \
            .adjust(brightness=60) \
            .filter("oil", blur=22) \
            .get_img_tag(alt="dog")
-
 image.reset()
 
-print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil", blur=22).get_img_tag()
+#print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil", blur=22).get_img_tag()
 
 ############
 

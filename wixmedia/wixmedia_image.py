@@ -28,6 +28,20 @@ class WixMediaImage(object):
         "sharpen":        "shrp"  # TODO: these command are built from 3 parameters so we need to combing and emit one in url
     }
 
+    alignment_value_map = {
+        "center": "c",
+        "top": "t",
+        "top-left": "tl",
+        "top-right": "tr",
+        "bottom": "b",
+        "bottom-left": "bl",
+        "bottom-right": "br",
+        "left": "l",
+        "right": "r",
+        "face": "f"
+        "faces" "fs"
+    }
+
     def __init__(self, file_uri, original_filename):
         self.transform_command = None
         self.transform_params  = None
@@ -45,7 +59,7 @@ class WixMediaImage(object):
         self.adjustment_params = {}
         self.filter_params     = {}
 
-    def srz(self, width, height, quality=85, alignment=1, radius=0.5, amount=0.2, threshold=0.0):
+    def srz(self, width, height, quality=85, alignment="center", radius=0.5, amount=0.2, threshold=0.0):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -56,7 +70,7 @@ class WixMediaImage(object):
             "w":  width,
             "h":  height,
             "q":  quality,
-            "a":  alignment,
+            "a":  WixMediaImage.alignment_value_map[alignment],
             "us": "%.2f_%.2f_%.2f" % (radius, amount, threshold)
         }
 
@@ -78,7 +92,7 @@ class WixMediaImage(object):
 
         return self
 
-    def canvas(self, width, height, quality=85, alignment=1):
+    def canvas(self, width, height, quality=85, alignment="center"):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -89,7 +103,7 @@ class WixMediaImage(object):
             "w": width,
             "h": height,
             "q": quality,
-            "a": alignment
+            "a": WixMediaImage.alignment_value_map[alignment]
         }
 
         return self
