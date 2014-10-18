@@ -186,7 +186,7 @@ bottom-right|Focus on the bottom right side of the image.
 left|Focus on the left side of the image, vertical center.
 right|Focus on the right side of the image, vertical center.
 face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
-all-faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
+faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
 **Sample Request**
 ```python
