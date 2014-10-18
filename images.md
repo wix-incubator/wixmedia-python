@@ -346,20 +346,40 @@ threshold|shapening mask threshold|0 to 255
 image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
 
 image.filter(blur=50)
-would generate the URL: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/blur_50/dog.jpg
+```
+would generate the URL:
 
+```
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/blur_50/dog.jpg
+```
+***
+```python
 image.filter(oil, neg)
-would generate: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg/dog.jpg
-
+```
+would generate: 
+```
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg/dog.jpg
+```
+***
+```python
 image.filter(neg, pixelate=108)
-would generate: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/neg,pix_108/dog.jpg
-
+```
+would generate: 
+```
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/neg,pix_108/dog.jpg
+```
+***
+```python
 image.filter(sharpen(radius=100, amount=30, thershold=217))
-would generate: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/sharpen_100_30_217/dog.jpg
-
+```
+would generate: 
+```
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/sharpen_100_30_217/dog.jpg
+```
+***
+```python
 image.filter(oil, neg, pixelate=125, sharpen(radius=100, amount=30, thershold=217)??????)
 would generate: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg,pix_125,sharpen_100_30_217/dog.jpg
-
 ```
 
 
