@@ -379,7 +379,10 @@ http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.p
 ***
 ```python
 image.filter(oil, neg, pixelate=125, sharpen(radius=100, amount=30, thershold=217)??????)
-would generate: http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg,pix_125,sharpen_100_30_217/dog.jpg
+```
+would generate: 
+```
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg,pix_125,sharpen_100_30_217/dog.jpg
 ```
 
 
