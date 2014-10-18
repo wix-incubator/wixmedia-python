@@ -1,18 +1,17 @@
 wixmedia-python SDK
 -------------------
-Wixmedia Image Manipulation
+Image Manipulation
 ===========================
-Wixmedia provides web developers a versatile infrastructure for image manipulations easily accessable through Wixmedia's RESTful Image API. 
+Wix Media Services provides web developers a versatile infrastructure for image manipulations easily accessable through its RESTful Image API. 
 
-In addition, Wixmedia offers the following Python wrapper, which provides easier access to the Image API (by automatically generating Wixmedia URL requests).
+For more details about Wix Media Services images RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia-python/blob/master/images
+_restfull_api.md). 
 
-For more details about Wixmedia RESTful API, you are welcome to browse our documentation [here](https://github.com/wix/wixmedia-python/blob/master/README.md). 
-
-## Wixmedia Image Manipulation Usage ##
+## Usage ##
 
 ### Uploading files ###
 
-It’s easy to upload files using the Wixmedia Python Library.
+It’s easy to upload images using the Wixmedia Python Library.
 For example:
 
 ```python
@@ -25,33 +24,38 @@ image = service.upload_file_from_path('/files/images/dog.jpg')
 print image.crop().adjust().filter().get_img_tag()
 ```
 
+__Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
+
 ### Rendering images ###
 
-After uploading an image, you can easily apply any manipulation suggested by Wix using the API documented here. 
+After uploading an image, you can easily apply any manipulation as described in [Wix Media Services images RESTful API](https://github.com/wix/wixmedia-python/blob/master/images
+_restfull_api.md).
 For example:
 
 ```python
-from wixmedia import wixmedia_image
+from wixmedia import wixmedia_service
 
-image = wixmedia_image.WixMediaImage('uri')
+service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
+image   = service.upload_image_from_path('/files/images/dog.jpg')
 
-print image.get_img_tag(width=4, alt="golan")
-print image.get_img_tag()
-
-print image.crop().adjust().filter().get_img_tag()
+print image.srz(width=120, height=120) \
+           .adjust(brightness=60) \
+           .filter("oil", blur=22) \
+           .get_img_tag(alt="dog")
 ```
 
-#### API List ####
+#### API ####
 All the APIs conform to a URI structure in the form of: 
 
 ```python
-http(s)://endpoint.com/file-id/operation/params(p_value, comma-separated)/filename.ext
+http(s)://endpoint.com/user-id/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
 For example:
 ```python
-http://endpont.com/5d958389e0a2.jpg/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.jpg
+http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png
 ```
-generated with the python API explained below. 
+Using this python package eliminates the need to manually construct such requests' urls. 
 
 
 ##### Image Transformation Operations #####
