@@ -14,7 +14,7 @@ _restfull_api.md).
 It’s easy to upload images using the Wixmedia Python Library. For example:
 
 ```python
-from wixmedia import wixmedia_service
+from wixmedia import wixmedia_servicea
 
 service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
 
@@ -60,7 +60,7 @@ Using this python package eliminates the need to manually construct such urls.
 
 ##### Image Transformation Operations #####
 
-The follwoing image transformations are available (one per image maipulation request):
+The following image transformations are available (one per image maipulation request):
 - Scaled resize with aligned crop   [srz]
 - Scaled resize (without crop)   [srb]
 - Canvas
@@ -267,11 +267,10 @@ the parameters may be one or more of the following options:
 
 function | parameter(s) | Description
 ---------|--------------|------------
-br (optional)|Integer (%)|brightness
-con (optional)|Integer (%)|contrast
-sat (optional)|Integer (%)|saturation
-hue (optional)|Integer (%)|hue
-vib (optional)|Integer (%)|vibrance
+br (optional)|Integer (%)|brightness. ```value between -100 and 100```
+con (optional)|Integer (%)|contrast ```value between -100 and 100```
+sat (optional)|Integer (%)|saturation ```value between -100 and 100```
+hue (optional)|Integer (%)|hue ```value between -100 and 100```
 auto(optional)|-|auto adjust
 
 **Sample Requests**
