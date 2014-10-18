@@ -82,9 +82,9 @@ width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
 quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 alignment (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default option: Central cropping.``` see values in the table below.
-radius|the unsharp mask radius. ```default value: 0.50.```
-amount|the unsharp mask amount. ```default value: 0.20.```
-threshold|the unsharp mask threshold. ```default value: 0.00.```
+radius|Float|the unsharp mask radius. ```default value: 0.50.```
+amount|Float|the unsharp mask amount. ```default value: 0.20.```
+threshold|Float|the unsharp mask threshold. ```default value: 0.00.```
 
 alignment optional values:
 
@@ -124,9 +124,9 @@ Parameter | value | Description
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
 quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
-radius|the unsharp mask radius. ```default value: 0.50.```
-amount|the unsharp mask amount. ```default value: 0.20.```
-threshold|the unsharp mask threshold. ```default value: 0.00.```
+radius|Float|the unsharp mask radius. ```default value: 0.50.```
+amount|Float|the unsharp mask amount. ```default value: 0.20.```
+threshold|Float|the unsharp mask threshold. ```default value: 0.00.```
 
 **Sample Request**
 ```python
