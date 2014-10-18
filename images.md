@@ -280,11 +280,10 @@ image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog:234234234234
 image.adjust(auto)  
 ```
 would generate the URL: 
-
 ```
 http://endpoint.com/5d958389e0a2.jpg/adjust/auto/dog.jpg
 ```
-
+***
 ```pyhton
 image.adjust(br=-82, con=12, hue=50)  
 ```
@@ -292,7 +291,7 @@ would generate:
 ```
 http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/adjust/br_-82,con_12,hue_50/dog.jpg
 ```
-
+***
 ```python
 image.adjust(con=60)
 ```
@@ -300,7 +299,7 @@ would generate:
 ```
 http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/adjust/con_60/dog.jpg
 ```
-
+***
 ```python
 image.adjust(b=100) 
 ```
