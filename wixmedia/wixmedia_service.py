@@ -10,11 +10,17 @@ class WixMediaService(object):
         self.api_key    = api_key
         self.api_secret = api_secret
 
-    def upload_file_from_path(self, filepath):
+    def upload_image_from_path(self, filepath):
 
         metadata = self._upload_to_pm_from_path(filepath)
 
         return WixMediaImage(metadata['file_url'], metadata['original_filename'])
+
+    def upload_audio_from_path(self, filepath):
+        pass
+
+    def upload_video_from_path(self, filepath):
+        pass
 
     def upload_file_from_stream(self, fp, filename):
 

@@ -7,7 +7,11 @@ print image
 print image.crop(x=10, y=10, width=120, height=120).adjust().filter().get_img_tag()
 image.reset()
 
-print image.srz(width=120, height=120).adjust(brightness=60).filter("oil", blur=22).get_img_tag(alt="dog")
+print image.srz(width=120, height=120) \
+           .adjust(brightness=60) \
+           .filter("oil", blur=22) \
+           .get_img_tag(alt="dog")
+
 image.reset()
 
 print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil", blur=22).get_img_tag()
@@ -18,6 +22,6 @@ print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil",
 
 ## service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
 
-## image = service.upload_file_from_path('/files/images/dog.jpg')
+## image = service.upload_image_from_path('/files/images/dog.jpg')
 
 ## print image.crop().adjust().filter().get_img_tag()
