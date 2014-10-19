@@ -105,7 +105,7 @@ image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, 
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
 ```
 ###### srb - scaled resize without crop ######
 
