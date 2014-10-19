@@ -43,9 +43,7 @@ The previous code snippet uploads an image to your account in Wix Media Services
 ```html
 <img src="http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
 ```
-Note |
-------
-All rendered URLs (as shown in the previous *img* tag) conform to the following structure: ```http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext``` Using this python package eliminates the need to manually construct such urls. For more information browse [Wix Media Images RESTful            API](http://media.wixapps.net/playground/docs/images_restfull_api.html) Documentation.|
+__Note__: All rendered URLs (as shown in the previous *img* tag) conform to the following structure: ```http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext``` Using this python package eliminates the need to manually construct such urls. For more information browse [Wix Media Images RESTful            API](http://media.wixapps.net/playground/docs/images_restfull_api.html) Documentation.|
 
 ##### Image Transformation Operations #####
 
