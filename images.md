@@ -76,11 +76,11 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-alignment (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
-radius|Float|the unsharp mask radius. ```default value: 0.50.```
-amount|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold|Float|the unsharp mask threshold. ```default value: 0.00.```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
+radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
 
 alignment optional values:
 
@@ -119,10 +119,10 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
-radius|Float|the unsharp mask radius. ```default value: 0.50.```
-amount|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold|Float|the unsharp mask threshold. ```default value: 0.00.```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
+radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
 
 **Sample Request**
 ```python
@@ -147,8 +147,8 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-alignment (optional)|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
 
 alignment optional values:
 
@@ -197,7 +197,7 @@ Parameter | value | Description
 ----------|-------|------------
 width (mandatory)|Integer|The width constraint (pixels).
 height (mandatory)|Integer|The height constraint (pixels).
-quality (optional)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 
 **Sample Request**
 
@@ -263,11 +263,11 @@ the parameters may be one or more of the following options:
 
 function | parameter(s) | Description
 ---------|--------------|------------
-br (optional)|Integer (%)|brightness. ```value between -100 and 100```
-con (optional)|Integer (%)|contrast ```value between -100 and 100```
-sat (optional)|Integer (%)|saturation ```value between -100 and 100```
-hue (optional)|Integer (%)|hue ```value between -100 and 100```
-auto(optional)|-|auto adjust
+br *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
+con *(optional)*|Integer (%)|contrast ```value between -100 and 100```
+sat *(optional)*|Integer (%)|saturation ```value between -100 and 100```
+hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
+auto*(optional)*|-|auto adjust
 
 **Sample Requests**
 ```python
@@ -393,9 +393,9 @@ watermark(opacity=None, alignment=None, scale=None)
 
 Parameter | value | Description
 ----------|-------|------------
-opacity (optional)|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
-alignment (optional)|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
-scale (optional)|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
+opacity *(optional)*|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
+alignment *(optional)*|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
+scale *(optional)*|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
 
 alignment optional values:
 
