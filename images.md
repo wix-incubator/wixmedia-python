@@ -51,7 +51,9 @@ http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-s
 ```
 Using this python package eliminates the need to manually construct such urls. 
 For more information browse [Wix Media Images RESTful            API](http://media.wixapps.net/playground/docs/images_restfull_api.html) Documentation.
+
 -----------------
+
 ##### Image Transformation Operations #####
 
 The following image transformations are available (one per image maipulation request):
