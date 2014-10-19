@@ -3,13 +3,13 @@ import os
 
 
 class WixMediaImage(object):
-    COMMAND_NONE   = ""
-    COMMAND_SRZ    = "srz"
-    COMMAND_SRB    = "srb"
-    COMMAND_CANVAS = "canvas"
-    COMMAND_FILL   = "fill"
-    COMMAND_CROP   = "crop"
-    COMMAND_WM     = "watermark"
+    COMMAND_NONE      = ""
+    COMMAND_SRZ       = "srz"
+    COMMAND_SRB       = "srb"
+    COMMAND_CANVAS    = "canvas"
+    COMMAND_FILL      = "fill"
+    COMMAND_CROP      = "crop"
+    COMMAND_WATERMARK = "wm"
 
     adjust_parameter_map = {
         "brightness": "br",
@@ -77,7 +77,7 @@ class WixMediaImage(object):
             "h":  height
         }
 
-        if quality:
+        if not quality == None:
             self.transform_params["q"] = quality
 
         if alignment:
@@ -107,7 +107,7 @@ class WixMediaImage(object):
             "h":  height
         }
 
-        if quality:
+        if not quality == None:
             self.transform_params["q"] = quality
 
         if radius or amount or threshold:
@@ -134,7 +134,7 @@ class WixMediaImage(object):
             "h": height
         }
 
-        if quality:
+        if not quality == None:
             self.transform_params["q"] = quality
 
         if alignment:
@@ -159,7 +159,7 @@ class WixMediaImage(object):
             "y": y
         }
 
-        if quality:
+        if not quality == None:
             self.transform_params["q"] = quality
 
         return self
@@ -179,7 +179,7 @@ class WixMediaImage(object):
             "h": height
         }
 
-        if quality:
+        if not quality == None:
             self.transform_params["q"] = quality
 
         return self
@@ -191,17 +191,17 @@ class WixMediaImage(object):
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
 
-        self.transform_command = WixMediaImage.COMMAND_WM
+        self.transform_command = WixMediaImage.COMMAND_WATERMARK
 
         self.transform_params = {}
 
-        if opacity:
+        if not opacity == None:
             self.transform_params["op"] = opacity
 
         if alignment:
             self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
 
-        if scale:
+        if not scale == None:
             self.transform_params["scl"] = scale
 
         return self
