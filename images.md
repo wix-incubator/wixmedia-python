@@ -105,7 +105,7 @@ image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, 
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/5d958389e0a2.jpg/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
 ```
 ###### srb - scaled resize without crop ######
 
@@ -240,7 +240,7 @@ image.crop(x=120, y=120, width=480, hdight=240, quality=75)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240,q_75/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/crop/x_120,y_120,w_480,h_240,q_75/dog.png
 ```
 and:
 ```
@@ -248,7 +248,7 @@ image.crop(x=120, y=120, width=480, height=240)
 ```
 would generate: (with the quality's default value)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/crop/x_120,y_120,w_480,h_240/dog.png
 ```
 
 
