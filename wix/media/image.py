@@ -230,7 +230,7 @@ class Image(object):
         return self
 
     def unsharp(self, radius, amount, threshold):
-        self.filter_params.append(("us","%.2f_%.2f_%.2f" % (radius, amount, threshold)))
+        self.filter_params.append(("us", "%.2f_%.2f_%.2f" % (radius, amount, threshold)))
         return self
 
     def get_rest_url(self):

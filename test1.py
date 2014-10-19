@@ -28,4 +28,3 @@ print image.srz(width=120, height=120, alignment="top-left") \
 #print image.watermark(opacity=45, scale=0).get_img_tag()
 #image.reset()
 #print image.watermark(opacity=45, alignment='top-left', scale=0).get_img_tag()
-
