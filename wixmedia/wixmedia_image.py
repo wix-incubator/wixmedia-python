@@ -9,6 +9,7 @@ class WixMediaImage(object):
     COMMAND_CANVAS = "canvas"
     COMMAND_FILL   = "fill"
     COMMAND_CROP   = "crop"
+    COMMAND_WM     = "watermark"
 
     adjust_parameter_map = {
         "brightness": "br",
@@ -183,6 +184,28 @@ class WixMediaImage(object):
 
         return self
 
+    def watermark(self, opacity=None, alignment=None, scale=None):
+        '''
+        default values: opacity=100, alignment='center', scale=0
+        '''
+        if self.transform_command != WixMediaImage.COMMAND_NONE:
+            raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
+
+        self.transform_command = WixMediaImage.COMMAND_WM
+
+        self.transform_params = {}
+
+        if opacity:
+            self.transform_params["op"] = opacity
+
+        if alignment:
+            self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
+
+        if scale:
+            self.transform_params["scl"] = scale
+
+        return self
+
     def adjust(self, *props_list, **props_dict):
 
         self.adjustment_params.update({p: True for p in props_list})
@@ -196,6 +219,7 @@ class WixMediaImage(object):
         self.filter_params.update(funcs_dict)
 
         return self
+
 
     def get_rest_url(self):
 
