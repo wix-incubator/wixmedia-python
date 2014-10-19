@@ -41,7 +41,7 @@ print image.srz(width=120, height=120) \
 The previous code snippet uploads an image to your account in Wix Media Services and prints an HTML *img* tag which can be used to render the image when embedded in a web page:
 
 ```html
-<img src="http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
+<img src="http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
 ```
 ----------------
 __Note__: 
@@ -100,7 +100,7 @@ faces|focus on all faces in the image.
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, amount=1.20, threshold=0.00)
 ```
 would generate the URL:
@@ -126,12 +126,12 @@ threshold|Float|the unsharp mask threshold. ```default value: 0.00.```
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.srb(width=480, height=240, quality=75)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.png
 ```
 
 
@@ -168,12 +168,12 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.canvas(width=480, height=240, quality=75, alignment='faces')
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/canvas/w_480,h_240,q_75,a_fs/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75,a_fs/dog.png
 ```
 and:
 ```python
@@ -181,7 +181,7 @@ image.canvas(width=480, height=240, quality=75)
 ```
 would generate: (giving 'alignment' its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/canvas/w_480,h_240,q_75/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75/dog.png
 ```
 
 
@@ -202,12 +202,12 @@ quality (optional)|Integer (%)|The quality constraint if jpg. Values are between
 **Sample Request**
 
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.fill(width=480, height=240, quality=75)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/fill/w_480,h_240,q_75/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,q_75/dog.png
 ```
 and:
 ```
@@ -215,7 +215,7 @@ image.fill(width=480, height=240)
 ```
 would generate: (with the quality's default value)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/fill/w_480,h_240/dog.png   
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240/dog.png   
 ```
 ###### crop ######
 
@@ -235,12 +235,12 @@ quality (optioanl)|Integer (%)|The quality constraint if jpg. Values are between
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.crop(x=120, y=120, width=480, hdight=240, quality=75)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240,q_75/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240,q_75/dog.png
 ```
 and:
 ```
@@ -248,7 +248,7 @@ image.crop(x=120, y=120, width=480, height=240)
 ```
 would generate: (with the quality's default value)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/5d958389e0a2.jpg/crop/x_120,y_120,w_480,h_240/dog.png
 ```
 
 
@@ -271,13 +271,13 @@ auto(optional)|-|auto adjust
 
 **Sample Requests**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 
 image.adjust(auto)  
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/adjust/auto/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/auto/dog.png
 ```
 ***
 ```pyhton
@@ -285,7 +285,7 @@ image.adjust(br=-82, con=12, hue=50)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/adjust/br_-82,con_12,hue_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/br_-82,con_12,hue_50/dog.png
 ```
 ***
 ```python
@@ -293,7 +293,7 @@ image.adjust(con=60)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/adjust/con_60/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/con_60/dog.png
 ```
 ***
 ```python
@@ -301,7 +301,7 @@ image.adjust(b=100)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/adjust/br_100/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/br_100/dog.png
 ```
 ##### Image Filter Operation #####
 
@@ -339,14 +339,14 @@ threshold|shapening mask threshold|0 to 255
 
 **Sample Requests**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 
 image.filter(blur=50)
 ```
 would generate the URL:
 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/filter/blur_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/blur_50/dog.png
 ```
 ***
 ```python
@@ -354,7 +354,7 @@ image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg/dog.png
 ```
 ***
 ```python
@@ -362,7 +362,7 @@ image.filter(neg, pixelate=108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/filter/neg,pix_108/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/neg,pix_108/dog.png
 ```
 ***
 ```python
@@ -370,7 +370,7 @@ image.filter(sharpen(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/filter/sharpen_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/sharpen_100_30_217/dog.png
 ```
 ***
 ```python
@@ -378,7 +378,7 @@ image.filter(oil, neg, pixelate=125, sharpen(radius=100, amount=30, thershold=21
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/filter/oil,neg,pix_125,sharpen_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg,pix_125,sharpen_100_30_217/dog.png
 ```
 
 
@@ -414,12 +414,12 @@ face|face-recognition based alignment.
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.watermark(opacity=45, scale=0)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/wm/op_45,scl_0/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_45,scl_0/dog.png
 ```
 and:
 ```python
@@ -427,7 +427,7 @@ image.watermark(opacity=100, alignment='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/wm/op_100,a_tl,scl_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_100,a_tl,scl_50/dog.png
 ```
 
 **Sample Response**
