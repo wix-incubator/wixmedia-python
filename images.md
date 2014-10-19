@@ -69,7 +69,7 @@ The following image transformations are available (one per image maipulation req
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, quality=75, alignment='center', radius=0.50, amount=0.20, threshold=0.00)
+srz(width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
@@ -112,7 +112,7 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. The resulting image will maintain the same aspect ratio of the input image.
 
 ```python
-srb(width, height, quality=75, radius=0.50, amount=0.20, threshold=0.00)
+srb(width, height, quality=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
@@ -140,7 +140,7 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(width, height, quality=75, alignment='center')
+canvas(width, height, quality=None, alignment=None)
 ```
 
 Parameter | value | Description
@@ -190,7 +190,7 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Create an image with the exact given width and height while retaining original proportions. Use only part of the image that fills the given dimensions. Only part of the original image might be visible if the required proportions are different than the original ones.
 
 ```python
-fill(width, height ,quality=75)
+fill(width, height ,quality=None)
 ```
 
 Parameter | value | Description
@@ -222,7 +222,7 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
 
 ```python
-crop(x, y, width, height, quality=75)
+crop(x, y, width, height, quality=None)
 ```
 
 Parameter | Value | Description
@@ -388,7 +388,7 @@ Enables users to apply watermark such as copyright notice in order to protect th
 * The system allows replacing watermark if needed.
 
 ```python
-watermark(opacity=100, alignment='center', scale=0)
+watermark(opacity=None, alignment=None, scale=None)
 ```
 
 Parameter | value | Description
