@@ -46,7 +46,7 @@ The previous code snippet uploads an image to your account in Wix Media Services
 #### API ####
 All the APIs conform to a URI structure in the form of: 
 
-```html
+```
 http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
 For example:
