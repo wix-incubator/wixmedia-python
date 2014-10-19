@@ -1,4 +1,4 @@
-application: wixmedia-example-gae
+application: media-example-gae
 module: default
 version: snapshot
 runtime: python27

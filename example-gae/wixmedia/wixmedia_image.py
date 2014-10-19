@@ -3,13 +3,12 @@ import os
 
 
 class WixMediaImage(object):
-    COMMAND_NONE      = ""
-    COMMAND_SRZ       = "srz"
-    COMMAND_SRB       = "srb"
-    COMMAND_CANVAS    = "canvas"
-    COMMAND_FILL      = "fill"
-    COMMAND_CROP      = "crop"
-    COMMAND_WATERMARK = "wm"
+    COMMAND_NONE   = ""
+    COMMAND_SRZ    = "srz"
+    COMMAND_SRB    = "srb"
+    COMMAND_CANVAS = "canvas"
+    COMMAND_FILL   = "fill"
+    COMMAND_CROP   = "crop"
 
     adjust_parameter_map = {
         "brightness": "br",
@@ -62,10 +61,7 @@ class WixMediaImage(object):
         self.adjustment_params = {}
         self.filter_params     = {}
 
-    def srz(self, width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None):
-        '''
-        default values: quality=75, alignment="center", radius=0.5, amount=0.2, threshold=0.0
-        '''
+    def srz(self, width, height, quality=75, alignment="center", radius=0.5, amount=0.2, threshold=0.0):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -74,28 +70,15 @@ class WixMediaImage(object):
 
         self.transform_params = {
             "w":  width,
-            "h":  height
+            "h":  height,
+            "q":  quality,
+            "a":  WixMediaImage.alignment_value_map[alignment],
+            "us": "%.2f_%.2f_%.2f" % (radius, amount, threshold)
         }
-
-        if not quality == None:
-            self.transform_params["q"] = quality
-
-        if alignment:
-            self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
-
-        if radius or amount or threshold:
-            radius    = radius or 0.5
-            amount    = amount or 0.2
-            threshold = threshold or 0.0
-
-            self.transform_params["us"] = "%.2f_%.2f_%.2f" % (radius, amount, threshold)
 
         return self
 
-    def srb(self, width, height, quality=None, radius=None, amount=None, threshold=None):
-        '''
-        default values: quality=75, radius=0.5, amount=0.2, threshold=0.0
-        '''
+    def srb(self, width, height, quality=75, radius=0.5, amount=0.2, threshold=0.0):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -104,25 +87,14 @@ class WixMediaImage(object):
 
         self.transform_params = {
             "w":  width,
-            "h":  height
+            "h":  height,
+            "q":  quality,
+            "us": "%.2f_%.2f_%.2f" % (radius, amount, threshold)
         }
-
-        if not quality == None:
-            self.transform_params["q"] = quality
-
-        if radius or amount or threshold:
-            radius    = radius or 0.5
-            amount    = amount or 0.2
-            threshold = threshold or 0.0
-
-            self.transform_params["us"] = "%.2f_%.2f_%.2f" % (radius, amount, threshold)
 
         return self
 
-    def canvas(self, width, height, quality=None, alignment=None):
-        '''
-        default values: quality=75, alignment="center"
-        '''
+    def canvas(self, width, height, quality=75, alignment="center"):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -131,21 +103,14 @@ class WixMediaImage(object):
 
         self.transform_params = {
             "w": width,
-            "h": height
+            "h": height,
+            "q": quality,
+            "a": WixMediaImage.alignment_value_map[alignment]
         }
-
-        if not quality == None:
-            self.transform_params["q"] = quality
-
-        if alignment:
-            self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
 
         return self
 
-    def crop(self, x, y, width, height, quality=None):
-        '''
-        default value: quality=75
-        '''
+    def crop(self, x, y, width, height, quality=75):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -155,19 +120,14 @@ class WixMediaImage(object):
         self.transform_params = {
             "w": width,
             "h": height,
+            "q": quality,
             "x": x,
             "y": y
         }
 
-        if not quality == None:
-            self.transform_params["q"] = quality
-
         return self
 
-    def fill(self, width, height, quality=None):
-        '''
-        default value: quality=75
-        '''
+    def fill(self, width, height, quality=75):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -176,33 +136,9 @@ class WixMediaImage(object):
 
         self.transform_params = {
             "w": width,
-            "h": height
+            "h": height,
+            "q": quality
         }
-
-        if not quality == None:
-            self.transform_params["q"] = quality
-
-        return self
-
-    def watermark(self, opacity=None, alignment=None, scale=None):
-        '''
-        default values: opacity=100, alignment='center', scale=0
-        '''
-        if self.transform_command != WixMediaImage.COMMAND_NONE:
-            raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
-
-        self.transform_command = WixMediaImage.COMMAND_WATERMARK
-
-        self.transform_params = {}
-
-        if not opacity == None:
-            self.transform_params["op"] = opacity
-
-        if alignment:
-            self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
-
-        if not scale == None:
-            self.transform_params["scl"] = scale
 
         return self
 
@@ -219,7 +155,6 @@ class WixMediaImage(object):
         self.filter_params.update(funcs_dict)
 
         return self
-
 
     def get_rest_url(self):
 
