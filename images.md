@@ -74,8 +74,8 @@ srz(width, height, quality=None, alignment=None, radius=None, amount=None, thres
 
 Parameter | value | Description
 ----------|-------|------------
-width (mandatory)|Integer|The width constraint (pixels).
-height (mandatory)|Integer|The height constraint (pixels).
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
 radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
@@ -117,8 +117,8 @@ srb(width, height, quality=None, radius=None, amount=None, threshold=None)
 
 Parameter | value | Description
 ----------|-------|------------
-width (mandatory)|Integer|The width constraint (pixels).
-height (mandatory)|Integer|The height constraint (pixels).
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
 radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
@@ -145,8 +145,8 @@ canvas(width, height, quality=None, alignment=None)
 
 Parameter | value | Description
 ----------|-------|------------
-width (mandatory)|Integer|The width constraint (pixels).
-height (mandatory)|Integer|The height constraint (pixels).
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
 
@@ -195,8 +195,8 @@ fill(width, height ,quality=None)
 
 Parameter | value | Description
 ----------|-------|------------
-width (mandatory)|Integer|The width constraint (pixels).
-height (mandatory)|Integer|The height constraint (pixels).
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 
 **Sample Request**
@@ -227,11 +227,11 @@ crop(x, y, width, height, quality=None)
 
 Parameter | Value | Description
 ----------|-------|------------
-x (mandatory)|Integer|The x-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
-y (mandatory)|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
-width (mandatory)|Integer|The width constraint (pixels).
-height (mandatory)|Integer|The height constraint (pixels).
-quality (optioanl)|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value:75```
+x *(mandatory)*|Integer|The x-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
+y *(mandatory)*|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value:75```
 
 **Sample Request**
 ```python
