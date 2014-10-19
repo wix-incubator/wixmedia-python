@@ -267,7 +267,7 @@ br *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
 con *(optional)*|Integer (%)|contrast ```value between -100 and 100```
 sat *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
-auto*(optional)*|-|auto adjust
+auto *(optional)*|-|auto adjust
 
 **Sample Requests**
 ```python
