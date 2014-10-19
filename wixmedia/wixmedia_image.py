@@ -61,7 +61,7 @@ class WixMediaImage(object):
         self.adjustment_params = {}
         self.filter_params     = {}
 
-    def srz(self, width, height, quality=85, alignment="center", radius=0.5, amount=0.2, threshold=0.0):
+    def srz(self, width, height, quality=75, alignment="center", radius=0.5, amount=0.2, threshold=0.0):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -78,7 +78,7 @@ class WixMediaImage(object):
 
         return self
 
-    def srb(self, width, height, quality=85, radius=0.5, amount=0.2, threshold=0.0):
+    def srb(self, width, height, quality=75, radius=0.5, amount=0.2, threshold=0.0):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -94,7 +94,7 @@ class WixMediaImage(object):
 
         return self
 
-    def canvas(self, width, height, quality=85, alignment="center"):
+    def canvas(self, width, height, quality=75, alignment="center"):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -110,7 +110,7 @@ class WixMediaImage(object):
 
         return self
 
-    def crop(self, x, y, width, height, quality=85):
+    def crop(self, x, y, width, height, quality=75):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
@@ -127,7 +127,7 @@ class WixMediaImage(object):
 
         return self
 
-    def fill(self, width, height, quality=85):
+    def fill(self, width, height, quality=75):
 
         if self.transform_command != WixMediaImage.COMMAND_NONE:
             raise WixMediaCmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
