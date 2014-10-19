@@ -6,32 +6,33 @@ Wix Media Services provides web developers a versatile infrastructure for image 
 
 ## Usage ##
 
-### Uploading files ###
+### Uploading Images ###
 
 It’s easy to upload images using the Wixmedia Python Library. For example:
-
-```python
-from wixmedia import wixmedia_servicea
-
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-
-image = service.upload_file_from_path('/files/images/dog.jpg')
-```
-
-__Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
-
-### Rendering images ###
-
-After uploading an image, you can easily apply any manipulation as described in [Wix Media Services images RESTful API](https://github.com/wix/wixmedia-python/blob/master/images
-_restfull_api.md).
-For example:
 
 ```python
 from wixmedia import wixmedia_service
 
 service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
 image   = service.upload_image_from_path('/files/images/dog.jpg')
+```
 
+__Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
+
+### Rendering Images ###
+
+After uploading an image, you can easily apply any manipulation as described in [Wix Media Services images RESTful API](https://github.com/wix/wixmedia-python/blob/master/images
+_restfull_api.md).
+For example:
+
+```python
+# Upload image:
+from wixmedia import wixmedia_service
+
+service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
+image   = service.upload_image_from_path('/files/images/dog.jpg')
+
+# Apply manipulations:
 print image.srz(width=120, height=120) \
            .adjust(brightness=60) \
            .filter("oil", blur=22) \
