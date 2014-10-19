@@ -47,7 +47,7 @@ __Note__:
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```uri
 http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
-```.
+```
 Using this python package eliminates the need to manually construct such urls. 
 For more information browse [Wix Media Images RESTful            API](http://media.wixapps.net/playground/docs/images_restfull_api.html) Documentation.|
 
