@@ -411,6 +411,7 @@ bottom-right|bottom right part of the image.
 left|central left part of the image. 
 right|central right part of the image. 
 face|face-recognition based alignment.
+faces|focus on all faces in the image.
 
 **Sample Request**
 ```python
