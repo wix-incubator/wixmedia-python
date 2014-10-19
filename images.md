@@ -46,11 +46,11 @@ The previous code snippet uploads an image to your account in Wix Media Services
 #### API ####
 All the APIs conform to a URI structure in the form of: 
 
-```python
+```html
 http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
 For example:
-```python
+```
 http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png
 ```
 Using this python package eliminates the need to manually construct such urls. 
