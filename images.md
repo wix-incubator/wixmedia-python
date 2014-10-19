@@ -179,7 +179,7 @@ and:
 ```python
 image.canvas(width=480, height=240, quality=75)
 ```
-would generate: (giving 'alignment' its default values)
+would generate (giving 'alignment' its default values):
 ```
 http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75/dog.png
 ```
