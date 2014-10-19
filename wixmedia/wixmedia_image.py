@@ -1,4 +1,5 @@
 from .exceptions import WixMediaCmdNotAllowed
+from .exceptions import WixMediaValueError
 import os
 
 
@@ -62,6 +63,50 @@ class WixMediaImage(object):
         self.adjustment_params = {}
         self.filter_params     = {}
 
+    @staticmethod
+    def check_param(param_name, val, type_expected, min_val=None, max_val=None):
+        if val is not None:
+
+            if type(val) is not type_expected:
+                raise WixMediaValueError('"%s" should be of type %s. type received: %s' % ( param_name, str(type_expected), str(type(val))))
+
+            if min_val is not None and max_val is not None:
+                if val > max_val or val < min_val:
+                    raise WixMediaValueError("'%s' parameter's value should be between %s to %s. Value received: %s" % (param_name, str(min_val), str(max_val), str(val)))
+
+            elif min_val is not None:
+                if val < min_val:
+                    raise WixMediaValueError("'%s' parameter's value should be above %s. Value received: %s" % (param_name, str(min_val), str(val)))
+
+            elif max_val is not None:
+                if val > max_val:
+                    raise WixMediaValueError("'%s' parameter's value should be under %s. Value received: %s" % (param_name, str(max_val), str(val)))
+
+            if param_name == 'alignment':
+                if val not in WixMediaImage.alignment_value_map.keys():
+                    raise WixMediaValueError("'alignment' parameter's value should be a String from the expected position-describing strings. Received: %s" % val)
+
+    @staticmethod
+    def check_transform_params(width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None, x=None, y=None):
+        check = WixMediaImage.check_param
+        check('width', width, int, 0)
+        check('height', width, int, 0)
+        check('quality', quality, int, 0, 100)
+        check('alignment', alignment, str)
+        check('radius', radius, float)
+        check('amount', amount, float)
+        check('threshold', threshold, float)
+        check('x', x, int, 0)
+        check('y', y, int, 0)
+
+    @staticmethod
+    def check_watermark_params(opacity=None, alignment=None, scale=None):
+        check = WixMediaImage.check_param
+        check('opacity', opacity, int, 0, 100)
+        check('scale', scale, int, 0, 100)
+        check('alignment', alignment, str)
+
+
     def srz(self, width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None):
         '''
         default values: quality=75, alignment="center", radius=0.5, amount=0.2, threshold=0.0
@@ -72,12 +117,14 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_SRZ
 
+        WixMediaImage.check_transform_params(width, height, quality, alignment, radius, amount, threshold)
+
         self.transform_params = {
             "w":  width,
             "h":  height
         }
 
-        if not quality == None:
+        if quality is not None:
             self.transform_params["q"] = quality
 
         if alignment:
@@ -102,12 +149,14 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_SRB
 
+        WixMediaImage.check_transform_params(width, height, quality, radius=radius, amount=amount, threshold=threshold)
+
         self.transform_params = {
             "w":  width,
             "h":  height
         }
 
-        if not quality == None:
+        if quality is not None:
             self.transform_params["q"] = quality
 
         if radius or amount or threshold:
@@ -129,12 +178,14 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_CANVAS
 
+        WixMediaImage.check_transform_params(width, height, quality=quality, alignment=alignment)
+
         self.transform_params = {
             "w": width,
             "h": height
         }
 
-        if not quality == None:
+        if quality is not None:
             self.transform_params["q"] = quality
 
         if alignment:
@@ -152,6 +203,8 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_CROP
 
+        WixMediaImage.check_transform_params(width, height, quality=quality, x=x, y=y)
+
         self.transform_params = {
             "w": width,
             "h": height,
@@ -159,7 +212,7 @@ class WixMediaImage(object):
             "y": y
         }
 
-        if not quality == None:
+        if quality is not None:
             self.transform_params["q"] = quality
 
         return self
@@ -174,12 +227,14 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_FILL
 
+        WixMediaImage.check_transform_params(width, height, quality=quality)
+
         self.transform_params = {
             "w": width,
             "h": height
         }
 
-        if not quality == None:
+        if quality is not None:
             self.transform_params["q"] = quality
 
         return self
@@ -193,15 +248,17 @@ class WixMediaImage(object):
 
         self.transform_command = WixMediaImage.COMMAND_WATERMARK
 
+        WixMediaImage.check_watermark_params(opacity, alignment, scale)
+
         self.transform_params = {}
 
-        if not opacity == None:
+        if opacity is not None:
             self.transform_params["op"] = opacity
 
         if alignment:
             self.transform_params["a"] = WixMediaImage.alignment_value_map[alignment]
 
-        if not scale == None:
+        if scale is not None:
             self.transform_params["scl"] = scale
 
         return self

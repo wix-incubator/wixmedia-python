@@ -14,7 +14,7 @@ image.reset()
 
 print image.watermark(opacity=45, scale=0).get_img_tag()
 image.reset()
-print image.watermark(opacity=45, alignment='top-left', scale=0).get_img_tag()
+print image.watermark(opacity=100, alignment='top-left', scale=50).get_img_tag()
 
 #print image.srz(width=120, height=120).adjust("auto", contrast=53).filter("oil", blur=22).get_img_tag()
 

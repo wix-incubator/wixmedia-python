@@ -8,3 +8,6 @@ class WixMediaUploadError(WixMediaError):
 
 class WixMediaCmdNotAllowed(WixMediaError):
     pass
+
+class WixMediaValueError(WixMediaError):
+    pass
