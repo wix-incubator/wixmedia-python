@@ -1,6 +1,30 @@
 wixmedia-python SDK
 ===================
 
+```python
+class RenderImagesHandler(webapp2.RequestHandler):
+    def get(self):
+
+        # Image id's can be fetched from datastore ...
+        image_ids = [
+            'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg',
+            'ggl-685734655894940532967/images/c074a4a8ea854ee7b5b893ce2a0c7361/dog.jpg'
+        ]
+
+        context = {
+            'thumbnail_urls': [RenderImagesHandler.create_image_thumbnail_url(image_id) for image_id in image_ids]
+        }
+
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.out.write(render_to_string('example.html', context))
+
+    @staticmethod
+    def create_image_thumbnail_url(image_id):
+        client = media.Client()
+        image  = client.get_image_from_id(image_id)
+
+        return image.srz(width=120, height=120).get_url()
+```
 The Wix Media Services are a collection of tools for handling online media files, such as images, audio and video. The services include storage, serving, uploading, transcoding and processing, client-side widgets and SDKs, user-repository metadata and media-collections. Result of processing media files, such as resized images, encoded audio or transcoded video, are stored in Google Cloud Storage.
 
 This package is a Python wrapper for vaious RESTful API, which allows you to upload media files and perform manipulations on them.
