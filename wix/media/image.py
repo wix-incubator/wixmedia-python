@@ -116,10 +116,6 @@ class Image(object):
         return self
 
     def crop(self, x, y, width, height):
-        """
-        default value: quality=75
-        """
-
         if self.transform_command != Image.COMMAND_NONE:
             raise CmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
 
@@ -134,9 +130,9 @@ class Image(object):
 
         return self
 
-    def fill(self, width, height, resize_filter=None):
+    def fill(self, width, height, resize_filter=None, alignment=None):
         """
-        default value: resize_filter=LanczosFilter
+        default value: resize_filter=LanczosFilter, alignment="center"
         """
 
         if self.transform_command != Image.COMMAND_NONE:
@@ -151,6 +147,9 @@ class Image(object):
 
         if resize_filter is not None:
             self.transform_params["f"] = resize_filter
+
+        if alignment:
+            self.transform_params["a"] = Image.alignment_value_map[alignment]
 
         return self
 

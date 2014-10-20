@@ -22,7 +22,7 @@ class Client(object):
             raise GeneralError('invalid authorization parameters: initialize api key and secret')
 
         metadata = self._upload_to_pm_from_path(file_path)
-        metadata['file_url'] = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+        metadata['file_url'] = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
         return image.Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE)
 
@@ -42,7 +42,7 @@ class Client(object):
             raise GeneralError('invalid authorization parameters: initialize api key and secret')
 
         metadata = self._upload_to_pm_from_stream(fp, filename)
-        metadata['file_url'] = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+        metadata['file_url'] = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
         return image.Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE)
 
