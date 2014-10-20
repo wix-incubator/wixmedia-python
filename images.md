@@ -66,8 +66,8 @@ Using this python package eliminates the need to manually construct such urls. F
 ##### Image Transformation Operations #####
 
 The following image transformations are available (one per image maipulation request):
-- Scaled resize with aligned crop   [srz]
-- Scaled resize (without crop)   [srb]
+- srz (shortcut for applying fill transformation and unsharp mask)
+- srb (shortcut for applying fit transformation and unsharp mask)
 - Canvas
 - Fill
 - Fit
