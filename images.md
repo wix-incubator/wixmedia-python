@@ -133,14 +133,13 @@ http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f847
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(width, height, quality=None, alignment=None)
+canvas(width, height, alignment=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default: center```
 
 alignment optional values:
@@ -161,21 +160,12 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 **Sample Request**
 ```python
-print image.canvas(width=480, height=240, quality=70, alignment='faces').get_url()
+print image.canvas(width=480, height=240, alignment='faces').get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/canvas/q_70,h_240,a_fs,w_480/cat.jpg
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
 ```
-and:
-```python
-image.canvas(width=480, height=240, quality=75)
-```
-would generate (giving 'alignment' its default values):
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75/dog.png
-```
-
 
 ###### fill ######
 
