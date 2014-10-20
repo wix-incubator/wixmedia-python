@@ -8,13 +8,21 @@ Wix Media Services provides web developers a versatile infrastructure for image 
 
 ### Uploading Images ###
 
-It’s easy to upload images using the Wixmedia Python Library. For example:
+It’s easy to upload images using the Wix Media Python Library. For example:
 
 ```python
-from wixmedia import wixmedia_service
+from wix import media
 
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-image   = service.upload_image_from_path('/files/images/dog.png')
+client = media.Client(api_key="my_key", api_secret="my_secret")
+image  = client.upload_image_from_path('/files/images/dog.jpg')
+
+print image.get_id()
+
+```
+
+The code outputs the image id:
+```
+wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
 __Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
