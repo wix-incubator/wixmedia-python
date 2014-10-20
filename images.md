@@ -45,7 +45,7 @@ print image.srz(width=120, height=120, alignment="top-left") \
            .oil() \
            .blur(22) \
            .sharpen(0.3) \
-           .get_rest_url()
+           .get_url()
 ```
 
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag embedded in a web page:
