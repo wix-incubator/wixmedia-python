@@ -255,10 +255,11 @@ the parameters may be one or more of the following options:
 
 function | parameter(s) | Description
 ---------|--------------|------------
-br *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
-con *(optional)*|Integer (%)|contrast ```value between -100 and 100```
-sat *(optional)*|Integer (%)|saturation ```value between -100 and 100```
+brightness *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
+contrast *(optional)*|Integer (%)|contrast ```value between -100 and 100```
+saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 auto *(optional)*|-|auto adjust
 
 **Sample Requests**
