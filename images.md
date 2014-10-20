@@ -279,7 +279,8 @@ quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values ar
 **Sample Requests**
 ```python
 print image.fit(width=120, height=120) \
-           .adjust(brightness=60, contrast=-40).get_url()
+           .adjust(brightness=60, contrast=-40) \
+           .get_url()
 ```
 would generate the URL: 
 ```
@@ -297,7 +298,8 @@ auto_adjust()
 **Sample Requests**
 ```python
 print image.fit(width=120, height=120) \
-           .auto_adjust().get_url()
+           .auto_adjust() \
+           .get_url()
 ```
 would generate the URL: 
 ```
