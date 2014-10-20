@@ -85,8 +85,8 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default: center.``` See values in the table below.
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
@@ -128,7 +128,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
@@ -155,7 +155,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default: center```
 
 alignment optional values:
@@ -204,7 +204,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
 
 **Sample Request**
 
@@ -238,7 +238,7 @@ x *(mandatory)*|Integer|The x-pixel-coordinate to start cropping from. (represen
 y *(mandatory)*|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value:75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default value:75```
 
 **Sample Request**
 ```python
