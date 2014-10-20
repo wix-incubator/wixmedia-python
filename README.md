@@ -1,10 +1,3 @@
-```python
-        context = {
-            'thumbnail_urls': [
-                RenderImagesHandler.create_image_thumbnail_url(image_id) for image_id in image_ids
-            ]
-        }
-```
 
 wixmedia-python SDK
 ===================
