@@ -29,7 +29,7 @@ __Note__: Wix Media Services supports the followoing images file formats: JPEG, 
 
 ### Rendering Images ###
 
-After uploading an image, you can easily apply any manipulation as described in [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html).
+After uploading an image, you can easily apply any manipulation as described later in the document.
 For example:
 
 ```python
