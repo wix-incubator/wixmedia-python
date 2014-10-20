@@ -140,7 +140,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default: center```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
 
 alignment optional values:
 
@@ -167,12 +167,12 @@ would generate the URL:
 http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
 ```
 
-###### fill ######
+###### Fill ######
 
-Create an image with the exact given width and height while retaining original proportions. Use only part of the image that fills the given dimensions. Only part of the original image might be visible if the required proportions are different than the original ones.
+Creates an image with the specified width and height while retaining original image proportion. If the requested proportion is different from the original proportion, only part of the original image may be used to fill the area specified by the width and height.
 
 ```python
-fill(width, height ,quality=None)
+fill(width, height ,quality=None, resize_filter=None, alignment=None)
 ```
 
 Parameter | value | Description
@@ -180,12 +180,29 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
+
+alignment optional values:
+
+Value | Description
+------|------------
+center|Focus on the center of the image, both vertical and horizontal center.
+top|Focus on the top of the image, horizontal center.
+top-left|Focus on the top left side of the image.
+top-right|Focus on the top right side of the image.
+bottom|Focus on the bottom of the image, horizontal center.
+bottom-left|Focus on the bottom left side of the image.
+bottom-right|Focus on the bottom right side of the image.
+left|Focus on the left side of the image, vertical center.
+right|Focus on the right side of the image, vertical center.
+face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
+faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
 **Sample Request**
 
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.fill(width=480, height=240, quality=75)
+print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
@@ -195,10 +212,13 @@ and:
 ```
 image.fill(width=480, height=240)
 ```
-would generate: (with the quality's default value)
+would generate:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240/dog.png   
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fill/a_tl,h_240,w_480/cat.jpg
 ```
+###### fit ######
+
+
 ###### crop ######
 
 Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
@@ -228,7 +248,7 @@ and:
 ```
 image.crop(x=120, y=120, width=480, height=240)
 ```
-would generate: (with the quality's default value)
+would generate:
 ```
 http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/crop/x_120,y_120,w_480,h_240/dog.png
 ```
