@@ -9,21 +9,20 @@ class RenderImagesHandler(webapp2.RequestHandler):
     def get(self):
 
         # Image id's can be fetched from datastore ...
-
-        cat_image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
-        dog_image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/c074a4a8ea854ee7b5b893ce2a0c7361/dog.jpg'
-
-        cat_image_thumbnail_url = self.create_image_thumbnail_url(cat_image_id)
-        dog_image_thumbnail_url = self.create_image_thumbnail_url(dog_image_id)
+        image_ids = [
+            'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg',
+            'ggl-685734655894940532967/images/c074a4a8ea854ee7b5b893ce2a0c7361/dog.jpg'
+        ]
 
         context = {
-            'thumbnail_urls': [(cat_image_thumbnail_url, 'cat'), (dog_image_thumbnail_url, 'dog')]
+            'thumbnail_urls': [RenderImagesHandler.create_image_thumbnail_url(image_id) for image_id in image_ids]
         }
 
         self.response.headers['Content-Type'] = 'text/html'
         self.response.out.write(render_to_string('example.html', context))
 
-    def create_image_thumbnail_url(self, image_id):
+    @staticmethod
+    def create_image_thumbnail_url(image_id):
         client = media.Client()
         image  = client.get_image_from_id(image_id)
 

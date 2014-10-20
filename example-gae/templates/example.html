@@ -8,8 +8,8 @@
 
 <h1>Thumnails</h1>
 
-{%for url, alt in thumbnail_urls%}
-<img src="{{ url }}" alt="{{ alt }}" />
+{%for url in thumbnail_urls%}
+<img src="{{ url }}" />
 {% endfor %}
 
 </body>
