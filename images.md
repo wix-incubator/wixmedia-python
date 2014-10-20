@@ -127,7 +127,6 @@ would generate the URL:
 http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srb/q_90,h_240,w_480/cat.jpg
 ```
 
-
 ###### Canvas ######
 
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
@@ -236,10 +235,10 @@ http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f847
 
 ###### Crop ######
 
-Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
+Crops the image based on the supplied coordinates, starting at the x, y coordinates along with the width and height parameters.
 
 ```python
-crop(x, y, width, height, quality=None)
+crop(x, y, width, height)
 ```
 
 Parameter | Value | Description
@@ -248,26 +247,15 @@ x *(mandatory)*|Integer|The x-pixel-coordinate to start cropping from. (represen
 y *(mandatory)*|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default value:75```
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.crop(x=120, y=120, width=480, hdight=240, quality=75)
+print image.crop(x=15, y=40, width=100, height=100).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/crop/x_120,y_120,w_480,h_240,q_75/dog.png
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/crop/y_40,h_100,w_100,x_15/cat.jpg
 ```
-and:
-```
-image.crop(x=120, y=120, width=480, height=240)
-```
-would generate:
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/crop/x_120,y_120,w_480,h_240/dog.png
-```
-
 
 ##### Image Adjustment Operation #####
 
