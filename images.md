@@ -23,7 +23,7 @@ print image_id
 
 The code snippet above gives the following image id as output:
 ```
-wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
+ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
 __Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
@@ -36,7 +36,7 @@ For example:
 ```python
 from wix import media
 
-image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+image_id = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
 client = media.Client()
 image  = client.get_image_from_id(image_id)
@@ -51,7 +51,7 @@ print image.fit(width=120, height=120) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
@@ -66,56 +66,39 @@ Using this python package eliminates the need to manually construct such urls. F
 ##### Image Transformation Operations #####
 
 The following image transformations are available (one per image maipulation request):
-- srz (shortcut for applying fill transformation and unsharp mask)
-- srb (shortcut for applying fit transformation and unsharp mask)
+- srz (shortcut for applying *fill* transformation and unsharp mask)
+- srb (shortcut for applying *fit* transformation and unsharp mask)
 - Canvas
 - Fill
 - Fit
 - Crop
 
 
-###### srz - scaled resize with aligned crop ######
+###### srz ######
 
-Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
+Scaled and resize with center crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, resize_filter=None, quality=None, alignment=None, radius=None, amount=None, threshold=None)
+srz(width, height, quality=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default: center.``` See values in the table below.
+blur *(optional)*|Float|Blur factor. Value > 1 is blurry, <1 is sharp. ```default: 1```
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
-alignment optional values:
-
-Value | Description
-------|------------
-center|center of the image. 
-top|central top part of the image.
-top-left|top left part of the image.
-top-right|top right part of the image.
-bottom|central bottom part of the image. 
-bottom-left|bottom left part of the image.
-bottom-right|bottom right part of the image. 
-left|central left part of the image. 
-right|central right part of the image. 
-face|focus on a face on the image..
-faces|focus on all faces in the image.
-
 **Sample Request**
 ```python
-print image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.60, amount=0.9, threshold=0.00).get_url()
+print image.srz(width=480, height=240, quality=85, blur=0.6, radius=0.60, amount=0.9, threshold=0.00).get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srz/q_75,h_240,a_tl,w_480,us_0.60_0.90_0.00/cat.jpg
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_240,usm_0.60_0.90_0.00,w_480,blur_0.6/cat.jpg
 ```
 ###### srb - scaled resize without crop ######
 
