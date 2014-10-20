@@ -76,10 +76,10 @@ The following image transformations are available (one per image maipulation req
 
 ###### srz ######
 
-Scaled and resize with center crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
+Creates an image with the specified width and height while retaining original image proportion. If the requested proportion is different from the original proportion, only part of the original image may be used to fill the area specified by the width and height. After creating the image, an unsharp mask filter is applied for better result. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, quality=None, radius=None, amount=None, threshold=None)
+srz(width, height, quality=None, blur=None,  radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
@@ -120,11 +120,11 @@ threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 **Sample Request**
 ```python
-print image.srb(width=480, height=240, quality=85).get_url()
+print image.srb(width=480, height=240, quality=90).get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srb/q_85,h_240,w_480/cat.jpg
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srb/q_90,h_240,w_480/cat.jpg
 ```
 
 
