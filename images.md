@@ -216,10 +216,10 @@ would generate:
 ```
 http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fill/a_tl,h_240,w_480/cat.jpg
 ```
-###### fit ######
+###### Fit ######
 
 
-###### crop ######
+###### Crop ######
 
 Crops the image based on the supplied coordinates, starting at the x, y pixel coordinates along with the width and height parameters.
 
