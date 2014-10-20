@@ -6,8 +6,11 @@
 <body>
 
 
-<img src="{{ item.get_thumbnail_url }}" alt="" />
+<h1>Thumnails</h1>
 
+{%for url, alt in thumbnail_urls%}
+<img src="{{ url }}" alt="{{ alt }}" />
+{% endfor %}
 
 </body>
 </html>

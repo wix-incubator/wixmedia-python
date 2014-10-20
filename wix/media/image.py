@@ -8,6 +8,7 @@ class Image(object):
     COMMAND_SRB       = "srb"
     COMMAND_CANVAS    = "canvas"
     COMMAND_FILL      = "fill"
+    COMMAND_FIT       = "fit"
     COMMAND_CROP      = "crop"
     COMMAND_WATERMARK = "wm"
 
@@ -17,6 +18,7 @@ class Image(object):
         "saturation": "sat",
         "hue":        "hue",
         "vibrance":   "vib",
+        "quality":    "q",
         "auto":       "auto"
     }
 
@@ -34,12 +36,12 @@ class Image(object):
         "faces":        "fs"
     }
 
-    def __init__(self, url_path, service_host):
+    def __init__(self, image_id, service_host):
         self.transform_command = None
         self.transform_params  = None
         self.adjustment_params = None
         self.filter_params     = None
-        self.url_path          = url_path
+        self.id                = image_id
         self.service_host      = service_host
 
         self.reset()
@@ -50,53 +52,38 @@ class Image(object):
         self.adjustment_params = {}
         self.filter_params     = []
 
-    def get_path(self):
-        return self.url_path
+    def get_id(self):
+        return self.id
 
-    def srz(self, width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None):
+    def srz(self, width, height, quality=None, blur=None,  radius=None, amount=None, threshold=None):
         """
-        default values: quality=75, alignment="center", radius=0.5, amount=0.2, threshold=0.0
+        default values: quality=75, blur=1, radius=0.5, amount=0.2, threshold=0.0
         """
-
-        if self.transform_command != Image.COMMAND_NONE:
-            raise CmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
-
-        self.transform_command = Image.COMMAND_SRZ
-
-        self.transform_params = {
-            "w":  width,
-            "h":  height
-        }
-
-        if quality is not None:
-            self.transform_params["q"] = quality
-
-        if alignment:
-            self.transform_params["a"] = Image.alignment_value_map[alignment]
-
-        if radius or amount or threshold:
-            radius    = radius or 0.5
-            amount    = amount or 0.2
-            threshold = threshold or 0.0
-
-            self.transform_params["us"] = "%.2f_%.2f_%.2f" % (radius, amount, threshold)
+        self._srz_srb_common(Image.COMMAND_SRZ, width, height, quality, blur, radius, amount, threshold)
 
         return self
 
-    def srb(self, width, height, quality=None, radius=None, amount=None, threshold=None):
+    def srb(self, width, height, quality=None, blur=None, radius=None, amount=None, threshold=None):
         """
-        default values: quality=75, radius=0.5, amount=0.2, threshold=0.0
+        default values: quality=75, blur=1, radius=0.5, amount=0.2, threshold=0.0
         """
+        self._srz_srb_common(Image.COMMAND_SRB, width, height, quality, blur, radius, amount, threshold)
 
+        return self
+
+    def _srz_srb_common(self, cmd, width, height, quality, blur, radius, amount, threshold):
         if self.transform_command != Image.COMMAND_NONE:
             raise CmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
 
-        self.transform_command = Image.COMMAND_SRB
+        self.transform_command = cmd
 
         self.transform_params = {
             "w":  width,
             "h":  height
         }
+
+        if blur is not None:
+            self.transform_params["blur"] = blur
 
         if quality is not None:
             self.transform_params["q"] = quality
@@ -106,13 +93,11 @@ class Image(object):
             amount    = amount or 0.2
             threshold = threshold or 0.0
 
-            self.transform_params["us"] = "%.2f_%.2f_%.2f" % (radius, amount, threshold)
+            self.transform_params["usm"] = "%.2f_%.2f_%.2f" % (radius, amount, threshold)
 
-        return self
-
-    def canvas(self, width, height, quality=None, alignment=None):
+    def canvas(self, width, height, alignment=None):
         """
-        default values: quality=75, alignment="center"
+        default values: alignment="center"
         """
 
         if self.transform_command != Image.COMMAND_NONE:
@@ -125,15 +110,12 @@ class Image(object):
             "h": height
         }
 
-        if quality is not None:
-            self.transform_params["q"] = quality
-
         if alignment:
             self.transform_params["a"] = Image.alignment_value_map[alignment]
 
         return self
 
-    def crop(self, x, y, width, height, quality=None):
+    def crop(self, x, y, width, height):
         """
         default value: quality=75
         """
@@ -150,14 +132,11 @@ class Image(object):
             "y": y
         }
 
-        if quality is not None:
-            self.transform_params["q"] = quality
-
         return self
 
-    def fill(self, width, height, quality=None):
+    def fill(self, width, height, resize_filter=None):
         """
-        default value: quality=75
+        default value: resize_filter=LanczosFilter
         """
 
         if self.transform_command != Image.COMMAND_NONE:
@@ -170,8 +149,28 @@ class Image(object):
             "h": height
         }
 
-        if quality is not None:
-            self.transform_params["q"] = quality
+        if resize_filter is not None:
+            self.transform_params["f"] = resize_filter
+
+        return self
+
+    def fit(self, width, height, resize_filter=None):
+        """
+        default value: resize_filter=LanczosFilter
+        """
+
+        if self.transform_command != Image.COMMAND_NONE:
+            raise CmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
+
+        self.transform_command = Image.COMMAND_FIT
+
+        self.transform_params = {
+            "w": width,
+            "h": height
+        }
+
+        if resize_filter is not None:
+            self.transform_params["f"] = resize_filter
 
         return self
 
@@ -226,16 +225,16 @@ class Image(object):
         return self
 
     def sharpen(self, radius):
-        self.filter_params.append(("s", "%.2f" % radius))
+        self.filter_params.append(("sharpen", "%.2f" % radius))
         return self
 
-    def unsharp(self, radius, amount, threshold):
-        self.filter_params.append(("us", "%.2f_%.2f_%.2f" % (radius, amount, threshold)))
+    def unsharp(self, radius=0.5, amount=0.2, threshold=0.0):
+        self.filter_params.append(("usm", "%.2f_%.2f_%.2f" % (radius, amount, threshold)))
         return self
 
-    def get_rest_url(self):
+    def get_url(self):
 
-        file_uri_path, org_file_name = os.path.split(self.url_path)
+        file_uri_path, org_file_name = os.path.split(self.id)
 
         params = ['http://%s' % self.service_host, file_uri_path]
 
@@ -245,18 +244,18 @@ class Image(object):
                  ",".join(["%s_%s" % (key, val) for key, val in self.transform_params.iteritems()])]
             )
 
-        if self.adjustment_params:
-            params.extend(
-                ["adjust",
-                 ",".join(["%s_%s" % (Image.adjust_parameter_map.get(key, key), val) if val is not True else key
-                           for key, val in self.adjustment_params.iteritems()])]
-            )
-
         if self.filter_params:
             params.extend(
                 ["filter",
                  ",".join(["%s_%s" % (key, val) if val is not None else key
                           for key, val in self.filter_params])]
+            )
+
+        if self.adjustment_params:
+            params.extend(
+                ["adjust",
+                 ",".join(["%s_%s" % (Image.adjust_parameter_map.get(key, key), val) if val is not True else key
+                           for key, val in self.adjustment_params.iteritems()])]
             )
 
         params.append(org_file_name)
@@ -265,12 +264,12 @@ class Image(object):
 
         return url
 
-    def get_img_tag(self, **kwargs):
-        img_params = ''.join([' %s="%s"' % (name, value) for name, value in kwargs.iteritems()])
+    #def get_img_tag(self, **kwargs):
+    #    img_params = ''.join([' %s="%s"' % (name, value) for name, value in kwargs.iteritems()])
+    #
+    #    return '<img src="%s"%s>' % (self.get_url(), img_params)
 
-        return '<img src="%s"%s>' % (self.get_rest_url(), img_params)
-    
     def __str__(self):
         return "<WixMediaImage %s, command=%s [%s]>" % (
-            self.url_path, self.transform_command, self.transform_params
+            self.id, self.transform_command, self.transform_params
         )
