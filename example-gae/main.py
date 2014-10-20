@@ -14,8 +14,7 @@ app = WSGIApplication(
     routes=[
         # [GET] /
 
-        Route('/django', handler='handlers_django.Handler', handler_method='example'),
-        Route('/jinja2', handler='handlers_jinja2.Handler', handler_method='example'),
+        Route('/django', handler='handlers.Handler', handler_method='example'),
 
     ]
 )

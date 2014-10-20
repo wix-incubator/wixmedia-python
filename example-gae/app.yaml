@@ -1,5 +1,5 @@
-application: wixmedia-example-gae
-module: default
+application: wixprospero
+module: example
 version: snapshot
 runtime: python27
 api_version: 1

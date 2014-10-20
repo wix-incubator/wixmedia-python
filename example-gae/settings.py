@@ -50,7 +50,6 @@ TEMPLATE_DIRS = (
 # )
 
 INSTALLED_APPS = (
-    'wixmedia-django',
 )
 
 SECRET_KEY = 'SECRET_KEY'
