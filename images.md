@@ -44,14 +44,13 @@ print image.srz(width=120, height=120, alignment="top-left") \
            .adjust(brightness=60, contrast=-40) \
            .oil() \
            .blur(22) \
-           .sharpen(0.3) \
            .get_url()
 ```
 
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://107.178.251.117/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srz/a_tl,h_120,w_120/adjust/con_-40,br_60/filter/oil,blur_22,s_0.30/cat.jpg
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srz/a_tl,h_120,w_120/adjust/con_-40,br_60/filter/oil,blur_22/cat.jpg
 ```
 ----------------
 __Note__: 
