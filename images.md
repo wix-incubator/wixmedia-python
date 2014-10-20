@@ -109,12 +109,11 @@ faces|focus on all faces in the image.
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, amount=1.20, threshold=0.00)
+print image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.60, amount=0.9, threshold=0.00).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srz/q_75,h_240,a_tl,w_480,us_0.60_0.90_0.00/cat.jpg
 ```
 ###### srb - scaled resize without crop ######
 
@@ -136,12 +135,11 @@ threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.srb(width=480, height=240, quality=75)
+print image.srb(width=480, height=240, quality=85).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srb/q_85,h_240,w_480/cat.jpg
 ```
 
 
@@ -157,8 +155,8 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default: center```
 
 alignment optional values:
 
@@ -178,12 +176,11 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.canvas(width=480, height=240, quality=75, alignment='faces')
+print image.canvas(width=480, height=240, quality=70, alignment='faces').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75,a_fs/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/canvas/q_70,h_240,a_fs,w_480/cat.jpg
 ```
 and:
 ```python
