@@ -41,7 +41,7 @@ print image.get_id()
 
 The code snippet above gives the following image id as output:
 ```
-wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
+ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
 ### Rendering Media ###
