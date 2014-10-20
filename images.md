@@ -85,11 +85,11 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
-radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
+radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 alignment optional values:
 
@@ -129,10 +129,10 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
-radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
+quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default: 75```
+radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 **Sample Request**
 ```python
