@@ -100,20 +100,20 @@ would generate the URL:
 ```
 http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_240,usm_0.60_0.90_0.00,w_480,blur_0.6/cat.jpg
 ```
-###### srb - scaled resize without crop ######
+###### srb ######
 
-Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. The resulting image will maintain the same aspect ratio of the input image.
+Resizes the image to fit to the specified width and height while retaining original image proportion. The entire image will be visible but not necessarily fill the area specified by the width and height. After creating the image, an unsharp mask filter is applied for better result.
 
 ```python
-srb(width, height, resize_filter=None, quality=None, radius=None, amount=None, threshold=None)
+srb(width, height, quality=None, blur=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
+blur *(optional)*|Float|Blur factor. Value > 1 is blurry, <1 is sharp. ```default: 1```
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
