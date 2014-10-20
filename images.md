@@ -16,7 +16,8 @@ from wix import media
 client = media.Client(api_key="my_key", api_secret="my_secret")
 image  = client.upload_image_from_path('/files/images/cat.jpg')
 
-print image.get_id()
+image_id = image.get_id()
+print image_id
 
 ```
 
@@ -40,10 +41,10 @@ image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477
 client = media.Client()
 image  = client.get_image_from_id(image_id)
 
-print image.srz(width=120, height=120, alignment="top-left") \
-           .adjust(brightness=60, contrast=-40) \
+print image.fit(width=120, height=120) \
+           .unsharp() \
            .oil() \
-           .blur(22) \
+           .adjust(brightness=60, contrast=-40) \
            .get_url()
 ```
 
