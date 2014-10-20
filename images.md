@@ -311,11 +311,10 @@ http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f847
 Applies one (or more) of the following effects to an image: 
 - Oil paint effect
 - Negative effect
-- Pixelate effect 
-- Regular
-- Based on facial recognition
-- Blur
-- Sharpen
+- Pixelate effect - on all image or based on facial recognition
+- Bluring
+- Sharpening
+- Unsharp mask
 
 ```python
 filter(*funcs, **filter_funcs)
