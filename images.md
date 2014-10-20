@@ -77,13 +77,14 @@ The following image transformations are available (one per image maipulation req
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None)
+srz(width, height, resize_filter=None, quality=None, alignment=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
+resize_filter *(optional)*|Integer|The resize filter to be used. ```default: LanczosFilter```
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
 radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
@@ -120,13 +121,14 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. The resulting image will maintain the same aspect ratio of the input image.
 
 ```python
-srb(width, height, quality=None, radius=None, amount=None, threshold=None)
+srb(width, height, resize_filter=None, quality=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
+resize_filter *(optional)*|Integer|The resize filter to be used. ```default: LanczosFilter```
 quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
 radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
