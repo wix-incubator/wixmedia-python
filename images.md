@@ -70,6 +70,7 @@ The following image transformations are available (one per image maipulation req
 - Scaled resize (without crop)   [srb]
 - Canvas
 - Fill
+- Fit
 - Crop
 
 
