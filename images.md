@@ -2,65 +2,75 @@ wixmedia-python SDK
 -------------------
 Image Manipulation
 ===========================
-Wix Media Services provides web developers a versatile infrastructure for image manipulations easily accessable through the [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html).
+Wix Media Services provides web developers a versatile infrastructure for image manipulations easily accessable through the [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html). The Wix Media Python library is a wrapper over the API.
 
 ## Usage ##
 
 ### Uploading Images ###
 
-It’s easy to upload images using the Wixmedia Python Library. For example:
+It’s easy to upload images using the Wix Media Python library. For example:
 
 ```python
-from wixmedia import wixmedia_service
+from wix import media
 
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-image   = service.upload_image_from_path('/files/images/dog.png')
+client = media.Client(api_key="my_key", api_secret="my_secret")
+image  = client.upload_image_from_path('/files/images/cat.jpg')
+
+image_id = image.get_id()
+print image_id
+
+```
+
+The code snippet above gives the following image id as output:
+```
+wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
 __Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
 
 ### Rendering Images ###
 
-After uploading an image, you can easily apply any manipulation as described in [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html).
+After uploading an image, you can easily apply any manipulation as described later in the document.
 For example:
 
 ```python
-# Upload image:
-from wixmedia import wixmedia_service
+from wix import media
 
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-image   = service.upload_image_from_path('/files/images/dog.png')
+image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
-# Apply manipulations:
-print image.srz(width=120, height=120) \
-           .adjust(brightness=60) \
-           .filter("oil", blur=22) \
-           .get_img_tag(alt="dog")
+client = media.Client()
+image  = client.get_image_from_id(image_id)
+
+print image.fit(width=120, height=120) \
+           .unsharp() \
+           .oil() \
+           .adjust(brightness=60, contrast=-40) \
+           .get_url()
 ```
 
-The previous code snippet uploads an image to your account in Wix Media Services and prints an HTML *img* tag which can be used to render the image when embedded in a web page:
+The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-<img src="http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```
-http://endpoint.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
+http://host.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
 ```
-Using this python package eliminates the need to manually construct such urls. 
-For more information browse [Wix Media Images RESTful            API](http://media.wixapps.net/playground/docs/images_restfull_api.html) Documentation.
+Using this python package eliminates the need to manually construct such urls. For more information about the URLs browse [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html) documentation.
 
 -----------------
 
 ##### Image Transformation Operations #####
 
 The following image transformations are available (one per image maipulation request):
-- Scaled resize with aligned crop   [srz]
-- Scaled resize (without crop)   [srb]
+- srz (shortcut for applying fill transformation and unsharp mask)
+- srb (shortcut for applying fit transformation and unsharp mask)
 - Canvas
 - Fill
+- Fit
 - Crop
 
 
@@ -69,18 +79,19 @@ The following image transformations are available (one per image maipulation req
 Scaled and resize with aligned crop, followed by unsharp mask. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
 
 ```python
-srz(width, height, quality=None, alignment=None, radius=None, amount=None, threshold=None)
+srz(width, height, resize_filter=None, quality=None, alignment=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default value: center.``` see values in the table below.
-radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). ``` default: center.``` See values in the table below.
+radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 alignment optional values:
 
@@ -100,38 +111,37 @@ faces|focus on all faces in the image.
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.50, amount=1.20, threshold=0.00)
+print image.srz(width=480, height=240, quality=75, alignment='top-left', radius=0.60, amount=0.9, threshold=0.00).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srz/w_480,h_240,q_75,a_tl,us_0.50_1.20_0.00/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srz/q_75,h_240,a_tl,w_480,us_0.60_0.90_0.00/cat.jpg
 ```
 ###### srb - scaled resize without crop ######
 
 Resizes the image to fit within the width and height boundaries without cropping or scaling the image, but will not increase the size of the image if it is smaller than the output size. The resulting image will maintain the same aspect ratio of the input image.
 
 ```python
-srb(width, height, quality=None, radius=None, amount=None, threshold=None)
+srb(width, height, resize_filter=None, quality=None, radius=None, amount=None, threshold=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value: 75```
-radius *(optional)*|Float|the unsharp mask radius. ```default value: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default value: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default value: 0.00.```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
+radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
+amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
+threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.srb(width=480, height=240, quality=75)
+print image.srb(width=480, height=240, quality=85).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/srb/w_480,h_240,q_75,us_0.50_1.20_0.00/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/srb/q_85,h_240,w_480/cat.jpg
 ```
 
 
@@ -147,8 +157,8 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
-alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default value: center```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
+alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture (the cropping alignment). see optional values in the table below.```default: center```
 
 alignment optional values:
 
@@ -168,18 +178,17 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.canvas(width=480, height=240, quality=75, alignment='faces')
+print image.canvas(width=480, height=240, quality=70, alignment='faces').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75,a_fs/dog.png
+http://prospero.wixapps.net/wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/canvas/q_70,h_240,a_fs,w_480/cat.jpg
 ```
 and:
 ```python
 image.canvas(width=480, height=240, quality=75)
 ```
-would generate: (giving 'alignment' its default values)
+would generate (giving 'alignment' its default values):
 ```
 http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/canvas/w_480,h_240,q_75/dog.png
 ```
@@ -197,7 +206,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default falue: 75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
 
 **Sample Request**
 
@@ -231,7 +240,7 @@ x *(mandatory)*|Integer|The x-pixel-coordinate to start cropping from. (represen
 y *(mandatory)*|Integer|The y-pixel-coordinate to start cropping from. (represents the top-left corner point of the cropped area).
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if jpg. Values are between 0 and 100. ```default value:75```
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default value:75```
 
 **Sample Request**
 ```python
@@ -267,7 +276,7 @@ br *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
 con *(optional)*|Integer (%)|contrast ```value between -100 and 100```
 sat *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
-auto*(optional)*|-|auto adjust
+auto *(optional)*|-|auto adjust
 
 **Sample Requests**
 ```python
@@ -411,6 +420,7 @@ bottom-right|bottom right part of the image.
 left|central left part of the image. 
 right|central right part of the image. 
 face|face-recognition based alignment.
+faces|focus on all faces in the image.
 
 **Sample Request**
 ```python

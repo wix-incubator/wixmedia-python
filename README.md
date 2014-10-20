@@ -30,21 +30,17 @@ In addition, Wix Media Services offers the following Python wrapper, which provi
 The following example shows server-to-server image upload:
 
 ```python
-from wixmedia import wixmedia_service
+from wix import media
 
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-image   = service.upload_image_from_path('/files/images/dog.jpg')
+client = media.Client(api_key="my_key", api_secret="my_secret")
+image  = client.upload_image_from_path('/files/images/cat.jpg')
 
-print image.srz(width=120, height=120) \
-           .adjust(brightness=60) \
-           .filter("oil", blur=22) \
-           .get_img_tag(alt="dog")
+print image.get_id()
 ```
 
-The above code snippet uploads an image to your account at Wix Media Services prints a HTML img tag that can be used to render the image when embedded in a web page:
-
-```html
-<img src="http://media.wixapps.net/goog:234234234234234/ae1d86b24054482f8477bfbf2d426936.png/srz/q_85,h_120,a_1,w_120,us_0.50_0.20_0.00/adjust/br_60/filter/oil,blur_22/dog.png" alt="dog">
+The code snippet above gives the following image id as output:
+```
+wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
 ### Rendering Media ###
