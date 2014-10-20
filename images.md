@@ -259,10 +259,12 @@ http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f847
 
 ##### Image Adjustment Operation #####
 
-Applies an adjustment to an image. Parameters values can be either specific or set to “auto”. An auto parameter without any values performs a general auto-enhancement.
+###### Adjust ######
+
+Applies an adjustment to an image.
 
 ```python
-adjust(*props, **adjust_props)
+adjust(**props_dict)
 ```
 the parameters may be one or more of the following options:
 
@@ -273,42 +275,35 @@ contrast *(optional)*|Integer (%)|contrast ```value between -100 and 100```
 saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-auto *(optional)*|-|auto adjust
 
 **Sample Requests**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-
-image.adjust(auto)  
+print image.fit(width=120, height=120) \
+           .adjust(brightness=60, contrast=-40).get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/auto/dog.png
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/con_-40,br_60/cat.jpg
 ```
-***
-```pyhton
-image.adjust(br=-82, con=12, hue=50)  
-```
-would generate: 
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/br_-82,con_12,hue_50/dog.png
-```
-***
+
+###### Auto-Adjust ######
+
+Performs a general auto-enhancement to an image.
+
 ```python
-image.adjust(con=60)
+auto_adjust()
 ```
-would generate: 
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/con_60/dog.png
-```
-***
+
+**Sample Requests**
 ```python
-image.adjust(b=100) 
+print image.fit(width=120, height=120) \
+           .auto_adjust().get_url()
 ```
-would generate: 
+would generate the URL: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/adjust/br_100/dog.png
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/auto/cat.jpg
 ```
+
 ##### Image Filter Operation #####
 
 Applies one (or more) of the following effects to an image: 
