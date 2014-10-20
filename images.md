@@ -208,16 +208,31 @@ would generate the URL:
 ```
 http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,q_75/dog.png
 ```
-and:
-```
-image.fill(width=480, height=240)
-```
-would generate:
-```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fill/a_tl,h_240,w_480/cat.jpg
-```
+
 ###### Fit ######
 
+Resizes the image to fit to the specified width and height while retaining original image proportion. The entire image will be visible but not necessarily fill the area specified by the width and height.
+
+```python
+fit(width, height ,quality=None, resize_filter=None)
+```
+
+Parameter | value | Description
+----------|-------|------------
+width *(mandatory)*|Integer|The width constraint (pixels).
+height *(mandatory)*|Integer|The height constraint (pixels).
+quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+
+**Sample Request**
+
+```python
+print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).get_url()
+```
+would generate the URL:
+```
+http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_240,w_480,f_25/cat.jpg
+```
 
 ###### Crop ######
 
