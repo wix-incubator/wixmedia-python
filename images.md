@@ -33,17 +33,19 @@ After uploading an image, you can easily apply any manipulation as described in 
 For example:
 
 ```python
-# Upload image:
-from wixmedia import wixmedia_service
+from wix import media
 
-service = wixmedia_service.WixMediaService(api_key="my_key", api_secret="my_secret")
-image   = service.upload_image_from_path('/files/images/dog.png')
+image_id = 'wix-ac831a9e-577b-4018-b8b8-88499c811234/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
-# Apply manipulations:
-print image.srz(width=120, height=120) \
-           .adjust(brightness=60) \
-           .filter("oil", blur=22) \
-           .get_img_tag(alt="dog")
+client = media.Client()
+image  = client.get_image_from_id(image_id)
+
+print image.srz(width=120, height=120, alignment="top-left") \
+           .adjust(brightness=60, contrast=-40) \
+           .oil() \
+           .blur(22) \
+           .sharpen(0.3) \
+           .get_rest_url()
 ```
 
 The previous code snippet uploads an image to your account in Wix Media Services and prints an HTML *img* tag which can be used to render the image when embedded in a web page:
