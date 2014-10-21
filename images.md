@@ -184,7 +184,6 @@ alignment *(optional)*|string|The position pointing the place from which to star
 
 alignment optional values:
 
-Value | Description
 ------|------------
 center|Focus on the center of the image, both vertical and horizontal center.
 top|Focus on the top of the image, horizontal center.
