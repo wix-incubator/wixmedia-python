@@ -64,10 +64,10 @@ The platform supports two different modes for storing and manipulating audio fil
 
 In Simple Audio mode, the user can upload an mp3 file of any quality, and use it as-is. In Professional Audio mode the user can upload a WAV file of at least 44.1KHz/16bit. This file is then automatically transcoded into additional versions: several high-quality versions (like FLAC and high-bitrate mp3), and one (relatively) low-quality version for immediate playback. The high quality files are stored securely, thus can be used in commercial music-selling applications.
 
-For more information about audio support in your apps, browse the Wix Media Services - Audio documentation.
+For more information about audio support in your apps, browse the Wix Media Platform - Audio documentation.
 
 #### Video ####
 Every video file uploaded into the service is automatically encoded into additional formats and qualities. These are particularly designed so that the videos will be playable on any browser and internet-connected device.
 The system allows for both public and secure storage of the video files. Public videos can be streamed or downloaded without the viewer authorization. Secured videos can be used in commercial video applications.
 
-For more information about video support in your apps, browse the Wix Media Services - Video documentation.
+For more information about video support in your apps, browse the Wix Media Platform - Video documentation.
