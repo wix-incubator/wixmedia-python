@@ -221,7 +221,40 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the in the table below. ```default: LanczosFilter```
+
+resize_filter optional values:
+
+resize_filter name | filter description
+-------------------|-------------------
+PointFilter
+BoxFilter
+TriangleFilter
+HermiteFilter
+HanningFilter
+HammingFilter
+BlackmanFilter
+GaussianFilter
+QuadraticFilter
+CubicFilter
+CatromFilter
+MitchellFilter
+JincFilter
+SincFilter
+SincFastFilter
+KaiserFilter
+WelshFilter
+ParzenFilter
+BohmanFilter
+BartlettFilter
+LagrangeFilter
+LanczosFilter
+LanczosSharpFilter 
+Lanczos2Filter
+Lanczos2SharpFilter
+RobidouxFilter
+RobidouxSharpFilter
+CosineFilter
 
 **Sample Request**
 
