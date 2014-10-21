@@ -227,8 +227,7 @@ resize_filter optional values:
 
 resize_filter name | filter description | resize_filter name | filter description
 -------------------|--------------------|--------------------|-------------------
-PointFilter||BoxFilter|
-TriangleFilter||HermiteFilter|
+[PointFilter](http://www.imagemagick.org/Usage/filter/#point)|[BoxFilter](http://www.imagemagick.org/Usage/filter/#box)|[TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)|[HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)|
 HanningFilter||HammingFilter|
 BlackmanFilter||GaussianFilter|
 QuadraticFilter||CubicFilter|
