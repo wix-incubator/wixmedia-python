@@ -198,7 +198,7 @@ right|Focus on the right side of the image, vertical center.
 face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-resize-filter optional values:
+resize_filter optional values:
 
 [PointFilter](http://www.imagemagick.org/Usage/filter/#point)|[BoxFilter](http://www.imagemagick.org/Usage/filter/#box)|[TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)|[HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)
 --------|---------|---------|--------
