@@ -225,36 +225,22 @@ resize_filter *(optional)*|Integer|The resize filter to be used. One of the in t
 
 resize_filter optional values:
 
-resize_filter name | filter description
--------------------|-------------------
-PointFilter|
-BoxFilter|
-TriangleFilter|
-HermiteFilter|
-HanningFilter|
-HammingFilter|
-BlackmanFilter|
-GaussianFilter|
-QuadraticFilter|
-CubicFilter|
-CatromFilter|
-MitchellFilter|
-JincFilter|
-SincFilter|
-SincFastFilter|
-KaiserFilter|
-WelshFilter|
-ParzenFilter|
-BohmanFilter|
-BartlettFilter|
-LagrangeFilter|
-LanczosFilter|
-LanczosSharpFilter| 
-Lanczos2Filter|
-Lanczos2SharpFilter|
-RobidouxFilter|
-RobidouxSharpFilter|
-CosineFilter|
+resize_filter name | filter description | resize_filter name | filter description
+-------------------|--------------------|--------------------|-------------------
+PointFilter||BoxFilter|
+TriangleFilter||HermiteFilter|
+HanningFilter||HammingFilter|
+BlackmanFilter||GaussianFilter|
+QuadraticFilter||CubicFilter|
+CatromFilter||MitchellFilter|
+JincFilter||SincFilter|
+SincFastFilter||KaiserFilter|
+WelshFilter||ParzenFilter|
+BohmanFilter||BartlettFilter|
+LagrangeFilter||LanczosFilter|
+LanczosSharpFilter||Lanczos2Filter|
+Lanczos2SharpFilter||RobidouxFilter|
+RobidouxSharpFilter||CosineFilter|
 
 **Sample Request**
 
