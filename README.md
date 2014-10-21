@@ -53,7 +53,7 @@ ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 Images can be uploaded to the Wix Media Platform using this package.
 Once an image was uploaded, you cab apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 
-For more information about image manipulation in your apps, browse the [Images  SDK documentation.](https://github.com/wix/wixmedia-python/blob/master/images.md).
+For more information about image manipulation in your apps, browse the [Images SDK documentation.](https://github.com/wix/wixmedia-python/blob/master/images.md).
 
 #### Audio ####
 The platform supports two different modes for storing and manipulating audio files - a Simple Audio mode and a Professional Audio mode.
