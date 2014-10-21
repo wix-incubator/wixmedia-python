@@ -227,34 +227,34 @@ resize_filter optional values:
 
 resize_filter name | filter description
 -------------------|-------------------
-PointFilter
-BoxFilter
-TriangleFilter
-HermiteFilter
-HanningFilter
-HammingFilter
-BlackmanFilter
-GaussianFilter
-QuadraticFilter
-CubicFilter
-CatromFilter
-MitchellFilter
-JincFilter
-SincFilter
-SincFastFilter
-KaiserFilter
-WelshFilter
-ParzenFilter
-BohmanFilter
-BartlettFilter
-LagrangeFilter
-LanczosFilter
-LanczosSharpFilter 
-Lanczos2Filter
-Lanczos2SharpFilter
-RobidouxFilter
-RobidouxSharpFilter
-CosineFilter
+PointFilter|
+BoxFilter|
+TriangleFilter|
+HermiteFilter|
+HanningFilter|
+HammingFilter|
+BlackmanFilter|
+GaussianFilter|
+QuadraticFilter|
+CubicFilter|
+CatromFilter|
+MitchellFilter|
+JincFilter|
+SincFilter|
+SincFastFilter|
+KaiserFilter|
+WelshFilter|
+ParzenFilter|
+BohmanFilter|
+BartlettFilter|
+LagrangeFilter|
+LanczosFilter|
+LanczosSharpFilter| 
+Lanczos2Filter|
+Lanczos2SharpFilter|
+RobidouxFilter|
+RobidouxSharpFilter|
+CosineFilter|
 
 **Sample Request**
 
