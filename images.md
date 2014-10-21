@@ -51,7 +51,7 @@ print image.fit(width=120, height=120) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
@@ -98,7 +98,7 @@ print image.srz(width=480, height=240, quality=85, blur=0.6, radius=0.60, amount
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_240,usm_0.60_0.90_0.00,w_480,blur_0.6/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_240,usm_0.60_0.90_0.00,w_480,blur_0.6/cat.jpg
 ```
 ###### srb ######
 
@@ -124,7 +124,7 @@ print image.srb(width=480, height=240, quality=90).get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srb/q_90,h_240,w_480/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srb/q_90,h_240,w_480/cat.jpg
 ```
 
 ###### Canvas ######
@@ -163,7 +163,7 @@ print image.canvas(width=480, height=240, alignment='faces').get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
 ```
 
 ###### Fill ######
@@ -230,7 +230,7 @@ print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_240,w_480,f_25/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_240,w_480,f_25/cat.jpg
 ```
 
 ###### Crop ######
@@ -254,7 +254,7 @@ print image.crop(x=15, y=40, width=100, height=100).get_url()
 ```
 would generate the URL:
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/crop/y_40,h_100,w_100,x_15/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/crop/y_40,h_100,w_100,x_15/cat.jpg
 ```
 
 ##### Image Adjustment Operation #####
@@ -284,7 +284,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/con_-40,br_60/cat.jpg
 ```
 
 ###### Auto-Adjust ######
@@ -303,7 +303,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://prospero.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/auto/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/auto/cat.jpg
 ```
 
 ##### Image Filter Operation #####
