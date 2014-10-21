@@ -184,6 +184,7 @@ alignment *(optional)*|string|The position pointing the place from which to star
 
 alignment optional values:
 
+Value | Description
 ------|------------
 center|Focus on the center of the image, both vertical and horizontal center.
 top|Focus on the top of the image, horizontal center.
@@ -224,7 +225,6 @@ resize_filter *(optional)*|Integer|The resize filter to be used. One of the in t
 
 resize_filter optional values:
 
-resize_filter name | filter description | resize_filter name | filter description
 -------------------|--------------------|--------------------|-------------------
 [PointFilter](http://www.imagemagick.org/Usage/filter/#point)|[BoxFilter](http://www.imagemagick.org/Usage/filter/#box)|[TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)|[HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)|
 HanningFilter||HammingFilter|
