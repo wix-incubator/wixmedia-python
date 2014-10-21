@@ -1,8 +1,8 @@
-wixmedia-python SDK
--------------------
+Wix Media Python SDK
+--------------------
 Image Manipulation
 ===========================
-Wix Media Services provides web developers a versatile infrastructure for image manipulations easily accessable through the [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html). The Wix Media Python library is a wrapper over the API.
+Wix Media Platform provides web developers a versatile infrastructure for image manipulations easily accessable through the [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html). The Wix Media Python library provides a wrapper over the API.
 
 ## Usage ##
 
