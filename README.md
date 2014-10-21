@@ -53,17 +53,17 @@ ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 Images can be uploaded to the Wix Media Platform using this package.
 Once an image was uploaded, you cab apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 
-For more information about image manipulation in your apps, browse the [Wix Media Platform - Images documentation.](https://github.com/wix/wixmedia-python/blob/master/images.md).
+For more information about image manipulation in your apps, browse the [Images  SDK documentation.](https://github.com/wix/wixmedia-python/blob/master/images.md).
 
 #### Audio ####
 The platform supports two different modes for storing and manipulating audio files - a Simple Audio mode and a Professional Audio mode.
 
 In Simple Audio mode, the user can upload an mp3 file of any quality, and use it as-is. In Professional Audio mode the user can upload a WAV file of at least 44.1KHz/16bit. This file is then automatically transcoded into additional versions: several high-quality versions (like FLAC and high-bitrate mp3), and one (relatively) low-quality version for immediate playback. The high quality files are stored securely, thus can be used in commercial music-selling applications.
 
-For more information about audio support in your apps, browse the Wix Media Platform - Audio documentation.
+For more information about audio support in your apps, browse the Audio SDK documentation.
 
 #### Video ####
 Every video file uploaded into the service is automatically encoded into additional formats and qualities. These are particularly designed so that the videos will be playable on any browser and internet-connected device.
 The system allows for both public and secure storage of the video files. Public videos can be streamed or downloaded without the viewer authorization. Secured videos can be used in commercial video applications.
 
-For more information about video support in your apps, browse the Wix Media Platform - Video documentation.
+For more information about video support in your apps, browse the Video SDK documentation.
