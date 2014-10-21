@@ -225,7 +225,8 @@ resize_filter *(optional)*|Integer|The resize filter to be used. One of the in t
 
 resize_filter optional values:
 
--------------------|--------------------|--------------------|-------------------
+ | | |
+-|-|-|-
 [PointFilter](http://www.imagemagick.org/Usage/filter/#point)|[BoxFilter](http://www.imagemagick.org/Usage/filter/#box)|[TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)|[HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)|
 HanningFilter||HammingFilter|
 BlackmanFilter||GaussianFilter|
