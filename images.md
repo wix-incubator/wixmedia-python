@@ -179,7 +179,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the following values: ```PointFilter, BoxFilter, TriangleFilter, HermiteFilter, HanningFilter, HammingFilter, BlackmanFilter, GaussianFilter, QuadraticFilter, CubicFilter, CatromFilter, MitchellFilter, JincFilter, SincFilter, SincFastFilter, KaiserFilter, WelshFilter, ParzenFilter, BohmanFilter, BartlettFilter, LagrangeFilter, LanczosFilter, LanczosSharpFilter, Lanczos2Filter, Lanczos2SharpFilter, RobidouxFilter, RobidouxSharpFilter, CosineFilter```. ```default: LanczosFilter```
+resize_filter *(optional)*|Integer|The resize filter to be used. One of the values below. ```default: LanczosFilter```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
 
 alignment optional values:
@@ -225,12 +225,9 @@ resize_filter *(optional)*|Integer|The resize filter to be used. One of the in t
 
 resize_filter optional values + descriptions (view links):
 
-* [PointFilter](http://www.imagemagick.org/Usage/filter/#point)
-* [BoxFilter](http://www.imagemagick.org/Usage/filter/#box)
-* [TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)
-* [HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)
-* [HanningFilter](http://www.imagemagick.org/Usage/filter/#hanning)
-* [HammingFilter](http://www.imagemagick.org/Usage/filter/#hamming)
+* [PointFilter](http://www.imagemagick.org/Usage/filter/#point)    * [BoxFilter](http://www.imagemagick.org/Usage/filter/#box)
+* [TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)    * [HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)
+* [HanningFilter](http://www.imagemagick.org/Usage/filter/#hanning)    * [HammingFilter](http://www.imagemagick.org/Usage/filter/#hamming)
 * [BlackmanFilter](http://www.imagemagick.org/Usage/filter/#balckman)
 * [GaussianFilter](http://www.imagemagick.org/Usage/filter/#gaussian)
 * [QuadraticFilter](http://www.imagemagick.org/Usage/filter/#quadratic)
