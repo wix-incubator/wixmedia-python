@@ -5,19 +5,13 @@ Wix Media Python SDK
 Wix Media Platform is a collection of APIs for image, audio, and video files, and services for storing, serving, uploading, and managing those files.
 
 In addition to this basic functionality, Wix Media Platform includes the following components: 
-* Image Services give you powerful REST APIs that enable you to manipulate images hosted on Wix Media Platform on the fly.
-* Video Services let you host, transcode, and serve video seamlessly across any Internet-enabled device. 
-* Audio Services enable you to upload professional audio files, which are automatically transcoded into web-friendly formats.
-* Dashboard provides the ability to upload and organize media, view statistics about media serving, and produce ready-to-use code snippets. 
-* SDKs include client- and server-side libraries.
+* **Image Services** give you powerful REST APIs that enable you to manipulate images hosted on Wix Media Platform on the fly.
+* **Video Services** let you host, transcode, and serve video seamlessly across any Internet-enabled device. 
+* **Audio Services** enable you to upload professional audio files, which are automatically transcoded into web-friendly formats.
+* **Dashboard** provides the ability to upload and organize media, view statistics about media serving, and produce ready-to-use code snippets. 
+* **SDKs** include client- and server-side libraries.
 
-
-The Wix Media Platform are a collection of tools for handling online media files, such as images, audio and video. The services include storage, serving, uploading, transcoding and processing, client-side widgets and SDKs, user-repository metadata and media-collections. 
-
-
-Result of processing media files, such as resized images, encoded audio or transcoded video, are stored in Google Cloud Storage.
-
-This package is a Python wrapper for vaious RESTful API, which allows you to upload media files and perform manipulations on them.
+Managing media files includes user-repository metadata and media-collections service. Result of processing media files, such as resized images, encoded audio or transcoded video, are stored in Google Cloud Storage.
 
 ## Setup ##
 
@@ -32,10 +26,10 @@ git clone git@github.com:wix/wixmedia-python.git
 __Note__: If you don't have git or would rather install by unpacking a Zip or Tarball, you can always grab the latest version of the package from [the downloads page](https://github.com/wix/wixmedia-python/archive/master.zip). 
 
 
-## Wix Media Services API ##
+## Wix Media Platform API ##
 
-Wix Media Services provides web developers a versatile infrastructure for media file manipulations easily accessable through its RESTful API. 
-In addition, Wix Media Services offers the following Python wrapper, which provides easier access to the Wix Media Services API (by automatically generating proper RESTful requests).
+Wix Media Platform provides web developers a versatile infrastructure for media file manipulations easily accessable through its APIs. 
+In addition, Wix Media Platform offers the following Python wrapper, which provides easier access to the Wix Media Plaform API (by automatically generating proper RESTful requests).
 
 ## Usage ##
 
