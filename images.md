@@ -225,31 +225,16 @@ resize_filter *(optional)*|Integer|The resize filter to be used. One of the in t
 
 resize_filter optional values + descriptions (view links):
 
-* [PointFilter](http://www.imagemagick.org/Usage/filter/#point)                        * [BoxFilter](http://www.imagemagick.org/Usage/filter/#box)
-* [TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)                  * [HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)
-* [HanningFilter](http://www.imagemagick.org/Usage/filter/#hanning)                    * [HammingFilter](http://www.imagemagick.org/Usage/filter/#hamming)
-* [BlackmanFilter](http://www.imagemagick.org/Usage/filter/#balckman)
-* [GaussianFilter](http://www.imagemagick.org/Usage/filter/#gaussian)
-* [QuadraticFilter](http://www.imagemagick.org/Usage/filter/#quadratic)
-* [CubicFilter](http://www.imagemagick.org/Usage/filter/#cubics)
-* [CatromFilter](http://www.imagemagick.org/Usage/filter/#catrom)
-* [MitchellFilter](http://www.imagemagick.org/Usage/filter/#mitchell)
-* [JincFilter](http://www.imagemagick.org/Usage/filter/#jinc)
-* [SincFilter](http://www.imagemagick.org/Usage/filter/#sinc)
-* [SincFastFilter](http://www.imagemagick.org/Usage/filter/#sinc)
-* [KaiserFilter](http://www.imagemagick.org/Usage/filter/#kaiser)
-* [WelchFilter](http://www.imagemagick.org/Usage/filter/#welch)
-* [ParzenFilter](http://www.imagemagick.org/Usage/filter/#parzen)
-* [BohmanFilter](http://www.imagemagick.org/Usage/filter/#bohman)
-* [BartlettFilter](http://www.imagemagick.org/Usage/filter/#bartlett)
-* [LagrangeFilter](http://www.imagemagick.org/Usage/filter/#lagrange)
-* [LanczosFilter](http://www.imagemagick.org/Usage/filter/#lanczos)
-* [LanczosSharpFilter](http://www.imagemagick.org/Usage/filter/#lanczos_sharp)
-* [Lanczos2Filter](http://www.imagemagick.org/Usage/filter/#lanczos2)
-* [Lanczos2SharpFilter](http://www.imagemagick.org/Usage/filter/#lanczos2sharp)
-* [RobidouxFilter](http://www.imagemagick.org/Usage/filter/#robidoux)
-* [RobidouxSharpFilter](http://www.imagemagick.org/Usage/filter/#robidoux_sharp)
-* [CosineFilter](http://www.imagemagick.org/Usage/filter/#cosine)
+filters: | filters: | filters: | filters: 
+---------|----------|----------|---------
+[PointFilter](http://www.imagemagick.org/Usage/filter/#point)|[BoxFilter](http://www.imagemagick.org/Usage/filter/#box)|[TriangleFilter](http://www.imagemagick.org/Usage/filter/#triangle)|[HermiteFilter](http://www.imagemagick.org/Usage/filter/#hermite)
+[HanningFilter](http://www.imagemagick.org/Usage/filter/#hanning)|[HammingFilter](http://www.imagemagick.org/Usage/filter/#hamming)|[BlackmanFilter](http://www.imagemagick.org/Usage/filter/#balckman)|[GaussianFilter](http://www.imagemagick.org/Usage/filter/#gaussian)
+[QuadraticFilter](http://www.imagemagick.org/Usage/filter/#quadratic)|[CubicFilter](http://www.imagemagick.org/Usage/filter/#cubics)|[CatromFilter](http://www.imagemagick.org/Usage/filter/#catrom)|[MitchellFilter](http://www.imagemagick.org/Usage/filter/#mitchell)
+[JincFilter](http://www.imagemagick.org/Usage/filter/#jinc)|[SincFilter](http://www.imagemagick.org/Usage/filter/#sinc)|[SincFastFilter](http://www.imagemagick.org/Usage/filter/#sinc)|[KaiserFilter](http://www.imagemagick.org/Usage/filter/#kaiser)
+[WelchFilter](http://www.imagemagick.org/Usage/filter/#welch)|[ParzenFilter](http://www.imagemagick.org/Usage/filter/#parzen)
+[BohmanFilter](http://www.imagemagick.org/Usage/filter/#bohman)|[BartlettFilter](http://www.imagemagick.org/Usage/filter/#bartlett)|[LagrangeFilter](http://www.imagemagick.org/Usage/filter/#lagrange)
+[LanczosFilter](http://www.imagemagick.org/Usage/filter/#lanczos)|[LanczosSharpFilter](http://www.imagemagick.org/Usage/filter/#lanczos_sharp)|[Lanczos2Filter](http://www.imagemagick.org/Usage/filter/#lanczos2)|[Lanczos2SharpFilter](http://www.imagemagick.org/Usage/filter/#lanczos2sharp)
+[RobidouxFilter](http://www.imagemagick.org/Usage/filter/#robidoux)|[RobidouxSharpFilter](http://www.imagemagick.org/Usage/filter/#robidoux_sharp)|[CosineFilter](http://www.imagemagick.org/Usage/filter/#cosine)|
 
 **Sample Request**
 
