@@ -171,14 +171,13 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 Creates an image with the specified width and height while retaining original image proportion. If the requested proportion is different from the original proportion, only part of the original image may be used to fill the area specified by the width and height.
 
 ```python
-fill(width, height ,quality=None, resize_filter=None, alignment=None)
+fill(width, height, resize_filter=None, alignment=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the values below. ```default: LanczosFilter```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
 
@@ -216,7 +215,7 @@ print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,q_75/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240/dog.png
 ```
 
 ###### Fit ######
@@ -224,14 +223,13 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 Resizes the image to fit to the specified width and height while retaining original image proportion. The entire image will be visible but not necessarily fill the area specified by the width and height.
 
 ```python
-fit(width, height ,quality=None, resize_filter=None)
+fit(width, height, resize_filter=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default falue: 75```
 resize_filter *(optional)*|Integer|The resize filter to be used. One of the in the table below. ```default: LanczosFilter```
 
 resize_filter optional values + descriptions (view links):
