@@ -461,7 +461,7 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 
 ###### More Options ######
 
-####### Progressive #######
+** Progressive **
 
 When adding the "Progressive" option, the image would display asyncronically, pixel row by pixel row, instead of waiting for all the data to load and only then display it.
 
