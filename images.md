@@ -87,7 +87,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-blur *(optional)*|Float|Blur factor. Value > 1 is blurry, <1 is sharp. ```default: 1```
+blur *(optional)*|Float|The blur factor. vlaue > 1 applies a blur effect, and value < 1 applies a sharpening effect. ```default: 1```
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
@@ -113,7 +113,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-blur *(optional)*|Float|Blur factor. Value > 1 is blurry, <1 is sharp. ```default: 1```
+blur *(optional)*|Float|The blur factor. vlaue > 1 applies a blur effect, and value < 1 applies a sharpening effect. ```default: 1```
 radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
 amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
 threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
