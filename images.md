@@ -215,7 +215,7 @@ print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,a_tl/dog.png
 ```
 
 ###### Fit ######
