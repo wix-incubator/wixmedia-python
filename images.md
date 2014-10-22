@@ -350,9 +350,10 @@ neg|-|Negates the colors of the image.
 pix|Integer|Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
 pix_faces|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
 blur|Integer (%)|Applies a blur effect to the image. The parameter value indicates the blur in percents.
-sharpen|Integer_Integer_Ingteger|Sharpens the image using radius, amount & threshold parameters. (see table below) ``` when no values are supplied, sharpen is auto```
+sharpen|Integer|Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is an Integer between 0 and the image size in pixels.
+usm|Float_Float_Float|The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
 
-sharpen optional values:
+usm optional values:
 
 Value | Description | Valid values
 ------|-------------|-------------
@@ -390,19 +391,19 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 ```
 ***
 ```python
-image.filter(sharpen(radius=100, amount=30, thershold=217))
+image.filter(usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/sharpen_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/usm_100_30_217/dog.png
 ```
 ***
 ```python
-image.filter(oil, neg, pixelate=125, sharpen(radius=100, amount=30, thershold=217)??????)
+image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg,pix_125,sharpen_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg,pix_125,usm_100_30_217/dog.png
 ```
 
 
