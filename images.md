@@ -458,3 +458,17 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 ```
 { "error": 0, "error_description": "success", "wm_filepath": "/goog-098152434167072483196/images/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg/dog.png" }
 ```
+
+###### More Options ######
+
+####### Progressive #######
+
+When adding the "Progressive" option, the image would display asyncronically, pixel row by pixel row, instead of waiting for all the data to load and only then display it.
+
+```python
+image.progressive()
+```
+would generate: (giving a its default values)
+```
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/opt/prog/dog.png
+```
