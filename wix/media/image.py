@@ -2,6 +2,8 @@ from .exceptions import MissingCmd
 import urllib
 import os
 
+VERSION = 'v1'
+
 
 class CmdBuilder(object):
     def __init__(self, cmd, *param_list, **param_dict):
@@ -216,7 +218,7 @@ class Image(object):
     def get_url(self):
         file_uri_path, org_file_name = os.path.split(self.id)
 
-        params = ['http://%s' % self.service_host, file_uri_path]
+        params = ['http://%s' % self.service_host, file_uri_path, VERSION]
         params.extend(self.commands)
         params.append(self.cmd_builder.build_cmd())
         params.append(org_file_name)
