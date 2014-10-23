@@ -21,7 +21,7 @@ print image_id
 
 ```
 
-The code snippet above gives the following image id as output:
+The code snippet above gives the following image-id as output:
 ```
 ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
@@ -51,13 +51,13 @@ print image.fit(width=120, height=120) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```
-http://host.com/user-id/media-type/file-id/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
+http://host.com/user-id/media-type/file-id/version/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
 ```
 Using this python package eliminates the need to manually construct such urls. For more information about the URLs browse [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html) documentation.
 
@@ -108,7 +108,7 @@ print image.canvas(width=480, height=240, alignment='faces').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/a_fs,h_240,w_480/cat.jpg
 ```
 
 ###### Fill ######
@@ -160,7 +160,7 @@ print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,a_tl/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/w_480,h_240,a_tl/dog.png
 ```
 
 ###### Fit ######
@@ -195,7 +195,7 @@ print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_240,w_480,f_25/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,f_25/cat.jpg
 ```
 
 ###### Crop ######
@@ -219,7 +219,7 @@ print image.crop(x=15, y=40, width=100, height=100).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/crop/y_40,h_100,w_100,x_15/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/crop/y_40,h_100,w_100,x_15/cat.jpg
 ```
 
 ##### Image Adjustment Operation #####
@@ -249,7 +249,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,con_-40,br_60/cat.jpg
 ```
 
 ###### Auto-Adjust ######
@@ -268,7 +268,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,auto_adj/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
 ```
 
 ##### Image Filter Operation #####
@@ -307,14 +307,14 @@ threshold|shapening mask threshold|0 to 255
 
 **Sample Requests**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/v1/ae1d86b24054482f8477bfbf2d426936/dog.png')
 
 image.filter(blur=50)
 ```
 would generate the URL:
 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,blur_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,blur_50/dog.png
 ```
 ***
 ```python
@@ -322,7 +322,7 @@ image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
 ```
 ***
 ```python
@@ -330,7 +330,7 @@ image.filter(neg, pixelate=108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,neg,pix_108/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
 ```
 ***
 ```python
@@ -338,7 +338,7 @@ image.filter(usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,usm_100_30_217/dog.png
 ```
 ***
 ```python
@@ -346,7 +346,7 @@ image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
 ```
 
 
@@ -388,7 +388,7 @@ image.watermark(opacity=45, scale=0)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_45,scl_0/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_45,scl_0/dog.png
 ```
 and:
 ```python
@@ -396,7 +396,7 @@ image.watermark(opacity=100, alignment='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_100,a_tl,scl_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_100,a_tl,scl_50/dog.png
 ```
 
 **Sample Response**
