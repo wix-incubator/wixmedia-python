@@ -6,5 +6,5 @@ class UploadError(GeneralError):
     pass
 
 
-class CmdNotAllowed(GeneralError):
+class MissingCmd(GeneralError):
     pass

@@ -21,7 +21,7 @@ print image_id
 
 ```
 
-The code snippet above gives the following image id as output:
+The code snippet above gives the following image-id as output:
 ```
 ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
@@ -51,19 +51,19 @@ print image.fit(width=120, height=120) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```
-http://host.com/user-id/media-type/file-id/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
+http://host.com/user-id/media-type/file-id/version/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
 ```
 Using this python package eliminates the need to manually construct such urls. For more information about the URLs browse [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html) documentation.
 
 -----------------
 
-##### Image Transformation Operations #####
+#### Image Transformation Operations ####
 
 The following image transformations are available (one per image maipulation request):
 - Canvas
@@ -72,12 +72,12 @@ The following image transformations are available (one per image maipulation req
 - Crop
 
 
-###### Canvas ######
+##### Canvas #####
 
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(width, height, alignment=None)
+canvas(width, height, alignment=None, ext_color=None)
 ```
 
 Parameter | value | Description
@@ -85,6 +85,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
+ext_color *(optional)*|string (RGB)| the extension color, in case the canvas size is larger than the image itself. Please note that the string expected is a 6 hexadecimal digits representing RRGGBB. 
 
 alignment optional values:
 
@@ -102,16 +103,16 @@ right|Focus on the right side of the image, vertical center.
 face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
 faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
-**Sample Request**
+*Sample Request:*
 ```python
-print image.canvas(width=480, height=240, alignment='faces').get_url()
+print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/canvas/a_fs,h_240,w_480/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/h_240,w_480,a_fs,c_ffffff/cat.jpg
 ```
 
-###### Fill ######
+##### Fill #####
 
 Creates an image with the specified width and height while retaining original image proportion. If the requested proportion is different from the original proportion, only part of the original image may be used to fill the area specified by the width and height.
 
@@ -153,17 +154,17 @@ resize_filter optional values + descriptions (view links):
 [**LagrangeFilter**](http://www.imagemagick.org/Usage/filter/#lagrange)|[**LanczosFilter**](http://www.imagemagick.org/Usage/filter/#lanczos)|[**LanczosSharpFilter**](http://www.imagemagick.org/Usage/filter/#lanczos_sharp)|[**Lanczos2Filter**](http://www.imagemagick.org/Usage/filter/#lanczos2)
 [**Lanczos2SharpFilter**](http://www.imagemagick.org/Usage/filter/#lanczos2sharp)|[**RobidouxFilter**](http://www.imagemagick.org/Usage/filter/#robidoux)|[**RobidouxSharpFilter**](http://www.imagemagick.org/Usage/filter/#robidoux_sharp)|[**CosineFilter**](http://www.imagemagick.org/Usage/filter/#cosine)
 
-**Sample Request**
+*Sample Request:*
 
 ```python
 print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/fill/w_480,h_240,a_tl/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/h_240,w_480/cat.jpg
 ```
 
-###### Fit ######
+##### Fit #####
 
 Resizes the image to fit to the specified width and height while retaining original image proportion. The entire image will be visible but not necessarily fill the area specified by the width and height.
 
@@ -188,17 +189,17 @@ resize_filter optional values + descriptions (view links):
 [**LagrangeFilter**](http://www.imagemagick.org/Usage/filter/#lagrange)|[**LanczosFilter**](http://www.imagemagick.org/Usage/filter/#lanczos)|[**LanczosSharpFilter**](http://www.imagemagick.org/Usage/filter/#lanczos_sharp)|[**Lanczos2Filter**](http://www.imagemagick.org/Usage/filter/#lanczos2)
 [**Lanczos2SharpFilter**](http://www.imagemagick.org/Usage/filter/#lanczos2sharp)|[**RobidouxFilter**](http://www.imagemagick.org/Usage/filter/#robidoux)|[**RobidouxSharpFilter**](http://www.imagemagick.org/Usage/filter/#robidoux_sharp)|[**CosineFilter**](http://www.imagemagick.org/Usage/filter/#cosine)
 
-**Sample Request**
+*Sample Request:*
 
 ```python
 print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_240,w_480,f_25/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,rf_25/cat.jpg
 ```
 
-###### Crop ######
+##### Crop #####
 
 Crops the image based on the supplied coordinates, starting at the x, y coordinates along with the width and height parameters.
 
@@ -213,18 +214,18 @@ y *(mandatory)*|Integer|The y-pixel-coordinate to start cropping from. (represen
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.crop(x=15, y=40, width=100, height=100).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/crop/y_40,h_100,w_100,x_15/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/crop/y_40,h_100,w_100,x_15/cat.jpg
 ```
 
-##### Image Adjustment Operation #####
+#### Image Adjustment Operation ####
 
-###### Adjust ######
+##### Adjust #####
 
 Applies an adjustment to an image.
 
@@ -241,7 +242,7 @@ saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 
-**Sample Requests**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .adjust(brightness=60, contrast=-40) \
@@ -249,10 +250,10 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,con_-40,br_60/cat.jpg
 ```
 
-###### Auto-Adjust ######
+##### Auto-Adjust #####
 
 Performs a general auto-enhancement to an image.
 
@@ -260,7 +261,7 @@ Performs a general auto-enhancement to an image.
 auto_adjust()
 ```
 
-**Sample Requests**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .auto_adjust() \
@@ -268,35 +269,141 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,auto_adj/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
 ```
 
-##### Image Filter Operation #####
 
-Applies one (or more) of the following effects to an image: 
-- Oil paint effect
-- Negative effect
-- Pixelate effect - on all image or based on facial recognition
-- Bluring
-- Sharpening
-- Unsharp mask
+#### Oil Filter ####
+
+Applies an oil paint effect on an image.
 
 ```python
-filter(*funcs, **filter_funcs)
+oil()
 ```
-Parameters value can be either specific values:
 
-function | parameter(s) | Description
----------|--------------|------------
-oil|-|Applies an oil paint effect on an image.
-neg|-|Negates the colors of the image.
-pix|Integer|Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
-pix_faces|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
-blur|Integer (%)|Applies a blur effect to the image. The parameter value indicates the blur in percents.
-sharpen|Integer|Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is an Integer between 0 and the image size in pixels.
-usm|Float_Float_Float|The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .oil() \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,oil/cat.jpg
+```
 
-usm optional values:
+
+#### Negative Filter ####
+
+Negates the colors of the image.
+
+```python
+neg()
+```
+
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .neg() \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,neg/cat.jpg
+```
+
+
+#### Pixelate Filter ####
+
+Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
+
+```python
+pixelate(value)
+```
+
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .pixelate(20) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pix_20/cat.jpg
+```
+
+
+#### Pixelate Faces Filter ####
+
+Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
+
+```python
+pixelate_faces(value)
+```
+
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .pixelate_faces(35) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pixfs_35/cat.jpg
+```
+
+
+#### Blur Filter ####
+
+Applies a blur effect to the image. The parameter value indicates the blur in percents.
+
+```python
+blur(value)
+```
+
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .blur(50) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,blur_50/cat.jpg
+```
+
+*** 
+
+#### Sharpening Filter ####
+
+Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is a float number.
+
+```python
+sharpen(radius)
+```
+
+*Sample Request:*
+```python
+print image.fit(width=120, height=120) \
+           .sharpen(0.70) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,shrp_0.70/cat.jpg
+```
+
+***
+
+#### Unsharp Mask Filter ####
+
+The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
+
+```python
+unsharp(radius=0.5, amount=0.2, threshold=0.0)
+```
+
+optional values:
 
 Value | Description | Valid values
 ------|-------------|-------------
@@ -304,63 +411,62 @@ radius|sharpening mask radius|0 to image size
 amount|sharpening mask amount|0 to 100
 threshold|shapening mask threshold|0 to 255
 
-
-**Sample Requests**
+*Sample Request:*
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
+print image.fit(width=120, height=120) \
+           .unsharp(radius=0.4, amount=0.2, threshold=0.0) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
+```
 
-image.filter(blur=50)
-```
-would generate the URL:
+*** 
 
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,blur_50/dog.png
-```
-***
+**Multiple Filters Sample Requests**
 ```python
 image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
 ```
 ***
 ```python
-image.filter(neg, pixelate=108)
+image.neg()
+     .pixelate(108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,neg,pix_108/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
 ```
 ***
 ```python
-image.filter(usm(radius=100, amount=30, thershold=217))
+image.oil()
+     .neg()
+     .pixelate(125) 
+     .sharpen(0.40)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,usm_100_30_217/dog.png
-```
-***
-```python
-image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
-```
-would generate: 
-```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg,pix_125,usm_100_30_217/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
 ```
 
 
-##### Image Watermark Operation #####
+
+#### Image Watermark Operation ####
 
 Enables users to apply watermark such as copyright notice in order to protect their images. 
 * The system allows replacing watermark if needed.
 
 ```python
-watermark(opacity=None, alignment=None, scale=None)
+watermark(wm_id, opacity=None, alignment=None, scale=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
+wm_id *(mandatory)*|string|The watermark image id. Please notice that the wmid format is similar to the file_id format used earlier in the URL. Must be url-plus encoded.
 opacity *(optional)*|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
 alignment *(optional)*|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
 scale *(optional)*|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
@@ -381,14 +487,14 @@ right|central right part of the image.
 face|face-recognition based alignment.
 faces|focus on all faces in the image.
 
-**Sample Request**
+*Sample Request:*
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.watermark(opacity=45, scale=0)
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
+image.watermark(wm_id='ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg', opacity=45, scale=0)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_45,scl_0/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/wmid_ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg, op_45,scl_0/dog.png
 ```
 and:
 ```python
@@ -396,24 +502,37 @@ image.watermark(opacity=100, alignment='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/wm/op_100,a_tl,scl_50/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_100,a_tl,scl_50/dog.png
 ```
 
-**Sample Response**
+*Sample Response:*
 ```
-{ "error": 0, "error_description": "success", "wm_filepath": "/goog-098152434167072483196/images/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg/dog.png" }
+{ "error": 0, "error_description": "success", "wm_filepath": "ggl-685734655894940532967/images/88dfc1cb1babd66a7bc635dbb599d94d/dog.png" }
 ```
 
-###### More Options ######
+#### JPEG Options ####
 
-**Baseline**
+Extra options for JPEGs only:
 
-When adding the "Baseline" option, the image would be desplayed only after it's fully loaded, instead of being displayed and loaded progressively by default.
+option | parameter(s) | description
+-------|------------|------------
+baseline|-|An option for JPEGs only. Applies baseline encoding on the image, instead of progressive encoding.
+quality|Integer (%)|Quality of the image, values between 0 and 100 
 
+*Sample Requests:*
 ```python
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.baseline()
 ```
-would generate: (giving a its default values)
+would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/bl/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,bl/dog.png
+```
+and:
+```python
+image.quality(0.70)
+```
+would generate: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,q_0.70/dog.png
 ```

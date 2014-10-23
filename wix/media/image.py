@@ -1,19 +1,23 @@
-from .exceptions import CmdNotAllowed
+from .exceptions import MissingCmd
+import urllib
 import os
+
+VERSION = 'v1'
 
 
 class CmdBuilder(object):
-    def __init__(self, *param_list, **param_dict):
-        self.cmd = list()
+    def __init__(self, cmd, *param_list, **param_dict):
+        self.cmd    = cmd
+        self.params = list()
 
         self.add(*param_list, **param_dict)
 
     def add(self, *param_list, **param_dict):
-        self.cmd.extend([str(p) for p in param_list])
-        self.cmd.extend(["%s_%s" % (k, v) for k, v in param_dict.iteritems()])
+        self.params.extend([str(p) for p in param_list])
+        self.params.extend(["%s_%s" % (k, v) for k, v in param_dict.iteritems()])
 
     def build_cmd(self):
-        return ','.join(self.cmd)
+        return '%s/%s' % (self.cmd, ','.join(self.params))
 
 
 class Image(object):
@@ -53,67 +57,43 @@ class Image(object):
     def __init__(self, image_id, service_host):
         self.id            = image_id
         self.service_host  = service_host
+        self.cmd_builder   = None
         self.commands      = list()
 
     def reset(self):
-        self.commands = list()
+        self.cmd_builder = None
+        self.commands    = list()
 
     def get_id(self):
         return self.id
 
-    def srz(self, width, height, quality=None, blur=None,  radius=None, amount=None, threshold=None):
-        """
-        default values: quality=75, blur=1, radius=0.5, amount=0.2, threshold=0.0
-        """
-        self._srz_srb_common(Image.COMMAND_SRZ, width, height, quality, blur, radius, amount, threshold)
+    def assert_cmd(self):
+        if self.cmd_builder is None:
+            raise MissingCmd("Missing transformation command. Original image cannot be used." % self.transform_command)
 
-        return self
-
-    def srb(self, width, height, quality=None, blur=None, radius=None, amount=None, threshold=None):
-        """
-        default values: quality=75, blur=1, radius=0.5, amount=0.2, threshold=0.0
-        """
-        self._srz_srb_common(Image.COMMAND_SRB, width, height, quality, blur, radius, amount, threshold)
-
-        return self
-
-    def _srz_srb_common(self, cmd, width, height, quality, blur, radius, amount, threshold):
-
-        cmd_builder = CmdBuilder(cmd, w=width, h=height)
-
-        if blur is not None:
-            cmd_builder.add(blur=blur)
-
-        if quality is not None:
-            cmd_builder.add(q=quality)
-
-        if radius or amount or threshold:
-            radius    = radius or 0.5
-            amount    = amount or 0.2
-            threshold = threshold or 0.0
-
-            cmd_builder.add(r='%.2f' % radius, a='%.2f' % amount, t='%.2f' % threshold)
-
-        self.commands.append(cmd_builder.build_cmd())
-
-    def canvas(self, width, height, alignment=None):
+    def canvas(self, width, height, alignment=None, ext_color=None):
         """
         default values: alignment="center"
         """
 
-        cmd_builder = CmdBuilder(Image.COMMAND_CANVAS, w=width, h=height)
+        if self.cmd_builder:
+            self.commands.append(self.cmd_builder.build_cmd())
 
-        if alignment:
-            cmd_builder.add(a=Image.alignment_value_map[alignment])
+        self.cmd_builder = CmdBuilder(Image.COMMAND_CANVAS, w=width, h=height)
 
-        self.commands.append(cmd_builder.build_cmd())
+        if alignment is not None:
+            self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+
+        if ext_color is not None:
+            self.cmd_builder.add(c=ext_color)
 
         return self
 
     def crop(self, x, y, width, height):
-        cmd_builder = CmdBuilder(Image.COMMAND_CROP, x=x, y=y, w=width, h=height)
+        if self.cmd_builder:
+            self.commands.append(self.cmd_builder.build_cmd())
 
-        self.commands.append(cmd_builder.build_cmd())
+        self.cmd_builder = CmdBuilder(Image.COMMAND_CROP, x=x, y=y, w=width, h=height)
 
         return self
 
@@ -122,15 +102,17 @@ class Image(object):
         default value: resize_filter=LanczosFilter, alignment="center"
         """
 
-        cmd_builder = CmdBuilder(Image.COMMAND_FILL, w=width, h=height)
+        if self.cmd_builder:
+            self.commands.append(self.cmd_builder.build_cmd())
+
+        self.cmd_builder = CmdBuilder(Image.COMMAND_FILL, w=width, h=height)
 
         if resize_filter is not None:
-            cmd_builder.add(f=resize_filter)
+            self.cmd_builder.add(rf=resize_filter)
 
-        if alignment:
-            cmd_builder.add(a=Image.alignment_value_map[alignment])
-
-        self.commands.append(cmd_builder.build_cmd())
+        # not supported yet...
+        #  if alignment is not None:
+        #     self.cmd_builder.add(a=Image.alignment_value_map[alignment])
 
         return self
 
@@ -139,112 +121,110 @@ class Image(object):
         default value: resize_filter=LanczosFilter
         """
 
-        cmd_builder = CmdBuilder(Image.COMMAND_FIT, w=width, h=height)
+        if self.cmd_builder:
+            self.commands.append(self.cmd_builder.build_cmd())
+
+        self.cmd_builder = CmdBuilder(Image.COMMAND_FIT, w=width, h=height)
 
         if resize_filter is not None:
-            cmd_builder.add(f=resize_filter)
-
-        self.commands.append(cmd_builder.build_cmd())
+            self.cmd_builder.add(rf=resize_filter)
 
         return self
 
-    #def watermark(self, opacity=None, alignment=None, scale=None):
-    #    """
-    #    default values: opacity=100, alignment='center', scale=0
-    #    """
-    #    if self.transform_command != Image.COMMAND_NONE:
-    #        raise CmdNotAllowed("Command already set: %s. Reset image before applying command." % self.transform_command)
-    #
-    #    self.transform_command = Image.COMMAND_WATERMARK
-    #
-    #    self.transform_params = {}
-    #
-    #    if opacity is not None:
-    #        self.transform_params["op"] = opacity
-    #
-    #    if alignment:
-    #        self.transform_params["a"] = Image.alignment_value_map[alignment]
-    #
-    #    if scale is not None:
-    #        self.transform_params["scl"] = scale
-    #
-    #    return self
-    #
+    def watermark(self, wm_id, opacity=None, alignment=None, scale=None):
+        """
+        default values: opacity=100, alignment='center', scale=0
+        """
+
+        if self.cmd_builder:
+            self.commands.append(self.cmd_builder.build_cmd())
+
+        self.cmd_builder = CmdBuilder(Image.COMMAND_WATERMARK, wmid=urllib.quote_plus(wm_id))
+
+        if opacity is not None:
+            self.cmd_builder.add(op=opacity)
+
+        if alignment is not None:
+            self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+
+        if scale is not None:
+            self.cmd_builder.add(scl=scale)
+
+        return self
 
     def adjust(self, **props_dict):
-        for prop, value in props_dict.iteritems():
+        self.assert_cmd()
 
-            cmd_builder = CmdBuilder(**{prop: value})
-            self.commands.append(cmd_builder.build_cmd())
+        for prop, value in props_dict.iteritems():
+            self.cmd_builder.add(**{Image.adjust_parameter_map[prop]: value})
 
         return self
 
     def auto_adjust(self):
-        cmd_builder = CmdBuilder('auto_adjust')
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add('auto_adj')
 
         return self
 
     def oil(self):
-        cmd_builder = CmdBuilder('oil')
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add('oil')
 
         return self
 
     def neg(self):
-        cmd_builder = CmdBuilder('neg')
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add('neg')
 
         return self
 
     def pixelate(self, value):
-        cmd_builder = CmdBuilder('pix', value)
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add(**{'pix': value})
 
         return self
 
     def pixelate_faces(self, value):
-        cmd_builder = CmdBuilder('pixfs', value)
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add(**{'pixfs': value})
 
         return self
 
     def blur(self, value):
-        cmd_builder = CmdBuilder('blur', value)
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add(**{'blur': value})
 
         return self
 
     def sharpen(self, radius):
-        cmd_builder = CmdBuilder('sharpen', "%.2f" % radius)
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add(**{'shrp': radius})
 
         return self
 
     def unsharp(self, radius=0.5, amount=0.2, threshold=0.0):
-        cmd_builder = CmdBuilder('usm', r='%.2f' % radius, a='%.2f' % amount, t='%.2f' % threshold)
-        self.commands.append(cmd_builder.build_cmd())
+        self.cmd_builder.add(**{'usm': "%.2f_%.2f_%.2f" % (radius, amount, threshold)})
 
         return self
 
     def quality(self, value):
-        cmd_builder = CmdBuilder('q', value)
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add(**{'q': value})
 
         return self
 
     def baseline(self):
-        cmd_builder = CmdBuilder('bl')
-        self.commands.append(cmd_builder.build_cmd())
+        self.assert_cmd()
+        self.cmd_builder.add('bl')
 
         return self
 
     def get_url(self):
-
         file_uri_path, org_file_name = os.path.split(self.id)
 
-        params = ['http://%s' % self.service_host, file_uri_path]
+        params = ['http://%s' % self.service_host, file_uri_path, VERSION]
         params.extend(self.commands)
+        params.append(self.cmd_builder.build_cmd())
         params.append(org_file_name)
 
         return "/".join(params)
