@@ -55,7 +55,7 @@ print image.fit(width=120, height=120) \
 image.reset()
 print image.fit(width=120, height=120) \
            .quality(7) \
-           .progressive() \
+           .baseline() \
            .get_url()
 
 

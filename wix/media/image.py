@@ -233,8 +233,8 @@ class Image(object):
 
         return self
 
-    def progressive(self):
-        cmd_builder = CmdBuilder('pr')
+    def baseline(self):
+        cmd_builder = CmdBuilder('bl')
         self.commands.append(cmd_builder.build_cmd())
 
         return self
