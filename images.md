@@ -242,7 +242,7 @@ saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
 quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 
-**Sample Requests**
+**Sample Request**
 ```python
 print image.fit(width=120, height=120) \
            .adjust(brightness=60, contrast=-40) \
@@ -261,7 +261,7 @@ Performs a general auto-enhancement to an image.
 auto_adjust()
 ```
 
-**Sample Requests**
+**Sample Request**
 ```python
 print image.fit(width=120, height=120) \
            .auto_adjust() \
@@ -272,32 +272,129 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
 ```
 
-##### Image Filter Operation #####
+###### Oil Filter ######
 
-Applies one (or more) of the following effects to an image: 
-- Oil paint effect
-- Negative effect
-- Pixelate effect - on all image or based on facial recognition
-- Bluring
-- Sharpening
-- Unsharp mask
+Applies an oil paint effect on an image.
 
 ```python
-filter(*funcs, **filter_funcs)
+oil()
 ```
-Parameters value can be either specific values:
 
-function | parameter(s) | Description
----------|--------------|------------
-oil|-|Applies an oil paint effect on an image.
-neg|-|Negates the colors of the image.
-pix|Integer|Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
-pix_faces|Integer|Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
-blur|Integer (%)|Applies a blur effect to the image. The parameter value indicates the blur in percents.
-sharpen|Integer|Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is an Integer between 0 and the image size in pixels.
-usm|Float_Float_Float|The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .oil() \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,oil/cat.jpg
+```
 
-usm optional values:
+###### Negative Filter ######
+
+Negates the colors of the image.
+
+```python
+neg()
+```
+
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .neg() \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,neg/cat.jpg
+```
+
+###### Pixelate Filter ######
+
+Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
+
+```python
+pixelate(value)
+```
+
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .pixelate(20) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pix_20/cat.jpg
+```
+
+###### Pixelate Faces Filter ######
+
+Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
+
+```python
+pixelate_faces(value)
+```
+
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .pixelate_faces(35) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pixfs_35/cat.jpg
+```
+
+###### Blur Filter ######
+
+Applies a blur effect to the image. The parameter value indicates the blur in percents.
+
+```python
+blur(value)
+```
+
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .blur(50) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,blur_50/cat.jpg
+```
+
+###### Sharpening Filter ######
+
+Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is a float number.
+
+```python
+sharpen(radius)
+```
+
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .sharpen(0.70) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,shrp_0.70/cat.jpg
+```
+
+###### Unsharp Mask Filter ######
+
+The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
+
+```python
+unsharp(radius=0.5, amount=0.2, threshold=0.0)
+```
+
+optional values:
 
 Value | Description | Valid values
 ------|-------------|-------------
@@ -305,19 +402,18 @@ radius|sharpening mask radius|0 to image size
 amount|sharpening mask amount|0 to 100
 threshold|shapening mask threshold|0 to 255
 
+**Sample Request**
+```python
+print image.fit(width=120, height=120) \
+           .unsharp(radius=0.4, amount=0.2, threshold=0.0) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
+```
 
 **Sample Requests**
-```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-
-image.filter(blur=50)
-```
-would generate the URL:
-
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,blur_50/dog.png
-```
-***
 ```python
 image.filter(oil, neg)
 ```
@@ -327,7 +423,8 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 ```
 ***
 ```python
-image.filter(neg, pixelate=108)
+image.neg()
+     .pixelate(108)
 ```
 would generate: 
 ```
@@ -335,15 +432,10 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 ```
 ***
 ```python
-image.filter(usm(radius=100, amount=30, thershold=217))
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,usm_100_30_217/dog.png
-```
-***
-```python
-image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
+image.oil()
+     .neg()
+     .pixelate(125) 
+     .sharpen(0.40)
 ```
 would generate: 
 ```
