@@ -346,7 +346,7 @@ image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg,pix_125,usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
 ```
 
 
