@@ -85,6 +85,7 @@ Parameter | value | Description
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
+ext_color *(optional)*|string (RGB)| the extension color, in case the canvas size is larger than the image itself. Please note that the string expected is a 6 hexadecimal digits representing RRGGBB. 
 
 alignment optional values:
 
@@ -104,11 +105,11 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 **Sample Request**
 ```python
-print image.canvas(width=480, height=240, alignment='faces').get_url()
+print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/a_fs,h_240,w_480/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/a_fs,h_240,w_480, c_ffffff/cat.jpg
 ```
 
 ###### Fill ######
@@ -160,7 +161,7 @@ print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/w_480,h_240,a_tl/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/w_480,h_240,a_tl/dog.png
 ```
 
 ###### Fit ######
@@ -307,14 +308,14 @@ threshold|shapening mask threshold|0 to 255
 
 **Sample Requests**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/v1/ae1d86b24054482f8477bfbf2d426936/dog.png')
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 
 image.filter(blur=50)
 ```
 would generate the URL:
 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,blur_50/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,blur_50/dog.png
 ```
 ***
 ```python
@@ -322,7 +323,7 @@ image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
 ```
 ***
 ```python
@@ -330,7 +331,7 @@ image.filter(neg, pixelate=108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
 ```
 ***
 ```python
@@ -338,7 +339,7 @@ image.filter(usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,usm_100_30_217/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,usm_100_30_217/dog.png
 ```
 ***
 ```python
@@ -346,7 +347,7 @@ image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
 ```
 
 
@@ -356,11 +357,12 @@ Enables users to apply watermark such as copyright notice in order to protect th
 * The system allows replacing watermark if needed.
 
 ```python
-watermark(opacity=None, alignment=None, scale=None)
+watermark(wm_id, opacity=None, alignment=None, scale=None)
 ```
 
 Parameter | value | Description
 ----------|-------|------------
+wm_id *(mandatory)*|string|The watermark image id. Please notice that the wmid format is similar to the file_id format used earlier in the URL. Must be url-plus encoded.
 opacity *(optional)*|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
 alignment *(optional)*|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
 scale *(optional)*|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
@@ -383,12 +385,12 @@ faces|focus on all faces in the image.
 
 **Sample Request**
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.watermark(opacity=45, scale=0)
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
+image.watermark(wm_id='ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg', opacity=45, scale=0)
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_45,scl_0/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/wmid_ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg, op_45,scl_0/dog.png
 ```
 and:
 ```python
@@ -396,24 +398,37 @@ image.watermark(opacity=100, alignment='top-left', scale=50)
 ```
 would generate: (giving a its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_100,a_tl,scl_50/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_100,a_tl,scl_50/dog.png
 ```
 
 **Sample Response**
 ```
-{ "error": 0, "error_description": "success", "wm_filepath": "/goog-098152434167072483196/images/media/123456_wxm_88dfc1cb1babd66a7bc635dbb599d94d.jpg/dog.png" }
+{ "error": 0, "error_description": "success", "wm_filepath": "ggl-685734655894940532967/images/88dfc1cb1babd66a7bc635dbb599d94d/dog.png" }
 ```
 
 ###### More Options ######
 
-**Baseline**
+**JPEG Options**
 
-When adding the "Baseline" option, the image would be desplayed only after it's fully loaded, instead of being displayed and loaded progressively by default.
+option | parameter(s) | description
+-------|------------|------------
+baseline|-|An option for JPEGs only. Applies baseline encoding on the image, instead of progressive encoding.
+quality|Integer (%)|Quality of the image, values between 0 and 100 
 
+**Sample Requests**
 ```python
+image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
 image.baseline()
 ```
-would generate: (giving a its default values)
+would generate the URL:
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/bl/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,bl/dog.png
+```
+and:
+```python
+image.quality(0.70)
+```
+would generate: 
+```
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,q_0.70/dog.png
 ```
