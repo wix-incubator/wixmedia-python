@@ -51,13 +51,13 @@ print image.fit(width=120, height=120) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/filter/usm_0.50_0.20_0.00,oil/adjust/con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
 ```
 ----------------
 __Note__: 
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```
-http://host.com/user-id/media-type/file-id/operation/params(p_value, comma-separated)/filename.ext
+http://host.com/user-id/media-type/file-id/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
 ```
 Using this python package eliminates the need to manually construct such urls. For more information about the URLs browse [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html) documentation.
 
@@ -66,66 +66,11 @@ Using this python package eliminates the need to manually construct such urls. F
 ##### Image Transformation Operations #####
 
 The following image transformations are available (one per image maipulation request):
-- srz (shortcut for applying *fill* transformation and unsharp mask)
-- srb (shortcut for applying *fit* transformation and unsharp mask)
 - Canvas
 - Fill
 - Fit
 - Crop
 
-
-###### srz ######
-
-Creates an image with the specified width and height while retaining original image proportion. If the requested proportion is different from the original proportion, only part of the original image may be used to fill the area specified by the width and height. After creating the image, an unsharp mask filter is applied for better result. Most useful shortcut for simple image optimization, while maintaining good balance between output size and quality.
-
-```python
-srz(width, height, quality=None, blur=None,  radius=None, amount=None, threshold=None)
-```
-
-Parameter | value | Description
-----------|-------|------------
-width *(mandatory)*|Integer|The width constraint (pixels).
-height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-blur *(optional)*|Float|The blur factor. vlaue > 1 applies a blur effect, and value < 1 applies a sharpening effect. ```default: 1```
-radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
-
-**Sample Request**
-```python
-print image.srz(width=480, height=240, quality=85, blur=0.6, radius=0.60, amount=0.9, threshold=0.00).get_url()
-```
-would generate the URL:
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srz/q_85,h_240,usm_0.60_0.90_0.00,w_480,blur_0.6/cat.jpg
-```
-###### srb ######
-
-Resizes the image to fit to the specified width and height while retaining original image proportion. The entire image will be visible but not necessarily fill the area specified by the width and height. After creating the image, an unsharp mask filter is applied for better result.
-
-```python
-srb(width, height, quality=None, blur=None, radius=None, amount=None, threshold=None)
-```
-
-Parameter | value | Description
-----------|-------|------------
-width *(mandatory)*|Integer|The width constraint (pixels).
-height *(mandatory)*|Integer|The height constraint (pixels).
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
-blur *(optional)*|Float|The blur factor. vlaue > 1 applies a blur effect, and value < 1 applies a sharpening effect. ```default: 1```
-radius *(optional)*|Float|the unsharp mask radius. ```default: 0.50.```
-amount *(optional)*|Float|the unsharp mask amount. ```default: 0.20.```
-threshold *(optional)*|Float|the unsharp mask threshold. ```default: 0.00.```
-
-**Sample Request**
-```python
-print image.srb(width=480, height=240, quality=90).get_url()
-```
-would generate the URL:
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/srb/q_90,h_240,w_480/cat.jpg
-```
 
 ###### Canvas ######
 
@@ -323,7 +268,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/auto/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,auto_adj/cat.jpg
 ```
 
 ##### Image Filter Operation #####
@@ -377,7 +322,7 @@ image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/oil,neg/dog.png
 ```
 ***
 ```python
@@ -385,7 +330,7 @@ image.filter(neg, pixelate=108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/neg,pix_108/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/neg,pix_108/dog.png
 ```
 ***
 ```python
@@ -393,7 +338,7 @@ image.filter(usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/usm_100_30_217/dog.png
 ```
 ***
 ```python
@@ -401,7 +346,7 @@ image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/oil,neg,pix_125,usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/oil,neg,pix_125,usm_100_30_217/dog.png
 ```
 
 
@@ -461,14 +406,14 @@ http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477b
 
 ###### More Options ######
 
-**Progressive**
+**Baseline**
 
-When adding the "Progressive" option, the image would be displayed and loaded progressively, (instead of being desplayed only after it's fully loaded).
+When adding the "Baseline" option, the image would be desplayed only after it's fully loaded, instead of being displayed and loaded progressively by default.
 
 ```python
-image.progressive()
+image.baseline()
 ```
 would generate: (giving a its default values)
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/opt/prog/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/bl/dog.png
 ```
