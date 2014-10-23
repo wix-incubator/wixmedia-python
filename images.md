@@ -123,7 +123,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the values below. ```default: LanczosFilter```
+resize_filter *(optional)*|string|The resize filter to be used. One of the values below. ```default: LanczosFilter```
 alignment *(optional)*|string|The position pointing the place from which to start cropping  the picture. See optional values in the table below.```default: center```
 
 alignment optional values:
@@ -175,7 +175,7 @@ Parameter | value | Description
 ----------|-------|------------
 width *(mandatory)*|Integer|The width constraint (pixels).
 height *(mandatory)*|Integer|The height constraint (pixels).
-resize_filter *(optional)*|Integer|The resize filter to be used. One of the in the table below. ```default: LanczosFilter```
+resize_filter *(optional)*|string|The resize filter to be used. One of the in the table below. ```default: LanczosFilter```
 
 resize_filter optional values + descriptions (view links):
 
@@ -249,7 +249,7 @@ print image.fit(width=120, height=120) \
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120/adjust/con_-40,br_60/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/fit/h_120,w_120,con_-40,br_60/cat.jpg
 ```
 
 ###### Auto-Adjust ######
@@ -314,7 +314,7 @@ image.filter(blur=50)
 would generate the URL:
 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/filter/blur_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/blur_50/dog.png
 ```
 ***
 ```python
