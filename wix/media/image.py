@@ -147,8 +147,9 @@ class Image(object):
         return self
 
     def adjust(self, **props_dict):
-        for prop, value in props_dict.iteritems():
+        self.assert_cmd()
 
+        for prop, value in props_dict.iteritems():
             self.cmd_builder.add(**{Image.adjust_parameter_map[prop]: value})
 
         return self
