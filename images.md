@@ -272,6 +272,8 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
 ```
 
+*** 
+
 ###### Oil Filter ######
 
 Applies an oil paint effect on an image.
@@ -290,6 +292,8 @@ would generate the URL:
 ```
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,oil/cat.jpg
 ```
+
+*** 
 
 ###### Negative Filter ######
 
@@ -310,6 +314,8 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,neg/cat.jpg
 ```
 
+***
+
 ###### Pixelate Filter ######
 
 Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
@@ -328,6 +334,8 @@ would generate the URL:
 ```
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pix_20/cat.jpg
 ```
+
+***
 
 ###### Pixelate Faces Filter ######
 
@@ -348,6 +356,8 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pixfs_35/cat.jpg
 ```
 
+***
+
 ###### Blur Filter ######
 
 Applies a blur effect to the image. The parameter value indicates the blur in percents.
@@ -367,6 +377,8 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,blur_50/cat.jpg
 ```
 
+*** 
+
 ###### Sharpening Filter ######
 
 Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is a float number.
@@ -385,6 +397,8 @@ would generate the URL:
 ```
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,shrp_0.70/cat.jpg
 ```
+
+***
 
 ###### Unsharp Mask Filter ######
 
@@ -412,6 +426,8 @@ would generate the URL:
 ```
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
 ```
+
+*** 
 
 **Multiple Filters Sample Requests**
 ```python
