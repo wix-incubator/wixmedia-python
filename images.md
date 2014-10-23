@@ -314,7 +314,7 @@ image.filter(blur=50)
 would generate the URL:
 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/blur_50/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,blur_50/dog.png
 ```
 ***
 ```python
@@ -322,7 +322,7 @@ image.filter(oil, neg)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/oil,neg/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg/dog.png
 ```
 ***
 ```python
@@ -330,7 +330,7 @@ image.filter(neg, pixelate=108)
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/neg,pix_108/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,neg,pix_108/dog.png
 ```
 ***
 ```python
@@ -338,7 +338,7 @@ image.filter(usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,usm_100_30_217/dog.png
 ```
 ***
 ```python
@@ -346,7 +346,7 @@ image.filter(oil, neg, pixelate=125, usm(radius=100, amount=30, thershold=217))
 ```
 would generate: 
 ```
-http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/oil,neg,pix_125,usm_100_30_217/dog.png
+http://media.wixapps.net/goog-098152434167072483196/images/ae1d86b24054482f8477bfbf2d426936/<operation>,oil,neg,pix_125,usm_100_30_217/dog.png
 ```
 
 
