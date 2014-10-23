@@ -26,7 +26,7 @@ The code snippet above gives the following image id as output:
 ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
 ```
 
-__Note__: Wix Media Services supports the followoing images file formats: JPEG, GIF and PNG.
+__Note__: Wix Media Services supports the following images file formats: JPEG, GIF and PNG.
 
 ### Rendering Images ###
 
