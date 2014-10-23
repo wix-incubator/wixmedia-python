@@ -261,7 +261,7 @@ Performs a general auto-enhancement to an image.
 auto_adjust()
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .auto_adjust() \
@@ -280,7 +280,7 @@ Applies an oil paint effect on an image.
 oil()
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .oil() \
@@ -299,7 +299,7 @@ Negates the colors of the image.
 neg()
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .neg() \
@@ -318,7 +318,7 @@ Applies a pixelate effect to the image. The parameter value is the width of pixe
 pixelate(value)
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .pixelate(20) \
@@ -337,7 +337,7 @@ Applies a pixelate effect to faces in the image. The parameter value is the widt
 pixelate_faces(value)
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .pixelate_faces(35) \
@@ -356,7 +356,7 @@ Applies a blur effect to the image. The parameter value indicates the blur in pe
 blur(value)
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .blur(50) \
@@ -375,7 +375,7 @@ Applies a sharpening filter on the image, using the radius parameter. please not
 sharpen(radius)
 ```
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .sharpen(0.70) \
@@ -402,7 +402,7 @@ radius|sharpening mask radius|0 to image size
 amount|sharpening mask amount|0 to 100
 threshold|shapening mask threshold|0 to 255
 
-**Sample Request**
+*Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
            .unsharp(radius=0.4, amount=0.2, threshold=0.0) \
@@ -413,7 +413,7 @@ would generate the URL:
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
 ```
 
-**Sample Requests**
+**Multiple Filters Sample Requests**
 ```python
 image.filter(oil, neg)
 ```
