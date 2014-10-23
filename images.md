@@ -515,7 +515,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 { "error": 0, "error_description": "success", "wm_filepath": "ggl-685734655894940532967/images/88dfc1cb1babd66a7bc635dbb599d94d/dog.png" }
 ```
 
-###### More Options ######
+##### More Options #####
 
 **JPEG Options**
 
