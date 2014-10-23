@@ -274,7 +274,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 *** 
 
-###### Oil Filter ######
+##### Oil Filter #####
 
 Applies an oil paint effect on an image.
 
@@ -295,7 +295,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 *** 
 
-###### Negative Filter ######
+##### Negative Filter #####
 
 Negates the colors of the image.
 
@@ -316,7 +316,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 ***
 
-###### Pixelate Filter ######
+##### Pixelate Filter #####
 
 Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
 
@@ -337,7 +337,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 ***
 
-###### Pixelate Faces Filter ######
+##### Pixelate Faces Filter #####
 
 Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
 
@@ -358,7 +358,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 ***
 
-###### Blur Filter ######
+##### Blur Filter #####
 
 Applies a blur effect to the image. The parameter value indicates the blur in percents.
 
@@ -379,7 +379,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 *** 
 
-###### Sharpening Filter ######
+##### Sharpening Filter #####
 
 Applies a sharpening filter on the image, using the radius parameter. please note that the radius’ value is a float number.
 
@@ -400,7 +400,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 ***
 
-###### Unsharp Mask Filter ######
+##### Unsharp Mask Filter #####
 
 The Unsharp Mask, applies the filter using radius, amount & threshold parameters. (see table below)
 
@@ -457,6 +457,7 @@ would generate:
 ```
 http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
 ```
+
 
 
 ##### Image Watermark Operation #####
