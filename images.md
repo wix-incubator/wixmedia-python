@@ -77,7 +77,7 @@ The following image transformations are available (one per image maipulation req
 Resizes the image canvas, filling the width and height boundaries and crops any excess image data. The resulting image will match the width and height constraints without scaling the image.
 
 ```python
-canvas(width, height, alignment=None)
+canvas(width, height, alignment=None, ext_color=None)
 ```
 
 Parameter | value | Description
@@ -109,7 +109,7 @@ print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff')
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/a_fs,h_240,w_480, c_ffffff/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/h_240,w_480,a_fs,c_ffffff/cat.jpg
 ```
 
 ###### Fill ######
@@ -161,7 +161,7 @@ print image.fill(width=480, height=240, alignment='top-left').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/w_480,h_240,a_tl/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/h_240,w_480/cat.jpg
 ```
 
 ###### Fit ######
@@ -196,7 +196,7 @@ print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,f_25/cat.jpg
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,rf_25/cat.jpg
 ```
 
 ###### Crop ######
