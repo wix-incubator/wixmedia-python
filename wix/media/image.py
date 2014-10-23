@@ -71,7 +71,7 @@ class Image(object):
         if self.cmd_builder is None:
             raise MissingCmd("Missing transformation command. Original image cannot be used." % self.transform_command)
 
-    def canvas(self, width, height, alignment=None):
+    def canvas(self, width, height, alignment=None, ext_color=None):
         """
         default values: alignment="center"
         """
@@ -81,8 +81,11 @@ class Image(object):
 
         self.cmd_builder = CmdBuilder(Image.COMMAND_CANVAS, w=width, h=height)
 
-        if alignment:
+        if alignment is not None:
             self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+
+        if ext_color is not None:
+            self.cmd_builder.add(c=ext_color)
 
         return self
 
@@ -107,8 +110,9 @@ class Image(object):
         if resize_filter is not None:
             self.cmd_builder.add(rf=resize_filter)
 
-        if alignment is not None:
-            self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+        # not supported yet...
+        #  if alignment is not None:
+        #     self.cmd_builder.add(a=Image.alignment_value_map[alignment])
 
         return self
 
@@ -127,7 +131,7 @@ class Image(object):
 
         return self
 
-    def watermark(self, wm_path, opacity=None, alignment=None, scale=None):
+    def watermark(self, wm_id, opacity=None, alignment=None, scale=None):
         """
         default values: opacity=100, alignment='center', scale=0
         """
@@ -135,7 +139,7 @@ class Image(object):
         if self.cmd_builder:
             self.commands.append(self.cmd_builder.build_cmd())
 
-        self.cmd_builder = CmdBuilder(Image.COMMAND_WATERMARK, fl=urllib.quote_plus(wm_path))
+        self.cmd_builder = CmdBuilder(Image.COMMAND_WATERMARK, wmid=urllib.quote_plus(wm_id))
 
         if opacity is not None:
             self.cmd_builder.add(op=opacity)

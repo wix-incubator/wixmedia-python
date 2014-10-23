@@ -24,7 +24,7 @@ print image.fit(width=120, height=120) \
 ############
 
 image.reset()
-print image.canvas(width=480, height=240, alignment='faces').get_url()
+print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff').get_url()
 
 image.reset()
 print image.fill(width=480, height=240, alignment='top-left').get_url()
@@ -52,5 +52,5 @@ print image.fit(width=120, height=120) \
            .get_url()
 
 image.reset()
-wm_path = 'ggl-685734655894940532967/images/128766b24054482f8477bfbf2d426936/wm.jpg'
-print image.watermark(wm_path=wm_path, opacity=45, alignment='top-left', scale=0).get_url()
+wm_id = 'ggl-685734655894940532967/images/128766b24054482f8477bfbf2d426936/wm.jpg'
+print image.watermark(wm_id=wm_id, opacity=45, alignment='top-left', scale=0).get_url()
