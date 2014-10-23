@@ -146,7 +146,6 @@ class Image(object):
 
         return self
 
-
     def adjust(self, **props_dict):
         for prop, value in props_dict.iteritems():
 
