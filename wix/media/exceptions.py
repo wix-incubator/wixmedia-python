@@ -8,3 +8,7 @@ class UploadError(GeneralError):
 
 class CmdNotAllowed(GeneralError):
     pass
+
+
+class MissingCmd(GeneralError):
+    pass
