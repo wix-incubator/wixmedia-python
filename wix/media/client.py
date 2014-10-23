@@ -6,7 +6,7 @@ class Client(object):
 
     METADATA_SERVICE_HOST         = 'mediacloud.wix.com'
     WIX_MEDIA_UPLOAD_URL_ENDPOINT = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
-    IMAGE_SERVICE                 = 'prospero.wixapps.net'
+    IMAGE_SERVICE                 = 'media.wixapps.net'
 
     def __init__(self, api_key=None, api_secret=None):
         self.api_key    = api_key
