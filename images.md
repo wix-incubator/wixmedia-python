@@ -157,7 +157,7 @@ resize_filter optional values + descriptions (view links):
 *Sample Request:*
 
 ```python
-print image.fill(width=480, height=240, alignment='top-left').get_url()
+print image.fill(width=480, height=240).get_url()
 ```
 would generate the URL:
 ```
