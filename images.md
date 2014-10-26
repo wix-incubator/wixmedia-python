@@ -230,7 +230,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 Applies an adjustment to an image.
 
 ```python
-adjust(**props_dict)
+adjust(brightness=None, contrast=None, saturation=None, hue=None):
 ```
 the parameters may be one or more of the following options:
 
