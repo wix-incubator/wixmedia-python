@@ -240,7 +240,6 @@ brightness *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
 contrast *(optional)*|Integer (%)|contrast ```value between -100 and 100```
 saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 
 *Sample Request:*
 ```python
