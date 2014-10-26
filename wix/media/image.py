@@ -152,11 +152,20 @@ class Image(object):
 
         return self
 
-    def adjust(self, **props_dict):
+    def adjust(self, brightness=None, contrast=None, saturation=None, hue=None):
+
         self.assert_cmd()
 
+        props_dict = {
+            'brightness': brightness,
+            'contrast': contrast,
+            'saturation': saturation,
+            'hue': hue
+        }
+
         for prop, value in props_dict.iteritems():
-            self.cmd_builder.add(**{Image.adjust_parameter_map[prop]: value})
+            if value is not None:
+                self.cmd_builder.add(**{Image.adjust_parameter_map[prop]: value})
 
         return self
 
