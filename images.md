@@ -230,7 +230,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 Applies an adjustment to an image.
 
 ```python
-adjust(**props_dict)
+adjust(brightness=None, contrast=None, saturation=None, hue=None):
 ```
 the parameters may be one or more of the following options:
 
@@ -240,7 +240,6 @@ brightness *(optional)*|Integer (%)|brightness. ```value between -100 and 100```
 contrast *(optional)*|Integer (%)|contrast ```value between -100 and 100```
 saturation *(optional)*|Integer (%)|saturation ```value between -100 and 100```
 hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
-quality *(optional)*|Integer (%)|The quality constraint if JPEG image. Values are between 0 and 100. ```default: 75```
 
 *Sample Request:*
 ```python
