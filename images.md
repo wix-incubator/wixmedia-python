@@ -495,7 +495,7 @@ image.watermark(wm_id='ggl-685734655894940532967%2Fimages%2F128766b24054482f8477
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/wmid_ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg, op_45,scl_0/dog.png
+http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/wmid_ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg,op_45,scl_0/dog.png
 ```
 and:
 ```python
