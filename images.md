@@ -426,7 +426,8 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 
 **Multiple Filters Sample Requests**
 ```python
-image.filter(oil, neg)
+image.oil()
+     .neg()
 ```
 would generate: 
 ```
