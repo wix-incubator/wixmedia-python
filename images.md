@@ -57,7 +57,7 @@ http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bf
 __Note__: 
 All rendered URLs (as shown in the previous *img* tag) conform to the following structure:
 ```
-http://host.com/user-id/media-type/file-id/version/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
+http://host/user-id/media-type/file-id/version/operation/params(p_value, comma-separated),manipulations(p_value, comma-separated)/filename.ext
 ```
 Using this python package eliminates the need to manually construct such urls. For more information about the URLs browse [Wix Media Images RESTful API](http://media.wixapps.net/playground/docs/images_restfull_api.html) documentation.
 
