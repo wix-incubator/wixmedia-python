@@ -96,7 +96,7 @@ class WixHmacAuthHandler(HmacKeys):
     """
 
     WixAuthService  = "WIX"
-    WixHeaderPrefix = "wix-"
+    WixHeaderPrefix = "x-wix-"
 
     def __init__(self, access_key, secret_key):
         HmacKeys.__init__(self, access_key, secret_key)
@@ -108,8 +108,8 @@ class WixHmacAuthHandler(HmacKeys):
 
     def add_auth(self, method="POST", path="/", headers={}, **kwargs):
 
-        if 'Date' not in headers:
-            headers['Date'] = formatdate(usegmt=True)
+        # if 'Date' not in headers:
+        #     headers['Date'] = formatdate(usegmt=True)
 
         string_to_sign = self.canonical_string(method, path, headers)
         b64_hmac = self.sign_string(string_to_sign)
@@ -130,21 +130,13 @@ class WixHmacAuthHandler(HmacKeys):
         interesting_headers = {}
         for key in headers:
             lk = key.lower()
-            if headers[key] is not None and \
-                    (lk in ['content-md5', 'content-type', 'date'] or
-                     lk.startswith(WixHmacAuthHandler.WixHeaderPrefix)):
+            if headers[key] is not None and lk.startswith(WixHmacAuthHandler.WixHeaderPrefix):
                 interesting_headers[lk] = str(headers[key]).strip()
-
-        # these keys get empty strings if they don't exist
-        if 'content-type' not in interesting_headers:
-            interesting_headers['content-type'] = ''
-        if 'content-md5' not in interesting_headers:
-            interesting_headers['content-md5'] = ''
 
         # if you're using expires for query string auth, then it trumps date
         # (and provider.date_header)
-        if expires:
-            interesting_headers['date'] = str(expires)
+        # if expires:
+        #     interesting_headers['date'] = str(expires)
 
         sorted_header_keys = sorted(interesting_headers.keys())
 

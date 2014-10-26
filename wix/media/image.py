@@ -216,7 +216,7 @@ class Image(object):
 
         return self
 
-    def quality(self, value):
+    def quality(self, value=75):
         self.assert_cmd()
         self.cmd_builder.add(**{'q': value})
 

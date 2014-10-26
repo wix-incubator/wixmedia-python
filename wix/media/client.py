@@ -1,4 +1,11 @@
-import urlparse
+import json
+import os
+import urllib2
+from urlparse import urlparse
+
+import requests
+import time
+
 from .exceptions import GeneralError
 import image
 import auth
@@ -19,53 +26,67 @@ class Client(object):
     def get_image_from_id(image_id):
         return image.Image(image_id=image_id, service_host=Client.IMAGE_SERVICE)
 
-    def upload_image_from_path(self, file_path):
-
+    def _validate_auth_credentials(self):
         if not self.api_key or not self.api_secret:
             raise GeneralError('invalid authorization parameters: initialize api key and secret')
 
-        auth_handler = auth.WixHmacAuthHandler(self.api_key, self.api_secret)
-        headers = {}
-        headers = auth_handler.add_auth(method="GET", path=Client.WIX_MEDIA_UPLOAD_URL_PATH, headers=headers)
-        # Get URL for uploading file
-        metadata = self._upload_to_pm_from_path(file_path, headers)
+    def upload_image_from_path(self, file_path):
+        self._validate_auth_credentials()
 
-        metadata['file_url'] = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+        with open(file_path, 'r') as fp:
+            metadata = self._upload_to_pm_from_stream(fp, os.path.basename(file_path), "picture")
+            return image.Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE)
 
-        # Upload file
-        headers = auth_handler.add_auth(method="GET", path=metadata['file_url'], headers=headers)
-        # call function which implements actual POST and pass new 'headers' to it
-        # ...
+    def upload_file_from_stream(self, fp, file_name):
+        self._validate_auth_credentials()
 
+        metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="picture")
 
         return image.Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE)
 
     def upload_audio_from_path(self, file_path):
+        self._validate_auth_credentials()
 
-        if not self.api_key or not self.api_secret:
-            raise GeneralError('invalid authorization parameters: initialize api key and secret')
+        raise NotImplementedError()
 
     def upload_video_from_path(self, file_path):
+        self._validate_auth_credentials()
 
-        if not self.api_key or not self.api_secret:
-            raise GeneralError('invalid authorization parameters: initialize api key and secret')
+        raise NotImplementedError()
 
-    def upload_file_from_stream(self, fp, filename):
+    def _get_upload_url(self):
+        auth_handler = auth.WixHmacAuthHandler(self.api_key, self.api_secret)
 
-        if not self.api_key or not self.api_secret:
-            raise GeneralError('invalid authorization parameters: initialize api key and secret')
+        headers = {
+            'x-wix-upload-nonce': os.urandom(6).encode("hex"),
+            'x-wix-upload-ts':    str(time.time())
+        }
+
+        headers      = auth_handler.add_auth(method="GET", path=Client.WIX_MEDIA_UPLOAD_URL_PATH, headers=headers)
+
+        opener       = urllib2.build_opener(urllib2.HTTPHandler)
+        request      = urllib2.Request(Client.WIX_MEDIA_UPLOAD_URL, headers=headers)
+        response     = opener.open(request)
+
+        return json.loads(response.read())
+
+    def _upload_to_pm_from_stream(self, fp, file_name, media_type):
+
+        # Get URL for uploading file
+        metadata   = self._get_upload_url()
+        upload_url = metadata['upload_url']
+
+        files   = {'file': (file_name, fp)}
+        data    = {'media_type': media_type}
+        headers = {
+            'x-wix-orig-upload-url': urlparse(upload_url).path,
+            'x-wix-upload-nonce':    os.urandom(6).encode("hex"),
+            'x-wix-upload-ts':       str(time.time())
+        }
 
         auth_handler = auth.WixHmacAuthHandler(self.api_key, self.api_secret)
-        headers = {}
-        headers = auth_handler.add_auth(method="GET", path=Client.WIX_MEDIA_UPLOAD_URL_PATH, headers=headers)
 
-        metadata = self._upload_to_pm_from_stream(fp, filename, headers)
-        metadata['file_url'] = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+        headers = auth_handler.add_auth("POST", urlparse(upload_url).path, headers)
+        response = requests.post(upload_url, files=files, data=data, headers=headers)
 
-        return image.Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE)
-
-    def _upload_to_pm_from_path(self, file_path, headers):
-        return dict(uri='uri')
-
-    def _upload_to_pm_from_stream(self, fp, file_name, headers):
-        return dict(uri='uri')
+        return json.loads(response.content)[0]

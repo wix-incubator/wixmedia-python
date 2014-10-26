@@ -26,7 +26,7 @@ class RenderImagesHandler(webapp2.RequestHandler):
         client = media.Client()
         image  = client.get_image_from_id(image_id)
 
-        return image.srz(width=120, height=120).get_url()
+        return image.fill(width=120, height=120).unsharp().quality().get_url()
 
 
 app = webapp2.WSGIApplication([
