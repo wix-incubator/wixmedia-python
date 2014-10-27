@@ -1,7 +1,8 @@
 from wix import media
 
-client = media.Client(api_key="my_key", api_secret="my_secret")
-image  = client.upload_image_from_path('/files/images/cat.jpg')
+# client = media.Client(api_key="MY_API_KEY", api_secret="MY_API_SECRET")
+client = media.Client(api_key="wix-e66d8201-ec1c-49ac-88b0-afbe9928bd2d", api_secret="93c4c1db05a5420ca3d11a4d78d75581")
+image  = client.upload_image_from_path('/Users/Slava_Goverdovsky/Pictures/woman_with_blue_eyes_new.jpg')
 
 image_id = image.get_id()
 print image_id
@@ -10,7 +11,7 @@ print image_id
 
 from wix import media
 
-image_id = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+# image_id = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
 
 client = media.Client()
 image  = client.get_image_from_id(image_id)
