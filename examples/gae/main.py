@@ -10,8 +10,9 @@ class RenderImagesHandler(webapp2.RequestHandler):
 
         # Image id's can be fetched from datastore ...
         image_ids = [
-            'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg',
-            'ggl-685734655894940532967/images/c074a4a8ea854ee7b5b893ce2a0c7361/dog.jpg'
+            'wixmedia-samples/images/6f113c0b2b274ee68a125263ce1b0b44/cat.jpg',
+            'wixmedia-samples/images/b0f7a02a37a341d9bbb68c3dfbdcf887/dog.jpg',
+            'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
         ]
 
         context = {
