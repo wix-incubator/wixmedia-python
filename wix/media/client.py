@@ -12,16 +12,18 @@ from wix.media import http_utils
 
 AUTH_ALGORITHM = "MCLOUDTOKEN"
 
+
 def retry_auth(func):
     @functools.wraps(func)
     def _func(client, *args, **kwargs):
 
-        got_result = False
+        got_result  = False
         retry_count = 0
+        result      = None
 
         while not got_result:
             try:
-                res = func(client, *args, **kwargs)
+                result = func(client, *args, **kwargs)
                 got_result = True
             except urllib2.HTTPError as e:
                 if e.code == 403:
@@ -33,7 +35,7 @@ def retry_auth(func):
                 else:
                     raise UploadError('failed to upload file: http_status=%d, reason=%s' % (e.code, e.reason))
 
-        return res
+        return result
 
     return _func
 
