@@ -1,21 +1,16 @@
 from wix import media
 
 client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
-image  = client.upload_image_from_path('/path/to/image.jpg')
 
-image_id = image.get_id()
-print image_id
+try:
+    image  = client.upload_image_from_path('/path/to/image.jpg')
+except:
+    image_id = 'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
+    image  = client.get_image_from_id(image_id)
 
-############
+print image.get_id()
 
-from wix import media
-
-image_id = 'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
-
-client = media.Client()
-image  = client.get_image_from_id(image_id)
-
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .unsharp() \
            .oil() \
            .adjust(brightness=10, contrast=-15) \
