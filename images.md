@@ -293,7 +293,7 @@ http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011e
 
 #### Pixelate Filter ####
 
-Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
+Applies a pixelate effect to the image. The parameter value is the width of pixelation squares (in pixels).
 
 ```python
 pixelate(value)
@@ -338,6 +338,12 @@ Applies a sharpening filter on the image, using the radius parameter. please not
 ```python
 sharpen(radius)
 ```
+parameters:
+
+Value | Description | Valid values
+------|-------------|-------------
+radius|sharpening mask radius|0 to image size
+
 
 *Sample Request:*
 ```python
@@ -360,7 +366,7 @@ The Unsharp Mask, applies the filter using radius, amount & threshold parameters
 unsharp(radius=0.5, amount=0.2, threshold=0.0)
 ```
 
-optional values:
+optional parameters:
 
 Value | Description | Valid values
 ------|-------------|-------------
@@ -380,6 +386,33 @@ http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011e
 ```
 
 *** 
+
+#### JPEG Image Quality ####
+
+Sets JPEG quality.
+
+```python
+quality(value=75)
+```
+
+parameters:
+
+Value | Description | Valid values
+------|-------------|-------------
+quality|Quality of the image, values between 0 and 100.```default: 75```
+
+*Sample Request:*
+```python
+print image.fit(width=420, height=420) \
+           .quality(35) \
+           .get_url()
+```
+would generate the URL: 
+```
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/parrot.jpg
+```
+
+
 
 **Multiple Filters Sample Requests**
 ```python
