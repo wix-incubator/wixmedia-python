@@ -77,7 +77,7 @@ class HmacKeys(object):
     def sign_string(self, string_to_sign):
         new_hmac = self._get_hmac()
         new_hmac.update(string_to_sign)
-        return base64.encodestring(new_hmac.digest()).strip()
+        return base64.urlsafe_b64encode(new_hmac.digest()).strip()
 
     def __getstate__(self):
         pickled_dict = copy.copy(self.__dict__)
@@ -138,18 +138,18 @@ class WixHmacAuthHandler(HmacKeys):
         # if expires:
         #     interesting_headers['date'] = str(expires)
 
-        sorted_header_keys = sorted(interesting_headers.keys())
-
         buf = "%s\n" % method
+
+        # don't include anything after the first ? in the resource...
+        t = path.split('?')
+        buf += t[0]
+
+        sorted_header_keys = sorted(interesting_headers.keys())
         for key in sorted_header_keys:
             val = interesting_headers[key]
             if key.startswith(WixHmacAuthHandler.WixHeaderPrefix):
                 buf += "%s:%s\n" % (key, val)
             else:
                 buf += "%s\n" % val
-
-        # don't include anything after the first ? in the resource...
-        t = path.split('?')
-        buf += t[0]
 
         return buf
