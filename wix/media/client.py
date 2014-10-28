@@ -85,7 +85,7 @@ class Client(object):
                 raise GeneralError('Invalid authorization algorithm')
 
         except urllib2.HTTPError as e:
-            raise UploadError(e.reason())
+            raise UploadError(e.reason)
 
     def upload_image_from_path(self, file_path):
         with open(file_path, 'r') as fp:
