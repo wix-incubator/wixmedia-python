@@ -79,7 +79,7 @@ class WixHmacAuthHandler(HmacKeys):
 
         # don't include anything after the first ? in the resource...
         t = path.split('?')
-        buf += t[0]
+        buf += '%s\n' % t[0]
 
         sorted_header_keys = sorted(interesting_headers.keys())
         for key in sorted_header_keys:
