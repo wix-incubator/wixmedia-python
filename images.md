@@ -244,33 +244,13 @@ hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
 *Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
-           .adjust(brightness=60, contrast=-40) \
+           .adjust(brightness=10, contrast=-15) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,con_-40,br_60/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_120,w_120,con_-15,br_10/parrot.jpg
 ```
-
-##### Auto-Adjust #####
-
-Performs a general auto-enhancement to an image.
-
-```python
-auto_adjust()
-```
-
-*Sample Request:*
-```python
-print image.fit(width=120, height=120) \
-           .auto_adjust() \
-           .get_url()
-```
-would generate the URL: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
-```
-
 
 #### Oil Filter ####
 
@@ -282,15 +262,14 @@ oil()
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .oil() \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,oil/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,oil/parrot.jpg
 ```
-
 
 #### Negative Filter ####
 
@@ -302,13 +281,13 @@ neg()
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .neg() \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,neg/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,neg/parrot.jpg
 ```
 
 
@@ -322,35 +301,14 @@ pixelate(value)
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .pixelate(20) \
+print image.fit(width=420, height=420) \
+           .pixelate(5) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pix_20/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,pix_5/parrot.jpg
 ```
-
-
-#### Pixelate Faces Filter ####
-
-Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
-
-```python
-pixelate_faces(value)
-```
-
-*Sample Request:*
-```python
-print image.fit(width=120, height=120) \
-           .pixelate_faces(35) \
-           .get_url()
-```
-would generate the URL: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pixfs_35/cat.jpg
-```
-
 
 #### Blur Filter ####
 
@@ -362,13 +320,13 @@ blur(value)
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .blur(50) \
+print image.fit(width=420, height=420) \
+           .blur(5) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,blur_50/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,blur_5/parrot.jpg
 ```
 
 *** 
@@ -383,13 +341,13 @@ sharpen(radius)
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .sharpen(0.70) \
+print image.fit(width=420, height=420) \
+           .sharpen(0.8) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,shrp_0.70/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,shrp_0.8/parrot.jpg
 ```
 
 ***
@@ -412,13 +370,13 @@ threshold|shapening mask threshold|0 to 255
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .unsharp(radius=0.4, amount=0.2, threshold=0.0) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.40_0.20_0.00/parrot.jpg
 ```
 
 *** 
