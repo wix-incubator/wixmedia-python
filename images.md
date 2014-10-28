@@ -385,67 +385,6 @@ would generate the URL:
 http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.40_0.20_0.00/parrot.jpg
 ```
 
-*** 
-
-#### JPEG Image Quality ####
-
-Sets JPEG quality.
-
-```python
-quality(value=75)
-```
-
-parameters:
-
-Value | Description | Valid values
-------|-------------|-------------
-quality|Quality of the image, values between 0 and 100.```default: 75```
-
-*Sample Request:*
-```python
-print image.fit(width=420, height=420) \
-           .quality(35) \
-           .get_url()
-```
-would generate the URL: 
-```
-http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/parrot.jpg
-```
-
-
-
-**Multiple Filters Sample Requests**
-```python
-image.oil()
-     .neg()
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
-```
-***
-```python
-image.neg()
-     .pixelate(108)
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
-```
-***
-```python
-image.oil()
-     .neg()
-     .pixelate(125) 
-     .sharpen(0.40)
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
-```
-
-
-
 #### Image Watermark Operation ####
 
 Enables users to apply watermark such as copyright notice in order to protect their images. 
@@ -512,18 +451,21 @@ quality|Integer (%)|Quality of the image, values between 0 and 100
 
 *Sample Requests:*
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.baseline()
+print image.fit(width=420, height=420) \
+           .baseline() \
+           .get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,bl/dog.png
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,bl/parrot.jpg
 ```
 and:
 ```python
-image.quality(0.70)
+print image.fit(width=420, height=420) \
+           .quality(35) \
+           .get_url()
 ```
 would generate: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,q_0.70/dog.png
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/parrot.jpg
 ```
