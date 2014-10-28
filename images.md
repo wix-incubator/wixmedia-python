@@ -14,7 +14,7 @@ It’s easy to upload images using the Wix Media Python library. For example:
 from wix import media
 
 client = media.Client(api_key="my_key", api_secret="my_secret")
-image  = client.upload_image_from_path('/files/images/cat.jpg')
+image  = client.upload_image_from_path('/files/images/parrot.jpg')
 
 image_id = image.get_id()
 print image_id
@@ -23,7 +23,7 @@ print image_id
 
 The code snippet above gives the following image-id as output:
 ```
-ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
+wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg
 ```
 
 __Note__: Wix Media Services supports the following images file formats: JPEG, GIF and PNG.
@@ -36,22 +36,22 @@ For example:
 ```python
 from wix import media
 
-image_id = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+image_id = 'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
 
 client = media.Client()
 image  = client.get_image_from_id(image_id)
 
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .unsharp() \
            .oil() \
-           .adjust(brightness=60, contrast=-40) \
+           .adjust(brightness=10, contrast=-15) \
            .get_url()
 ```
 
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.50_0.20_0.00,oil,con_-15,br_10/parrot.jpg
 ```
 ----------------
 __Note__: 
@@ -105,11 +105,11 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 *Sample Request:*
 ```python
-print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff').get_url()
+print image.canvas(width=480, height=240, ext_color='ffffff').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/h_240,w_480,a_fs,c_ffffff/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/canvas/h_240,w_480,c_ffffff/parrot.jpg
 ```
 
 ##### Fill #####
@@ -161,7 +161,7 @@ print image.fill(width=480, height=240).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/h_240,w_480/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fill/h_240,w_480/parrot.jpg
 ```
 
 ##### Fit #####
@@ -196,7 +196,7 @@ print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,rf_25/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_240,w_480,rf_25/parrot.jpg
 ```
 
 ##### Crop #####
@@ -216,11 +216,11 @@ height *(mandatory)*|Integer|The height constraint (pixels).
 
 *Sample Request:*
 ```python
-print image.crop(x=15, y=40, width=100, height=100).get_url()
+print image.crop(x=1900, y=800, width=800, height=900).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/crop/y_40,h_100,w_100,x_15/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/crop/h_900,w_800,x_1900,y_800/parrot.jpg
 ```
 
 #### Image Adjustment Operation ####
