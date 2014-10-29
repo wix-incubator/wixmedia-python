@@ -36,15 +36,16 @@ The following example shows server-to-server image upload:
 ```python
 from wix import media
 
-client = media.Client(api_key="my_key", api_secret="my_secret")
-image  = client.upload_image_from_path('/files/images/cat.jpg')
+client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+image  = client.upload_image_from_path('/files/images/parrot.jpg')
 
-print image.get_id()
+image_id = image.get_id()
+print image_id
 ```
 
 The code snippet above gives the following image id as output:
 ```
-ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
+wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg
 ```
 
 ### Rendering Media ###
