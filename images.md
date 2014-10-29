@@ -13,7 +13,7 @@ It’s easy to upload images using the Wix Media Python library. For example:
 ```python
 from wix import media
 
-client = media.Client(api_key="my_key", api_secret="my_secret")
+client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
 image  = client.upload_image_from_path('/files/images/parrot.jpg')
 
 image_id = image.get_id()
