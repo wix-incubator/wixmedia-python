@@ -13,17 +13,16 @@ It’s easy to upload images using the Wix Media Python library. For example:
 ```python
 from wix import media
 
-client = media.Client(api_key="my_key", api_secret="my_secret")
-image  = client.upload_image_from_path('/files/images/cat.jpg')
+client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+image  = client.upload_image_from_path('/files/images/parrot.jpg')
 
 image_id = image.get_id()
 print image_id
-
 ```
 
 The code snippet above gives the following image-id as output:
 ```
-ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg
+wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg
 ```
 
 __Note__: Wix Media Services supports the following images file formats: JPEG, GIF and PNG.
@@ -36,22 +35,22 @@ For example:
 ```python
 from wix import media
 
-image_id = 'ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/cat.jpg'
+image_id = 'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
 
 client = media.Client()
 image  = client.get_image_from_id(image_id)
 
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .unsharp() \
            .oil() \
-           .adjust(brightness=60, contrast=-40) \
+           .adjust(brightness=10, contrast=-15) \
            .get_url()
 ```
 
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.50_0.20_0.00,oil,con_-40,br_60/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.50_0.20_0.00,oil,con_-15,br_10/parrot.jpg
 ```
 ----------------
 __Note__: 
@@ -105,11 +104,11 @@ faces|Focus on all faces in the image. Detects multiple faces and centers on the
 
 *Sample Request:*
 ```python
-print image.canvas(width=480, height=240, alignment='faces', ext_color='ffffff').get_url()
+print image.canvas(width=480, height=240, ext_color='ffffff').get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/canvas/h_240,w_480,a_fs,c_ffffff/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/canvas/h_240,w_480,c_ffffff/parrot.jpg
 ```
 
 ##### Fill #####
@@ -161,7 +160,7 @@ print image.fill(width=480, height=240).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fill/h_240,w_480/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fill/h_240,w_480/parrot.jpg
 ```
 
 ##### Fit #####
@@ -196,7 +195,7 @@ print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_240,w_480,rf_25/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_240,w_480,rf_25/parrot.jpg
 ```
 
 ##### Crop #####
@@ -216,11 +215,11 @@ height *(mandatory)*|Integer|The height constraint (pixels).
 
 *Sample Request:*
 ```python
-print image.crop(x=15, y=40, width=100, height=100).get_url()
+print image.crop(x=1900, y=800, width=800, height=900).get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/crop/y_40,h_100,w_100,x_15/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/crop/h_900,w_800,x_1900,y_800/parrot.jpg
 ```
 
 #### Image Adjustment Operation ####
@@ -244,33 +243,13 @@ hue *(optional)*|Integer (%)|hue ```value between -100 and 100```
 *Sample Request:*
 ```python
 print image.fit(width=120, height=120) \
-           .adjust(brightness=60, contrast=-40) \
+           .adjust(brightness=10, contrast=-15) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,con_-40,br_60/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_120,w_120,con_-15,br_10/parrot.jpg
 ```
-
-##### Auto-Adjust #####
-
-Performs a general auto-enhancement to an image.
-
-```python
-auto_adjust()
-```
-
-*Sample Request:*
-```python
-print image.fit(width=120, height=120) \
-           .auto_adjust() \
-           .get_url()
-```
-would generate the URL: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,auto_adj/cat.jpg
-```
-
 
 #### Oil Filter ####
 
@@ -282,15 +261,14 @@ oil()
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .oil() \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,oil/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,oil/parrot.jpg
 ```
-
 
 #### Negative Filter ####
 
@@ -302,19 +280,19 @@ neg()
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .neg() \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,neg/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,neg/parrot.jpg
 ```
 
 
 #### Pixelate Filter ####
 
-Applies a pixelate effect to the image. The parameter value is the width of pixelation squares, (in pixels).
+Applies a pixelate effect to the image. The parameter value is the width of pixelation squares (in pixels).
 
 ```python
 pixelate(value)
@@ -322,35 +300,14 @@ pixelate(value)
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .pixelate(20) \
+print image.fit(width=420, height=420) \
+           .pixelate(5) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pix_20/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,pix_5/parrot.jpg
 ```
-
-
-#### Pixelate Faces Filter ####
-
-Applies a pixelate effect to faces in the image. The parameter value is the width of pixelation squares, (in pixels).
-
-```python
-pixelate_faces(value)
-```
-
-*Sample Request:*
-```python
-print image.fit(width=120, height=120) \
-           .pixelate_faces(35) \
-           .get_url()
-```
-would generate the URL: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,pixfs_35/cat.jpg
-```
-
 
 #### Blur Filter ####
 
@@ -362,13 +319,13 @@ blur(value)
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .blur(50) \
+print image.fit(width=420, height=420) \
+           .blur(5) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,blur_50/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,blur_5/parrot.jpg
 ```
 
 *** 
@@ -380,16 +337,22 @@ Applies a sharpening filter on the image, using the radius parameter. please not
 ```python
 sharpen(radius)
 ```
+parameters:
+
+Value | Description | Valid values
+------|-------------|-------------
+radius|sharpening mask radius|0 to image size
+
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
-           .sharpen(0.70) \
+print image.fit(width=420, height=420) \
+           .sharpen(0.8) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,shrp_0.70/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,shrp_0.8/parrot.jpg
 ```
 
 ***
@@ -402,7 +365,7 @@ The Unsharp Mask, applies the filter using radius, amount & threshold parameters
 unsharp(radius=0.5, amount=0.2, threshold=0.0)
 ```
 
-optional values:
+optional parameters:
 
 Value | Description | Valid values
 ------|-------------|-------------
@@ -412,48 +375,14 @@ threshold|shapening mask threshold|0 to 255
 
 *Sample Request:*
 ```python
-print image.fit(width=120, height=120) \
+print image.fit(width=420, height=420) \
            .unsharp(radius=0.4, amount=0.2, threshold=0.0) \
            .get_url()
 ```
 would generate the URL: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/fit/h_120,w_120,usm_0.40_0.20_0.00/cat.jpg
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.40_0.20_0.00/parrot.jpg
 ```
-
-*** 
-
-**Multiple Filters Sample Requests**
-```python
-image.oil()
-     .neg()
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg/dog.png
-```
-***
-```python
-image.neg()
-     .pixelate(108)
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,neg,pix_108/dog.png
-```
-***
-```python
-image.oil()
-     .neg()
-     .pixelate(125) 
-     .sharpen(0.40)
-```
-would generate: 
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,oil,neg,pix_125,shrp_0.40/dog.png
-```
-
-
 
 #### Image Watermark Operation ####
 
@@ -521,18 +450,59 @@ quality|Integer (%)|Quality of the image, values between 0 and 100
 
 *Sample Requests:*
 ```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.baseline()
+print image.fit(width=420, height=420) \
+           .baseline() \
+           .get_url()
 ```
 would generate the URL:
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,bl/dog.png
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,bl/parrot.jpg
 ```
 and:
 ```python
-image.quality(0.70)
+print image.fit(width=420, height=420) \
+           .quality(35) \
+           .get_url()
 ```
 would generate: 
 ```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/<operation>,q_0.70/dog.png
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/parrot.jpg
 ```
+
+### Composite Image Manipulation ###
+
+The Image API allows linking several manipulations one after the other. 
+
+For example:
+
+```python
+print image.fit(width=420, height=420) \
+           .crop(x=60, y=60, width=300, height=300) \
+           .unsharp() \
+           .get_url()
+
+```
+would generate: 
+```
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/fit/h_420,w_420/crop/h_300,w_300,x_60,y_60,usm_0.50_0.20_0.00/parrot.jpg
+```
+
+### Best Paractices ###
+
+* When Fill or Fit are used it is recomended to apply Unsharp Mask filter on the result:
+```python
+print image.fit(width=420, height=420) \
+           .unsharp() \
+           .get_url()
+```
+
+* If the image is in JPEG format, it is recomended to set qulity to 75:
+
+```python
+print image.fit(width=420, height=420) \
+           .unsharp() \
+           .quality(75) \
+           .get_url()
+```
+
+The recomendations above, describe simple image optimization while maintaining good balance between output size and quality.
