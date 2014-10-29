@@ -468,3 +468,20 @@ would generate:
 ```
 http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/parrot.jpg
 ```
+
+## Composite Image Manipulation ##
+
+The Image API allow to link several manipulation one after the other. 
+
+For example:
+
+```python
+print image.fit(width=420, height=420) \
+           .crop(x=60, y=60, width=300, height=300) \
+           .get_url()
+
+```
+would generate: 
+```
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/fit/h_420,w_420/crop/h_300,w_300,x_60,y_60/parrot.jpg
+```
