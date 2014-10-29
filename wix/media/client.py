@@ -45,8 +45,8 @@ class Client(object):
     METADATA_SERVICE_HOST     = 'mediacloud.wix.com'
     WIX_MEDIA_UPLOAD_URL      = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
     WIX_MEDIA_AUTH_TOKEN_URL  = 'http://%s/auth/get-token' % METADATA_SERVICE_HOST
-    # IMAGE_SERVICE             = 'media.wixapps.net'
-    IMAGE_SERVICE             = '107.178.253.0'
+    IMAGE_SERVICE             = 'media.wixapps.net'
+    #IMAGE_SERVICE             = '107.178.253.0'
 
     def __init__(self, api_key=None, api_secret=None):
         self.api_key    = api_key

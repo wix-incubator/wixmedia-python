@@ -14,7 +14,7 @@ class CmdBuilder(object):
 
     def add(self, *param_list, **param_dict):
         self.params.extend([str(p) for p in param_list])
-        self.params.extend(["%s_%s" % (k, v) for k, v in param_dict.iteritems()])
+        self.params.extend(["%s_%s" % (k, v) for k, v in iter(sorted(param_dict.iteritems()))])
 
     def build_cmd(self):
         return '%s/%s' % (self.cmd, ','.join(self.params))
@@ -35,9 +35,6 @@ class Image(object):
         "contrast":   "con",
         "saturation": "sat",
         "hue":        "hue",
-        "vibrance":   "vib",
-        "quality":    "q",
-        "auto":       "auto"
     }
 
     alignment_value_map = {
@@ -81,8 +78,9 @@ class Image(object):
 
         self.cmd_builder = CmdBuilder(Image.COMMAND_CANVAS, w=width, h=height)
 
-        if alignment is not None:
-            self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+        # not supported yet...
+        #if alignment is not None:
+        #    self.cmd_builder.add(a=Image.alignment_value_map[alignment])
 
         if ext_color is not None:
             self.cmd_builder.add(c=ext_color)
@@ -190,12 +188,6 @@ class Image(object):
     def pixelate(self, value):
         self.assert_cmd()
         self.cmd_builder.add(**{'pix': value})
-
-        return self
-
-    def pixelate_faces(self, value):
-        self.assert_cmd()
-        self.cmd_builder.add(**{'pixfs': value})
 
         return self
 
