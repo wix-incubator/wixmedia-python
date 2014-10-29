@@ -478,7 +478,7 @@ For example:
 ```python
 print image.fit(width=420, height=420) \
            .crop(x=60, y=60, width=300, height=300) \
-           .unsharp()
+           .unsharp() \
            .get_url()
 
 ```
