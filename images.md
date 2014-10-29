@@ -471,7 +471,7 @@ http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011e
 
 ### Composite Image Manipulation ###
 
-The Image API allow to link several manipulation one after the other. 
+The Image API allows linking several manipulations one after the other. 
 
 For example:
 
@@ -487,16 +487,16 @@ would generate:
 http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,q_35/fit/h_420,w_420/crop/h_300,w_300,x_60,y_60,usm_0.50_0.20_0.00/parrot.jpg
 ```
 
-### Best Paractice ###
+### Best Paractices ###
 
-When Fill or Fit are used it is recomended to apply Unsharp Mask filter on the result:
+* When Fill or Fit are used it is recomended to apply Unsharp Mask filter on the result:
 ```python
 print image.fit(width=420, height=420) \
            .unsharp() \
            .get_url()
 ```
 
-If the image is of JPEG format, it is recomended to set qulity to 75:
+* If the image is in JPEG format, it is recomended to set qulity to 75:
 
 ```python
 print image.fit(width=420, height=420) \
@@ -505,4 +505,4 @@ print image.fit(width=420, height=420) \
            .get_url()
 ```
 
-The above describes simple image optimization, while maintaining good balance between output size and quality.
+The recomendations above, describe simple image optimization while maintaining good balance between output size and quality.
