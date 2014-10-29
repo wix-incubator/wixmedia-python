@@ -18,7 +18,6 @@ image  = client.upload_image_from_path('/files/images/parrot.jpg')
 
 image_id = image.get_id()
 print image_id
-
 ```
 
 The code snippet above gives the following image-id as output:
