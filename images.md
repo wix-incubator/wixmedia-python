@@ -50,7 +50,7 @@ print image.fit(width=420, height=420) \
 The last code snippet applies image manipulation on a previously uploaded image and prints the URL for rendering the manipulated image. The URL can be embedded in an HTML *img* tag:
 
 ```html
-[http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.50_0.20_0.00,oil,con_-15,br_10/parrot.jpg](http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.50_0.20_0.00,oil,con_-15,br_10/parrot.jpg)
+http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.50_0.20_0.00,oil,con_-15,br_10/parrot.jpg
 ```
 ----------------
 __Note__: 
