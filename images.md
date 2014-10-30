@@ -132,15 +132,10 @@ Value | Description
 ------|------------
 center|Focus on the center of the image, both vertical and horizontal center.
 top|Focus on the top of the image, horizontal center.
-top-left|Focus on the top left side of the image.
-top-right|Focus on the top right side of the image.
 bottom|Focus on the bottom of the image, horizontal center.
-bottom-left|Focus on the bottom left side of the image.
-bottom-right|Focus on the bottom right side of the image.
 left|Focus on the left side of the image, vertical center.
 right|Focus on the right side of the image, vertical center.
 face|Focus on a face on the image. Detects a face in the picture and centers on it. When multiple faces are detected in the picture, the focus will be on one of them.
-faces|Focus on all faces in the image. Detects multiple faces and centers on them. Will do a best effort to have all the faces in the new image, depending on the size of the new canvas.
 
 resize_filter optional values + descriptions (view links):
 
@@ -382,61 +377,6 @@ print image.fit(width=420, height=420) \
 would generate the URL: 
 ```
 http://media.wixapps.net/wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/v1/fit/h_420,w_420,usm_0.40_0.20_0.00/parrot.jpg
-```
-
-#### Image Watermark Operation ####
-
-Enables users to apply watermark such as copyright notice in order to protect their images. 
-* The system allows replacing watermark if needed.
-
-```python
-watermark(wm_id, opacity=None, alignment=None, scale=None)
-```
-
-Parameter | value | Description
-----------|-------|------------
-wm_id *(mandatory)*|string|The watermark image id. Please notice that the wmid format is similar to the file_id format used earlier in the URL. Must be url-plus encoded.
-opacity *(optional)*|Integer (%)|The Watermark opacity. values are between 0 and 100. ```op default value: 100.```
-alignment *(optional)*|string|The watermark position. ``` a default option: center.``` for more details, see the table below.
-scale *(optional)*|Integer (%)|Watermark horizontal scaling as percents of the requested image width. Values are between 0 and 100. ```scl efault value: 0```
-
-alignment optional values:
-
-Value | Description
-------|------------
-center|center of the image. 
-top|central top part of the image.
-top-left|top left part of the image.
-top-right|top right part of the image.
-bottom|central bottom part of the image. 
-bottom-left|bottom left part of the image.
-bottom-right|bottom right part of the image. 
-left|central left part of the image. 
-right|central right part of the image. 
-face|face-recognition based alignment.
-faces|focus on all faces in the image.
-
-*Sample Request:*
-```python
-image = wixmedia_image.WixMediaImage('http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/dog.png')
-image.watermark(wm_id='ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg', opacity=45, scale=0)
-```
-would generate the URL:
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/wmid_ggl-685734655894940532967%2Fimages%2F128766b24054482f8477bfbf2d426936%2Fwm.jpg,op_45,scl_0/dog.png
-```
-and:
-```python
-image.watermark(opacity=100, alignment='top-left', scale=50)
-```
-would generate: (giving a its default values)
-```
-http://media.wixapps.net/ggl-685734655894940532967/images/ae1d86b24054482f8477bfbf2d426936/v1/wm/op_100,a_tl,scl_50/dog.png
-```
-
-*Sample Response:*
-```
-{ "error": 0, "error_description": "success", "wm_filepath": "ggl-685734655894940532967/images/88dfc1cb1babd66a7bc635dbb599d94d/dog.png" }
 ```
 
 #### JPEG Options ####
