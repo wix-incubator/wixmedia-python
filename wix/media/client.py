@@ -1,7 +1,6 @@
 from datetime import datetime
 import functools
 from urlparse import urlparse
-import calendar
 import urllib2
 import json
 import os
@@ -136,4 +135,4 @@ class Client(object):
 
     @staticmethod
     def _get_utc_now_ts():
-        return calendar.timegm(datetime.utcnow().utctimetuple())
+        return datetime.utcnow().isoformat() + "Z"

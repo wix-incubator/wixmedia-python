@@ -55,7 +55,7 @@ class WixHmacAuthHandler(HmacKeys):
         # if 'Date' not in headers:
         #     headers['Date'] = formatdate(usegmt=True)
 
-        string_to_sign = WixHmacAuthHandler.canonical_string(method, path, headers)
+        string_to_sign = WixHmacAuthHandler.canonical_string(method, path, headers).rstrip()
         b64_hmac = self.sign_string(string_to_sign)
         auth = ("%s %s:%s" % (self.WixAuthService, self._access_key, b64_hmac))
         headers['Authorization'] = auth
