@@ -1,5 +1,5 @@
 from .exceptions import MissingCmd
-import urllib
+from media import Media
 import os
 
 VERSION = 'v1'
@@ -20,7 +20,7 @@ class CmdBuilder(object):
         return '%s/%s' % (self.cmd, ','.join(self.params))
 
 
-class Image(object):
+class Image(Media):
     COMMAND_NONE      = ""
     COMMAND_SRZ       = "srz"
     COMMAND_SRB       = "srb"
@@ -28,7 +28,6 @@ class Image(object):
     COMMAND_FILL      = "fill"
     COMMAND_FIT       = "fit"
     COMMAND_CROP      = "crop"
-    COMMAND_WATERMARK = "wm"
 
     adjust_parameter_map = {
         "brightness": "br",
@@ -47,30 +46,27 @@ class Image(object):
         "bottom-right": "br",
         "left":         "l",
         "right":        "r",
-        "face":         "f",
-        "faces":        "fs"
+        "face":         "face"
     }
 
-    def __init__(self, image_id, service_host):
-        self.id            = image_id
-        self.service_host  = service_host
-        self.cmd_builder   = None
-        self.commands      = list()
+    def __init__(self, image_id, service_host, client):
+        super(Image, self).__init__(image_id, client)
+
+        self.service_host = service_host
+        self.cmd_builder  = None
+        self.commands     = list()
 
     def reset(self):
         self.cmd_builder = None
         self.commands    = list()
 
-    def get_id(self):
-        return self.id
-
     def assert_cmd(self):
         if self.cmd_builder is None:
-            raise MissingCmd("Missing transformation command. Original image cannot be used." % self.transform_command)
+            raise MissingCmd("Missing transformation command. Original image cannot be used.")
 
     def canvas(self, width, height, alignment=None, ext_color=None):
         """
-        default values: alignment="center"
+        default values: alignment="center", ext_color="000000"
         """
 
         if self.cmd_builder:
@@ -78,9 +74,8 @@ class Image(object):
 
         self.cmd_builder = CmdBuilder(Image.COMMAND_CANVAS, w=width, h=height)
 
-        # not supported yet...
-        #if alignment is not None:
-        #    self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+        if alignment is not None:
+            self.cmd_builder.add(al=Image.alignment_value_map[alignment])
 
         if ext_color is not None:
             self.cmd_builder.add(c=ext_color)
@@ -97,7 +92,7 @@ class Image(object):
 
     def fill(self, width, height, resize_filter=None, alignment=None):
         """
-        default value: resize_filter=LanczosFilter, alignment="center"
+        default value: resize_filter=LanczosFilter
         """
 
         if self.cmd_builder:
@@ -108,9 +103,8 @@ class Image(object):
         if resize_filter is not None:
             self.cmd_builder.add(rf=resize_filter)
 
-        # not supported yet...
-        #  if alignment is not None:
-        #     self.cmd_builder.add(a=Image.alignment_value_map[alignment])
+        if alignment is not None:
+            self.cmd_builder.add(al=Image.alignment_value_map[alignment])
 
         return self
 
@@ -126,27 +120,6 @@ class Image(object):
 
         if resize_filter is not None:
             self.cmd_builder.add(rf=resize_filter)
-
-        return self
-
-    def watermark(self, wm_id, opacity=None, alignment=None, scale=None):
-        """
-        default values: opacity=100, alignment='center', scale=0
-        """
-
-        if self.cmd_builder:
-            self.commands.append(self.cmd_builder.build_cmd())
-
-        self.cmd_builder = CmdBuilder(Image.COMMAND_WATERMARK, wmid=urllib.quote_plus(wm_id))
-
-        if opacity is not None:
-            self.cmd_builder.add(op=opacity)
-
-        if alignment is not None:
-            self.cmd_builder.add(a=Image.alignment_value_map[alignment])
-
-        if scale is not None:
-            self.cmd_builder.add(scl=scale)
 
         return self
 

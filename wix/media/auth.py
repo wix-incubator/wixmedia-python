@@ -57,9 +57,8 @@ class WixHmacAuthHandler(HmacKeys):
 
         string_to_sign = WixHmacAuthHandler.canonical_string(method, path, headers).rstrip()
         b64_hmac = self.sign_string(string_to_sign)
-        auth = ("%s %s:%s" % (self.WixAuthService, self._access_key, b64_hmac))
-        headers['Authorization'] = auth
-        return headers
+
+        return "%s %s:%s" % (self.WixAuthService, self._access_key, b64_hmac)
 
     @staticmethod
     def canonical_string(method, path, headers, expires=None):
@@ -90,3 +89,10 @@ class WixHmacAuthHandler(HmacKeys):
                 buf += "%s\n" % val
 
         return buf
+
+
+def get_authorization_header(access_key, secret_key, method, path, headers):
+    auth_handler  = WixHmacAuthHandler(access_key, secret_key)
+    authorization = auth_handler.add_auth(method=method, path=path, headers=headers)
+
+    return authorization

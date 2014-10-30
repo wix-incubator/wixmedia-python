@@ -5,7 +5,7 @@ client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
 try:
     image = client.upload_image_from_path('/path/to/image.jpg')
 
-    print "File was uploaded."
+    print "Image was uploaded."
 except Exception as e:
     image_id = 'wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg'
     image  = client.get_image_from_id(image_id)
@@ -84,8 +84,28 @@ print image.fit(width=420, height=420) \
            .unsharp() \
            .get_url()
 
+#######
+import time
 
-image.reset()
-wm_id = 'ggl-685734655894940532967/images/128766b24054482f8477bfbf2d426936/wm.jpg'
-print image.watermark(wm_id=wm_id, opacity=45, alignment='top-left', scale=0)\
-           .get_url()
+try:
+    client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+    video = client.upload_video_from_path('/path/to/video.mp4')
+
+    print "Video file was uploaded."
+
+    print video.get_id()
+    print video.get_url()
+
+    metadata = video.get_metadata_from_service()
+
+    while metadata['op_status'] not in ['READY', 'FAILED']:
+        print 'waiting', metadata['op_status']
+        time.sleep(1)
+
+        metadata = video.get_metadata_from_service()
+
+    print metadata
+
+
+except Exception as e:
+    pass
