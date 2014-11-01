@@ -1,7 +1,7 @@
 from io import BytesIO
+from uuid import uuid4
 import mimetypes
 import urllib2
-from uuid import uuid4
 
 
 def encode_multipart(fields, files, boundary=None):
@@ -30,8 +30,7 @@ def encode_multipart(fields, files, boundary=None):
             mimetype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
         lines.extend((
             '--{0}'.format(boundary),
-            'Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(
-                    escape_quote(name), escape_quote(filename)),
+            'Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(escape_quote(name), escape_quote(filename)),
             'Content-Type: {0}'.format(mimetype),
             '',
             value['content'],
@@ -42,23 +41,15 @@ def encode_multipart(fields, files, boundary=None):
         '',
     ))
 
-    s = BytesIO()
+    buf = BytesIO()
     for element in lines:
-        s.write(str(element))
-        s.write('\r\n')
-    body = s.getvalue()
+        buf.write(str(element))
+        buf.write('\r\n')
+    body = buf.getvalue()
 
     content_type = 'multipart/form-data; boundary={0}'.format(boundary)
 
     return body, content_type
-
-
-def get(url, headers=None):
-    opener   = urllib2.build_opener(urllib2.HTTPHandler)
-    request  = urllib2.Request(url.encode("utf-8"), headers=headers)
-    response = opener.open(request)
-
-    return response.code, response.read(), response.headers
 
 
 def post_multipart(url, headers=None, fields=None, files=None):
@@ -71,6 +62,14 @@ def post_multipart(url, headers=None, fields=None, files=None):
 
     opener   = urllib2.build_opener(urllib2.HTTPHandler)
     request  = urllib2.Request(url.encode("utf-8"), data=data, headers=headers)
+    response = opener.open(request)
+
+    return response.code, response.read(), response.headers
+
+
+def get(url, headers=None):
+    opener   = urllib2.build_opener(urllib2.HTTPHandler)
+    request  = urllib2.Request(url.encode("utf-8"), headers=headers)
     response = opener.open(request)
 
     return response.code, response.read(), response.headers

@@ -9,3 +9,9 @@ class Video(Media):
 
     def get_url(self):
         return "/".join(['http://%s' % self.service_host, self.id])
+
+    # returns: video encoding status: 'IN-QUEUE', 'INPROGRESS', 'READY', 'FAILED'
+    def get_video_status(self):
+        metadata = self.get_metadata_from_service()
+
+        return metadata['op_status']

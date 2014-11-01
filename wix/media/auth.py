@@ -50,10 +50,12 @@ class WixHmacAuthHandler(HmacKeys):
     def update_keys(self, access_key, secret_key):
         super(WixHmacAuthHandler, self).update_keys(access_key, secret_key)
 
-    def add_auth(self, method="POST", path="/", headers={}):
+    def add_auth(self, method="POST", path="/", headers=None):
 
         # if 'Date' not in headers:
         #     headers['Date'] = formatdate(usegmt=True)
+
+        headers = headers or {}
 
         string_to_sign = WixHmacAuthHandler.canonical_string(method, path, headers).rstrip()
         b64_hmac = self.sign_string(string_to_sign)
@@ -61,7 +63,7 @@ class WixHmacAuthHandler(HmacKeys):
         return "%s %s:%s" % (self.WixAuthService, self._access_key, b64_hmac)
 
     @staticmethod
-    def canonical_string(method, path, headers, expires=None):
+    def canonical_string(method, path, headers):
         interesting_headers = {}
 
         for key in headers:
@@ -69,14 +71,9 @@ class WixHmacAuthHandler(HmacKeys):
             if headers[key] is not None and lk.startswith(WixHmacAuthHandler.WixHeaderPrefix):
                 interesting_headers[lk] = str(headers[key]).strip()
 
-        # if you're using expires for query string auth, then it trumps date
-        # (and provider.date_header)
-        # if expires:
-        #     interesting_headers['date'] = str(expires)
-
         buf = "%s\n" % method
 
-        # don't include anything after the first ? in the resource...
+        # don't include query parameters
         t = path.split('?')
         buf += '%s\n' % t[0]
 
@@ -91,7 +88,7 @@ class WixHmacAuthHandler(HmacKeys):
         return buf
 
 
-def get_authorization_header(access_key, secret_key, method, path, headers):
+def create_authorization_header(access_key, secret_key, method, path, headers):
     auth_handler  = WixHmacAuthHandler(access_key, secret_key)
     authorization = auth_handler.add_auth(method=method, path=path, headers=headers)
 

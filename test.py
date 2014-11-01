@@ -87,25 +87,21 @@ print image.fit(width=420, height=420) \
 #######
 import time
 
-try:
-    client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
-    video = client.upload_video_from_path('/path/to/video.mp4')
+client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+video = client.upload_video_from_path('/path/to/video.mp4')
 
-    print "Video file was uploaded."
+print "Video file was uploaded."
 
-    print video.get_id()
-    print video.get_url()
+print video.get_id()
+print video.get_url()
 
-    metadata = video.get_metadata_from_service()
+encoding_status = video.get_video_status()
 
-    while metadata['op_status'] not in ['READY', 'FAILED']:
-        print 'waiting', metadata['op_status']
-        time.sleep(1)
+# polling video encoding status ...
+while encoding_status not in ["READY", "FAILED"]:
+    print "Encoding Status:", encoding_status
+    time.sleep(1)
 
-        metadata = video.get_metadata_from_service()
+    encoding_status = video.get_video_status()
 
-    print metadata
-
-
-except Exception as e:
-    pass
+print "Encoding Status:", encoding_status

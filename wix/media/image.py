@@ -1,4 +1,4 @@
-from .exceptions import MissingCmd
+from exceptions import MissingCmd
 from media import Media
 import os
 

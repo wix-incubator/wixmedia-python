@@ -1,16 +1,15 @@
-from datetime import datetime
+from exceptions import GeneralError, UploadError
 import functools
-from urlparse import urlparse
 import urllib2
 import json
 import os
-from .exceptions import GeneralError, UploadError
-from .image import Image
-from .video import Video
-import auth
-from wix.media import http_utils
+from image import Image
+from video import Video
+import http_utils
+import auth_token
 
-AUTH_ALGORITHM = "MCLOUDTOKEN"
+
+AUTH_SCHEME = "MCLOUDTOKEN"
 
 
 def retry_auth(func):
@@ -80,34 +79,7 @@ class Client(object):
         return Video(video_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
 
     def get_auth_token(self):
-
-        if not self.api_key or not self.api_secret:
-            raise GeneralError('invalid authorization parameters: initialize api key and secret')
-
-        headers = {
-            'x-wix-auth-nonce': os.urandom(6).encode("hex"),
-            'x-wix-auth-ts':    '%sZ' % datetime.utcnow().isoformat()
-        }
-
-        url = Client.WIX_MEDIA_AUTH_TOKEN_URL
-        authorization_header = auth.get_authorization_header(self.api_key, self.api_secret, method="GET", path=urlparse(url).path, headers=headers)
-        headers['Authorization'] = authorization_header
-
-        try:
-            http_status, response, response_headers = http_utils.get(url, headers=headers)
-
-            if http_status != 200:
-                raise UploadError('Failed to get upload url: http_status=%d' % http_status)
-
-            response = json.loads(response)
-
-            if response['scheme'] != AUTH_ALGORITHM:
-                raise GeneralError('Invalid authorization algorithm')
-
-            self.auth_token = response['token']
-
-        except urllib2.HTTPError as e:
-            raise UploadError(e.reason)
+        self.auth_token = auth_token.get_auth_token(self.api_key, self.api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL)
 
     def _upload_to_pm_from_stream(self, fp, file_name, media_type, upload_url_endpoint):
 
@@ -122,7 +94,7 @@ class Client(object):
     @retry_auth
     def _get_upload_url(self, upload_url_endpoint):
 
-        headers = {'Authorization': AUTH_ALGORITHM + ' ' + self.auth_token}
+        headers = {'Authorization': AUTH_SCHEME + ' ' + self.auth_token}
 
         http_status, content, _ = http_utils.get(upload_url_endpoint, headers)
 
@@ -137,7 +109,7 @@ class Client(object):
 
         fields  = {"media_type": media_type}
         files   = {'file': {'filename': file_name, 'content': fp.read()}}
-        headers = {'Authorization':  AUTH_ALGORITHM + ' ' + self.auth_token}
+        headers = {'Authorization':  AUTH_SCHEME + ' ' + self.auth_token}
 
         http_status, content, _ = http_utils.post_multipart(upload_url, headers, fields, files)
 
@@ -149,13 +121,13 @@ class Client(object):
     @retry_auth
     def get_media_metadata_from_service(self, metadata_id):
 
-        headers = {'Authorization': AUTH_ALGORITHM + ' ' + self.auth_token}
+        headers = {'Authorization': AUTH_SCHEME + ' ' + self.auth_token}
 
         url = '%s%s' % (Client.WIX_MEDIA_GET_FILE_INFO_URL_PREFIX, metadata_id)
         http_status, content, _ = http_utils.get(url, headers)
 
         if http_status != 200:
-            raise GeneralError('failed to get file info: http_status=%d' % http_status)
+            raise GeneralError('failed to get file metadata: http_status=%d' % http_status)
 
         metadata = json.loads(content)
         return metadata
