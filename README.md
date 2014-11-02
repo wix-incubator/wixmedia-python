@@ -67,4 +67,4 @@ For more information about audio support in your apps, browse the Audio SDK docu
 Every video file uploaded into the service is automatically encoded into additional formats and qualities. These are particularly designed so that the videos will be playable on any browser and internet-connected device.
 The system allows for both public and secure storage of the video files. Public videos can be streamed or downloaded without the viewer authorization. Secured videos can be used in commercial video applications.
 
-For more information about video support in your apps, browse the Video SDK documentation.
+For more information about video support in your apps, browse the [Video SDK documentation.](https://github.com/wix/wixmedia-python/blob/master/videos.md).
