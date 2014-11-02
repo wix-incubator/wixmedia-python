@@ -29,7 +29,7 @@ After uploading a video, you can easily retreive information about it using the 
 
 #### Video URL ####
 
-Using the get_url() function, for example:
+Using the get_url function, for example:
 
 ```python
 print video.get_url()
@@ -37,7 +37,7 @@ print video.get_url()
 
 #### Video Status  ####
 
-You can also get the video status using the get_video_status. for example:
+You can also get the video status using the get_video_status function. for example:
 
 ```python
 print video.get_video_status()
