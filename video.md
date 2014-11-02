@@ -1,1 +1,75 @@
-# Video #
+Wix Media Python SDK
+--------------------
+Video Manipulation
+==================
+Wix Media Platform provides web developers a versatile infrastructure for video manipulations via the Wix Media Python library.
+
+## Usage ##
+
+### Uploading Videos ###
+
+To upload a video using the Wix Media Python library, follow the steps in the example:
+
+```python
+from wix import media
+import time
+
+client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+video = client.upload_video_from_path('/path/to/video.mp4')
+
+print "Video file was uploaded."
+
+# Get the video by ID / URL:
+print video.get_id()
+print video.get_url() 
+```
+
+### Rendering Videos ###
+
+After uploading a video, you can easily retreive information about it (and about more vidoes you have uploaded) using the SDK:
+
+#### Video URL ####
+
+```python 
+get_url()
+```
+
+Using the previous example:
+```python
+print video.get_url()
+```
+
+#### Video Status  ####
+```python
+get_video_status()
+```
+You can also get the video status using our example:
+```python
+print vidwo.get_video_status()
+```
+
+#### Encoded Videos ####
+```python
+get_encoded_videos(refresh=False)
+```
+You can get a list of all videos which are ready to be watched. using our example:
+```python
+encoding_status = video.get_video_status()
+
+# polling video encoding status ...
+while encoding_status not in ["READY", "FAILED"]:
+    print "Encoding Status:", encoding_status
+    time.sleep(1)
+
+    encoding_status = video.get_video_status()
+
+print "Encoding Status:", encoding_status
+
+if encoding_status == 'READY':
+    print
+    print "Encoded videos:"
+
+    ready_videos = video.get_encoded_videos()
+    for k, ready_video in ready_videos.iteritems():
+        print ready_video.get_url()
+```
