@@ -23,7 +23,7 @@ print "Video file was uploaded."
 print video.get_id()
 print video.get_url() 
 ```
-### Working with Videos ### 
+### Working with Videos ###
 
 After uploading a video, you can easily retreive information about it (and about more vidoes you have uploaded) using the SDK:
 
