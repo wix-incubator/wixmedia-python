@@ -54,7 +54,7 @@ wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg
 Images can be uploaded to the Wix Media Platform using this package.
 Once an image was uploaded, you cab apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 
-For more information about image manipulation in your apps, browse the [Images SDK documentation.](https://github.com/wix/wixmedia-python/blob/master/images.md).
+For more information about image manipulation in your apps, browse the [Images SDK documentation](https://github.com/wix/wixmedia-python/blob/master/images.md).
 
 #### Audio ####
 The platform supports two different modes for storing and manipulating audio files - a Simple Audio mode and a Professional Audio mode.
@@ -67,4 +67,4 @@ For more information about audio support in your apps, browse the Audio SDK docu
 Every video file uploaded into the service is automatically encoded into additional formats and qualities. These are particularly designed so that the videos will be playable on any browser and internet-connected device.
 The system allows for both public and secure storage of the video files. Public videos can be streamed or downloaded without the viewer authorization. Secured videos can be used in commercial video applications.
 
-For more information about video support in your apps, browse the Video SDK documentation.
+For more information about video support in your apps, browse the [Video SDK documentation](https://github.com/wix/wixmedia-python/blob/master/videos.md).
