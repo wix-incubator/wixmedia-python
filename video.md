@@ -25,25 +25,28 @@ print video.get_url()
 ```
 ### Working with Videos ###
 
-After uploading a video, you can easily retreive information about it (and about more vidoes you have uploaded) using the SDK:
+After uploading a video, you can easily retreive information about it using the SDK:
 
 #### Video URL ####
 
-Using the get_url() function, via our previous example:
+Using the get_url() function, for example:
+
 ```python
 print video.get_url()
 ```
 
 #### Video Status  ####
 
-You can also get the video status using the get_video_status. via our example:
+You can also get the video status using the get_video_status. for example:
+
 ```python
 print video.get_video_status()
 ```
 
 #### Encoded Videos ####
 
-You can get a list of all videos which are ready to be watched. using the get_encoded_videos function. via our example:
+You can get a list of all videos which are ready to be watched. using the get_encoded_videos function. for example:
+
 ```python
 encoding_status = video.get_video_status()
 
