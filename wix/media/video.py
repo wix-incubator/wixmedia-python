@@ -21,4 +21,4 @@ class Video(Media):
         metadata = self.get_metadata(refresh=refresh)
 
         file_info = json.loads(metadata['file_info'])
-        return {k: Video(id, self.service_host, self.client) for k, id in file_info['ready_url'].iteritems()}
+        return {k: Video(id, self.service_host, self.client) for k, id in file_info['ready_videos'].iteritems()}

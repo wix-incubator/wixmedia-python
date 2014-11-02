@@ -27,12 +27,12 @@ def retry_auth(func):
             except urllib2.HTTPError as e:
                 if e.code == 403:
                     if retry_count > 1:
-                        raise UploadError(e.reason)
+                        raise GeneralError(e.reason)
 
                     client.get_auth_token()
                     retry_count += 1
                 else:
-                    raise UploadError('failed to upload file: http_status=%d, reason=%s' % (e.code, e.reason))
+                    raise
 
         return result
 
@@ -50,9 +50,17 @@ class Client(object):
     WIX_MEDIA_GET_FILE_INFO_URL_PREFIX = 'http://%s/files/' % METADATA_SERVICE_HOST
 
     def __init__(self, api_key=None, api_secret=None):
-        self.api_key    = api_key
-        self.api_secret = api_secret
-        self.auth_token = ''
+        self._api_key    = api_key
+        self._api_secret = api_secret
+        self._auth_token = ''
+
+    @property
+    def api_key(self):
+        return self._api_key
+
+    @property
+    def api_secret(self):
+        return self._api_secret
 
     def get_image_from_id(self, image_id):
         return Image(image_id=image_id, service_host=Client.IMAGE_SERVICE_HOST, client=self)
@@ -79,11 +87,20 @@ class Client(object):
         return Video(video_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
 
     def get_auth_token(self):
-        self.auth_token = auth_token.get_auth_token(self.api_key, self.api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL)
+        self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL)
+
+    def get_media_metadata_from_service(self, metadata_id):
+
+        if not self._auth_token:
+            self.get_auth_token()
+
+        metadata = self._get_media_metadata_from_service(metadata_id)
+        return metadata
+
 
     def _upload_to_pm_from_stream(self, fp, file_name, media_type, upload_url_endpoint):
 
-        if not self.auth_token:
+        if not self._auth_token:
             self.get_auth_token()
 
         upload_url = self._get_upload_url(upload_url_endpoint)
@@ -94,7 +111,7 @@ class Client(object):
     @retry_auth
     def _get_upload_url(self, upload_url_endpoint):
 
-        headers = {'Authorization': AUTH_SCHEME + ' ' + self.auth_token}
+        headers = {'Authorization': AUTH_SCHEME + ' ' + self._auth_token}
 
         http_status, content, _ = http_utils.get(upload_url_endpoint, headers)
 
@@ -109,7 +126,7 @@ class Client(object):
 
         fields  = {"media_type": media_type}
         files   = {'file': {'filename': file_name, 'content': fp.read()}}
-        headers = {'Authorization':  AUTH_SCHEME + ' ' + self.auth_token}
+        headers = {'Authorization':  AUTH_SCHEME + ' ' + self._auth_token}
 
         http_status, content, _ = http_utils.post_multipart(upload_url, headers, fields, files)
 
@@ -119,9 +136,9 @@ class Client(object):
         return json.loads(content)[0]
 
     @retry_auth
-    def get_media_metadata_from_service(self, metadata_id):
+    def _get_media_metadata_from_service(self, metadata_id):
 
-        headers = {'Authorization': AUTH_SCHEME + ' ' + self.auth_token}
+        headers = {'Authorization': AUTH_SCHEME + ' ' + self._auth_token}
 
         url = '%s%s' % (Client.WIX_MEDIA_GET_FILE_INFO_URL_PREFIX, metadata_id)
         http_status, content, _ = http_utils.get(url, headers)
@@ -129,5 +146,4 @@ class Client(object):
         if http_status != 200:
             raise GeneralError('failed to get file metadata: http_status=%d' % http_status)
 
-        metadata = json.loads(content)
-        return metadata
+        return json.loads(content)

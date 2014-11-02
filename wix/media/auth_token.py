@@ -13,7 +13,7 @@ AUTH_SCHEME = "MCLOUDTOKEN"
 def get_auth_token(api_key, api_secret, url):
 
     if not api_key or not api_secret:
-        raise GeneralError('invalid authorization parameters: initialize api key and secret')
+        raise GeneralError('Invalid authorization parameters: initialize api key and secret')
 
     headers = {
         'x-wix-auth-nonce': os.urandom(6).encode("hex"),
@@ -27,11 +27,11 @@ def get_auth_token(api_key, api_secret, url):
     http_status, response, response_headers = http_utils.get(url, headers=headers)
 
     if http_status != 200:
-        raise GeneralError('Failed to get upload url: http_status=%d' % http_status)
+        raise GeneralError('Failed to get authorization token: http_status=%d' % http_status)
 
     response = json.loads(response)
 
     if response['scheme'] != AUTH_SCHEME:
-        raise GeneralError('Invalid authorization algorithm')
+        raise GeneralError('Invalid authorization scheme')
 
     return response['token']
