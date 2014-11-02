@@ -30,40 +30,23 @@ After uploading a video, you can easily retreive information about it (and about
 
 #### Video URL ####
 
-```python 
-get_url()
-```
-
-Using the previous example:
+Using the get_url() function, via our previous example:
 ```python
 print video.get_url()
 ```
 
 #### Video Status  ####
+
+You can also get the video status using the get_video_status. via our example:
 ```python
-get_video_status()
-```
-You can also get the video status using our example:
-```python
-print vidwo.get_video_status()
+print video.get_video_status()
 ```
 
 #### Encoded Videos ####
-```python
-get_encoded_videos(refresh=False)
-```
-You can get a list of all videos which are ready to be watched. using our example:
+
+You can get a list of all videos which are ready to be watched. using the get_encoded_videos function. via our example:
 ```python
 encoding_status = video.get_video_status()
-
-# polling video encoding status ...
-while encoding_status not in ["READY", "FAILED"]:
-    print "Encoding Status:", encoding_status
-    time.sleep(1)
-
-    encoding_status = video.get_video_status()
-
-print "Encoding Status:", encoding_status
 
 if encoding_status == 'READY':
     print
