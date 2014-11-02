@@ -25,7 +25,7 @@ print video.get_url()
 ```
 ### Working with Videos ###
 
-After uploading a video, you can easily retreive information about it using the SDK:
+After uploading a video, you can easily retreive its information using the SDK:
 
 #### Video URL ####
 
