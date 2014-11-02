@@ -1,3 +1,4 @@
+import pprint
 from wix import media
 
 client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
@@ -105,3 +106,11 @@ while encoding_status not in ["READY", "FAILED"]:
     encoding_status = video.get_video_status()
 
 print "Encoding Status:", encoding_status
+
+if encoding_status == 'READY':
+    print
+    print "Encoded videos:"
+
+    ready_videos = video.get_encoded_videos()
+    for k, ready_video in ready_videos.iteritems():
+        print ready_video.get_url()

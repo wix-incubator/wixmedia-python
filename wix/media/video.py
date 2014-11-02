@@ -1,4 +1,5 @@
 from media import Media
+import json
 
 
 class Video(Media):
@@ -12,6 +13,12 @@ class Video(Media):
 
     # returns: video encoding status: 'IN-QUEUE', 'INPROGRESS', 'READY', 'FAILED'
     def get_video_status(self):
-        metadata = self.get_metadata_from_service()
+        metadata = self.get_metadata(refresh=True)
 
         return metadata['op_status']
+
+    def get_encoded_videos(self, refresh=False):
+        metadata = self.get_metadata(refresh=refresh)
+
+        file_info = json.loads(metadata['file_info'])
+        return {k: Video(id, self.service_host, self.client) for k, id in file_info['ready_url'].iteritems()}
