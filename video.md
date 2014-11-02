@@ -8,7 +8,7 @@ Wix Media Platform provides web developers a versatile infrastructure for video 
 
 ### Uploading Videos ###
 
-To upload a video using the Wix Media Python library, follow the steps in the example:
+To upload a video using Wix Media Python library, follow the steps in the example:
 
 ```python
 from wix import media
