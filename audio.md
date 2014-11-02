@@ -20,7 +20,7 @@ print "Uploaded audio url:", audio.get_url()
 ```
 ### Working with Audio ###
 
-After uploading a video, you can easily retreive information about it using the SDK:
+After uploading an audio file, you can easily retreive its information using the SDK:
 
 #### Audio URL ####
 
