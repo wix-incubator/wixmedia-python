@@ -21,7 +21,7 @@ print "Uploaded video url:", video.get_url()
 
 try:
     print "Waiting for video encoding to finish..."
-    encoding_status = video.get_video_status()
+    encoding_status = video.get_video_status(timeout=60)
     print "Encoding Status:", encoding_status
 
     if encoding_status == 'READY':
