@@ -49,7 +49,6 @@ You can get a list of all videos which are ready to be watched. using the get_en
 encoding_status = video.get_video_status()
 
 if encoding_status == 'READY':
-    print
     print "Encoded videos:"
 
     ready_videos = video.get_encoded_videos()
