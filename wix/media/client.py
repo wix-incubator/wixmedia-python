@@ -5,6 +5,7 @@ import json
 import os
 from image import Image
 from video import Video
+from audio import Audio
 import http_utils
 import auth_token
 
@@ -45,6 +46,7 @@ class Client(object):
     VIDEO_SERVICE_HOST         = 'storage.googleapis.com'
     METADATA_SERVICE_HOST      = 'mediacloud.wix.com'
     WIX_MEDIA_IMAGE_UPLOAD_URL = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
+    WIX_MEDIA_AUDIO_UPLOAD_URL = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
     WIX_MEDIA_VIDEO_UPLOAD_URL = 'http://%s/files/video/upload/url' % METADATA_SERVICE_HOST
     WIX_MEDIA_AUTH_TOKEN_URL   = 'http://%s/auth/token' % METADATA_SERVICE_HOST
     WIX_MEDIA_GET_FILE_INFO_URL_PREFIX = 'http://%s/files/' % METADATA_SERVICE_HOST
@@ -86,6 +88,18 @@ class Client(object):
 
         return Video(video_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
 
+    def get_audio_from_id(self, audio_id):
+        return Audio(audio_id=audio_id, service_host=Client.VIDEO_SERVICE_HOST, client=self)
+
+    def upload_audio_from_path(self, file_path):
+        with open(file_path, 'r') as fp:
+            return self.upload_audio_from_stream(fp, os.path.basename(file_path), Client.WIX_MEDIA_AUDIO_UPLOAD_URL)
+
+    def upload_audio_from_stream(self, fp, file_name, upload_url_endpoint):
+        metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="music", upload_url_endpoint=upload_url_endpoint)
+
+        return Audio(audio_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
+
     def get_auth_token(self):
         self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL)
 
@@ -96,7 +110,6 @@ class Client(object):
 
         metadata = self._get_media_metadata_from_service(metadata_id)
         return metadata
-
 
     def _upload_to_pm_from_stream(self, fp, file_name, media_type, upload_url_endpoint):
 
