@@ -52,7 +52,7 @@ wixmedia-samples/images/cdf1ba9ec9554baca147db1cb6e011ec/parrot.jpg
 
 #### Images ####
 Images can be uploaded to the Wix Media Platform using this package.
-Once an image was uploaded, you cab apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
+Once an image was uploaded, you can apply various manipulations on it. These manipulations include, but are not limited to, resizing, cropping, rotating, sharpening, watermarking, face-detection and applying numerous filters. 
 
 For more information about image manipulation in your apps, please read the [Images SDK documentation](https://github.com/wix/wixmedia-python/blob/master/images.md).
 
