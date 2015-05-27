@@ -41,7 +41,6 @@ class WixHmacAuthHandler(HmacKeys):
     Implements the HMAC request signing used by Wix Media Cloud platform.
     """
 
-    WixAuthService  = "WIX"
     WixHeaderPrefix = "x-wix-"
 
     def __init__(self, access_key, secret_key):
@@ -50,17 +49,18 @@ class WixHmacAuthHandler(HmacKeys):
     def update_keys(self, access_key, secret_key):
         super(WixHmacAuthHandler, self).update_keys(access_key, secret_key)
 
-    def add_auth(self, method="POST", path="/", headers=None):
+    def create_authorization_header(self, method="POST", path="/", headers=None, auth_service=None):
 
         # if 'Date' not in headers:
         #     headers['Date'] = formatdate(usegmt=True)
 
-        headers = headers or {}
+        auth_service = auth_service or 'WIX'
+        headers      = headers or {}
 
         string_to_sign = WixHmacAuthHandler.canonical_string(method, path, headers).rstrip()
         b64_hmac = self.sign_string(string_to_sign)
 
-        return "%s %s:%s" % (self.WixAuthService, self._access_key, b64_hmac)
+        return "%s %s:%s" % (auth_service, self._access_key, b64_hmac)
 
     @staticmethod
     def canonical_string(method, path, headers):
@@ -88,8 +88,8 @@ class WixHmacAuthHandler(HmacKeys):
         return buf
 
 
-def create_authorization_header(access_key, secret_key, method, path, headers):
-    auth_handler  = WixHmacAuthHandler(access_key, secret_key)
-    authorization = auth_handler.add_auth(method=method, path=path, headers=headers)
+def create_authorization_header(access_key, secret_key, method, path, headers, auth_service=None):
+    auth_handler         = WixHmacAuthHandler(access_key, secret_key)
+    authorization_header = auth_handler.create_authorization_header(method=method, path=path, headers=headers, auth_service=auth_service)
 
-    return authorization
+    return authorization_header

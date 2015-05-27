@@ -10,7 +10,7 @@ import os
 AUTH_SCHEME = "MCLOUDTOKEN"
 
 
-def get_auth_token(api_key, api_secret, url):
+def get_auth_token(api_key, api_secret, url, auth_service=None):
 
     if not api_key or not api_secret:
         raise GeneralError('Invalid authorization parameters: initialize api key and secret')
@@ -21,7 +21,8 @@ def get_auth_token(api_key, api_secret, url):
     }
 
     authorization_header = auth.create_authorization_header(api_key, api_secret,
-                                                            method="GET", path=urlparse(url).path, headers=headers)
+                                                            method="GET", path=urlparse(url).path,
+                                                            headers=headers, auth_service=auth_service)
     headers['Authorization'] = authorization_header
 
     http_status, response, response_headers = http_utils.get(url, headers=headers)

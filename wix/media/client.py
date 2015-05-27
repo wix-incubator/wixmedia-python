@@ -51,10 +51,11 @@ class Client(object):
     WIX_MEDIA_AUTH_TOKEN_URL   = 'http://%s/auth/token' % METADATA_SERVICE_HOST
     WIX_MEDIA_GET_FILE_INFO_URL_PREFIX = 'http://%s/files/' % METADATA_SERVICE_HOST
 
-    def __init__(self, api_key=None, api_secret=None):
-        self._api_key    = api_key
-        self._api_secret = api_secret
-        self._auth_token = ''
+    def __init__(self, api_key=None, api_secret=None, auth_service='WIX'):
+        self._api_key     = api_key
+        self._api_secret  = api_secret
+        self._auth_token  = ''
+        self.auth_service = auth_service
 
     @property
     def api_key(self):
@@ -101,7 +102,7 @@ class Client(object):
         return Audio(audio_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
 
     def get_auth_token(self):
-        self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL)
+        self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL, auth_service=self.auth_service)
 
     def get_media_metadata_from_service(self, metadata_id):
 
