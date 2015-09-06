@@ -1,12 +1,22 @@
+import os
 import sys
 sys.path.append('..')
-
 from wix import media
 
+SAMPLE_MEDIA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "sample_media"))
+
+
+# wixmp
 client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
 
+# wixmp tenant
+# client = media.TenantClient(user_id="YOUR_USER_ID", admin_secret="YOUR_ADMIN_SECRET",
+#                             metadata_service_host="YOUR_TENANT_METADATA_HOST",
+#                             image_service_host="YOUR_TENANT_IMAGE_HOST")
+
 try:
-    image = client.upload_image_from_path('/path/to/image.jpg')
+    path_to_image = os.path.join(SAMPLE_MEDIA_DIR, 'parrot.jpg')
+    image = client.upload_image_from_path(path_to_image)
 
     print "Image was uploaded."
 except Exception as e:
@@ -35,7 +45,7 @@ image.reset()
 print image.fit(width=480, height=240, resize_filter=media.Lanczos2SharpFilter).get_url()
 
 image.reset()
-print image.crop(x=1900, y=800, width=800, height=900).get_url()
+print image.crop(x=900, y=70, width=1050, height=730).get_url()
 
 image.reset()
 print image.fit(width=120, height=120) \

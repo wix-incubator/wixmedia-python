@@ -42,20 +42,25 @@ def retry_auth(func):
 
 class Client(object):
 
-    IMAGE_SERVICE_HOST         = 'media.wixapps.net'
-    VIDEO_SERVICE_HOST         = 'storage.googleapis.com'
-    METADATA_SERVICE_HOST      = 'mediacloud.wix.com'
-    WIX_MEDIA_IMAGE_UPLOAD_URL = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
-    WIX_MEDIA_AUDIO_UPLOAD_URL = 'http://%s/files/upload/url' % METADATA_SERVICE_HOST
-    WIX_MEDIA_VIDEO_UPLOAD_URL = 'http://%s/files/video/upload/url' % METADATA_SERVICE_HOST
-    WIX_MEDIA_AUTH_TOKEN_URL   = 'http://%s/auth/token' % METADATA_SERVICE_HOST
-    WIX_MEDIA_GET_FILE_INFO_URL_PREFIX = 'http://%s/files/' % METADATA_SERVICE_HOST
+    def __init__(self, api_key=None, api_secret=None, auth_service='WIX',
+                 metadata_service_host='mediacloud.wix.com',
+                 image_service_host='media.wixapps.net',
+                 video_service_host='storage.googleapis.com'):
 
-    def __init__(self, api_key=None, api_secret=None, auth_service='WIX'):
-        self._api_key     = api_key
-        self._api_secret  = api_secret
-        self._auth_token  = ''
-        self.auth_service = auth_service
+        self._api_key      = api_key
+        self._api_secret   = api_secret
+        self._auth_token   = ''
+        self._auth_service = auth_service
+
+        self._image_service_host    = image_service_host
+        self._video_service_host    = video_service_host
+        self._metadata_service_host = metadata_service_host
+
+        self._wix_media_image_upload_url = 'http://%s/files/upload/url' % self._metadata_service_host
+        self._wix_media_audio_upload_url = 'http://%s/files/upload/url' % self._metadata_service_host
+        self._wix_media_video_upload_url = 'http://%s/files/video/upload/url' % self._metadata_service_host
+        self._wix_media_auth_token_url   = 'http://%s/auth/tenant/token' % self._metadata_service_host
+        self._wix_media_get_file_info_url_prefix = 'http://%s/files/' % self._metadata_service_host
 
     @property
     def api_key(self):
@@ -66,43 +71,43 @@ class Client(object):
         return self._api_secret
 
     def get_image_from_id(self, image_id):
-        return Image(image_id=image_id, service_host=Client.IMAGE_SERVICE_HOST, client=self)
+        return Image(image_id=image_id, service_host=self._image_service_host, client=self)
 
     def upload_image_from_path(self, file_path):
         with open(file_path, 'r') as fp:
-            return self.upload_image_from_stream(fp, os.path.basename(file_path), Client.WIX_MEDIA_IMAGE_UPLOAD_URL)
+            return self.upload_image_from_stream(fp, os.path.basename(file_path), self._wix_media_image_upload_url)
 
     def upload_image_from_stream(self, fp, file_name, upload_url_endpoint):
         metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="picture", upload_url_endpoint=upload_url_endpoint)
 
-        return Image(image_id=metadata['file_url'], service_host=Client.IMAGE_SERVICE_HOST, client=self)
+        return Image(image_id=metadata['file_url'], service_host=self._image_service_host, client=self)
 
     def get_video_from_id(self, video_id):
-        return Video(video_id=video_id, service_host=Client.VIDEO_SERVICE_HOST, client=self)
+        return Video(video_id=video_id, service_host=self._video_service_host, client=self)
 
     def upload_video_from_path(self, file_path):
         with open(file_path, 'r') as fp:
-            return self.upload_video_from_stream(fp, os.path.basename(file_path), Client.WIX_MEDIA_VIDEO_UPLOAD_URL)
+            return self.upload_video_from_stream(fp, os.path.basename(file_path), self._wix_media_video_upload_url)
 
     def upload_video_from_stream(self, fp, file_name, upload_url_endpoint):
         metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="video", upload_url_endpoint=upload_url_endpoint)
 
-        return Video(video_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
+        return Video(video_id=metadata['file_url'], service_host=self._video_service_host, client=self)
 
     def get_audio_from_id(self, audio_id):
-        return Audio(audio_id=audio_id, service_host=Client.VIDEO_SERVICE_HOST, client=self)
+        return Audio(audio_id=audio_id, service_host=self._video_service_host, client=self)
 
     def upload_audio_from_path(self, file_path):
         with open(file_path, 'r') as fp:
-            return self.upload_audio_from_stream(fp, os.path.basename(file_path), Client.WIX_MEDIA_AUDIO_UPLOAD_URL)
+            return self.upload_audio_from_stream(fp, os.path.basename(file_path), self._wix_media_audio_upload_url)
 
     def upload_audio_from_stream(self, fp, file_name, upload_url_endpoint):
         metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="music", upload_url_endpoint=upload_url_endpoint)
 
-        return Audio(audio_id=metadata['file_url'], service_host=Client.VIDEO_SERVICE_HOST, client=self)
+        return Audio(audio_id=metadata['file_url'], service_host=self._video_service_host, client=self)
 
     def get_auth_token(self):
-        self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, Client.WIX_MEDIA_AUTH_TOKEN_URL, auth_service=self.auth_service)
+        self._auth_token = auth_token.get_auth_token(self._api_key, self._api_secret, self._wix_media_auth_token_url, auth_service=self._auth_service)
 
     def get_media_metadata_from_service(self, metadata_id):
 
@@ -126,7 +131,7 @@ class Client(object):
     def _get_upload_url(self, upload_url_endpoint):
 
         headers = {'Authorization': AUTH_SCHEME + ' ' + self._auth_token}
-
+        print headers
         http_status, content, _ = http_utils.get(upload_url_endpoint, headers)
 
         if http_status != 200:
@@ -154,10 +159,20 @@ class Client(object):
 
         headers = {'Authorization': AUTH_SCHEME + ' ' + self._auth_token}
 
-        url = '%s%s' % (Client.WIX_MEDIA_GET_FILE_INFO_URL_PREFIX, metadata_id)
+        url = '%s%s' % (self._wix_media_get_file_info_url_prefix, metadata_id)
         http_status, content, _ = http_utils.get(url, headers)
 
         if http_status != 200:
             raise GeneralError('failed to get file metadata: http_status=%d' % http_status)
 
         return json.loads(content)
+
+
+class TenantClient(Client):
+
+    def __init__(self, user_id=None, admin_secret=None, metadata_service_host=None, image_service_host=None, video_service_host='storage.googleapis.com'):
+        super(TenantClient, self).__init__(api_key=user_id, api_secret=admin_secret, auth_service='WIXTENANT',
+                                           metadata_service_host=metadata_service_host, image_service_host=image_service_host,
+                                           video_service_host=video_service_host)
+
+
