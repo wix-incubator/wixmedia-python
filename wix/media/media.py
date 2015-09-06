@@ -2,12 +2,13 @@ from datetime import datetime
 
 
 class Media(object):
-    def __init__(self, media_id, client):
-        self.id          = media_id
-        self.client      = client
+    def __init__(self, media_id, service_host, client):
+        self.id           = media_id
+        self.service_host = service_host
+        self.client       = client
 
-        self.metadata    = None
-        self.metadata_ts = None
+        self.metadata     = None
+        self.metadata_ts  = None
 
     def get_id(self):
         return self.id

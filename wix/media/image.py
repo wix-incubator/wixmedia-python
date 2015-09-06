@@ -50,9 +50,8 @@ class Image(Media):
     }
 
     def __init__(self, image_id, service_host, client):
-        super(Image, self).__init__(image_id, client)
+        super(Image, self).__init__(image_id, service_host, client)
 
-        self.service_host = service_host
         self.cmd_builder  = None
         self.commands     = list()
 

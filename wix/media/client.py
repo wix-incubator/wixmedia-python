@@ -78,19 +78,23 @@ class Client(object):
             return self.upload_image_from_stream(fp, os.path.basename(file_path), self._wix_media_image_upload_url)
 
     def upload_image_from_stream(self, fp, file_name, upload_url_endpoint):
-        metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="picture", upload_url_endpoint=upload_url_endpoint)
+        metadata = self._upload_to_pm_from_stream(fp, file_name, "picture", upload_url_endpoint)
 
         return Image(image_id=metadata['file_url'], service_host=self._image_service_host, client=self)
 
     def get_video_from_id(self, video_id):
         return Video(video_id=video_id, service_host=self._video_service_host, client=self)
 
-    def upload_video_from_path(self, file_path):
+    def upload_video_from_path(self, file_path, encoding_options=None):
         with open(file_path, 'r') as fp:
-            return self.upload_video_from_stream(fp, os.path.basename(file_path), self._wix_media_video_upload_url)
+            return self.upload_video_from_stream(fp, os.path.basename(file_path), self._wix_media_video_upload_url, encoding_options)
 
-    def upload_video_from_stream(self, fp, file_name, upload_url_endpoint):
-        metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="video", upload_url_endpoint=upload_url_endpoint)
+    def upload_video_from_stream(self, fp, file_name, upload_url_endpoint, encoding_options=None):
+        parts = dict()
+        if encoding_options:
+            parts.update({'encoding_options': encoding_options})
+
+        metadata = self._upload_to_pm_from_stream(fp, file_name, "video", upload_url_endpoint, **parts)
 
         return Video(video_id=metadata['file_url'], service_host=self._video_service_host, client=self)
 
@@ -102,7 +106,7 @@ class Client(object):
             return self.upload_audio_from_stream(fp, os.path.basename(file_path), self._wix_media_audio_upload_url)
 
     def upload_audio_from_stream(self, fp, file_name, upload_url_endpoint):
-        metadata = self._upload_to_pm_from_stream(fp, file_name, media_type="music", upload_url_endpoint=upload_url_endpoint)
+        metadata = self._upload_to_pm_from_stream(fp, file_name, "music", upload_url_endpoint)
 
         return Audio(audio_id=metadata['file_url'], service_host=self._video_service_host, client=self)
 
@@ -117,13 +121,13 @@ class Client(object):
         metadata = self._get_media_metadata_from_service(metadata_id)
         return metadata
 
-    def _upload_to_pm_from_stream(self, fp, file_name, media_type, upload_url_endpoint):
+    def _upload_to_pm_from_stream(self, fp, file_name, media_type, upload_url_endpoint, **parts):
 
         if not self._auth_token:
             self.get_auth_token()
 
         upload_url = self._get_upload_url(upload_url_endpoint)
-        metadata   = self._upload_to_url(upload_url, fp, file_name, media_type)
+        metadata   = self._upload_to_url(upload_url, fp, file_name, media_type, **parts)
 
         return metadata
 
@@ -141,9 +145,11 @@ class Client(object):
         return metadata['upload_url']
 
     @retry_auth
-    def _upload_to_url(self, upload_url, fp, file_name, media_type):
+    def _upload_to_url(self, upload_url, fp, file_name, media_type, **parts):
 
         fields  = {"media_type": media_type}
+        fields.update(parts)
+
         files   = {'file': {'filename': file_name, 'content': fp.read()}}
         headers = {'Authorization':  AUTH_SCHEME + ' ' + self._auth_token}
 
@@ -171,8 +177,11 @@ class Client(object):
 class TenantClient(Client):
 
     def __init__(self, user_id=None, admin_secret=None, metadata_service_host=None, image_service_host=None, video_service_host='storage.googleapis.com'):
-        super(TenantClient, self).__init__(api_key=user_id, api_secret=admin_secret, auth_service='WIXTENANT',
-                                           metadata_service_host=metadata_service_host, image_service_host=image_service_host,
-                                           video_service_host=video_service_host)
+        super(TenantClient, self).__init__(
+            api_key=user_id, api_secret=admin_secret, auth_service='WIXTENANT',
+            metadata_service_host=metadata_service_host,
+            image_service_host=image_service_host,
+            video_service_host=video_service_host
+        )
 
 

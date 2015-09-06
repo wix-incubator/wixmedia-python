@@ -2,13 +2,32 @@ import sys
 sys.path.append('..')
 
 from wix import media
+from pprint import pprint
 
+
+# wixmp
 client = media.Client(api_key="YOUR_API_KEY", api_secret="YOUR_API_SECRET")
+
+# wixmp tenant
+# client = media.TenantClient(user_id="YOUR_USER_ID", admin_secret="YOUR_ADMIN_SECRET",
+#                             metadata_service_host="YOUR_TENANT_METADATA_HOST",
+#                             image_service_host="YOUR_TENANT_IMAGE_HOST")
 
 try:
     print "Uploading video ..."
 
-    video = client.upload_video_from_path('/path/to/video.mp4')
+    # upload a video and output video only in mp4 format (default is: mp4 and webm)
+    encoding_options = """
+    {
+        "file_output": {
+            "video": {
+                "format":["mp4"]
+                }
+            }
+    }
+    """
+
+    video = client.upload_video_from_path('/path/to/video.mp4', encoding_options=encoding_options)
 
     print "Video file was uploaded."
 except:
@@ -16,8 +35,6 @@ except:
     video = client.get_video_from_id(video_id)
     print "Stock video file is used."
 
-print
-print "Uploaded video url:", video.get_url()
 
 try:
     print "Waiting for video encoding to finish..."
@@ -29,9 +46,9 @@ try:
         print "Encoded videos:"
 
         ready_videos = video.get_encoded_videos()
-        for k, ready_video in ready_videos.iteritems():
-            print ready_video.get_url()
-except:
-    print "Failed to get video information. " \
+        pprint(ready_videos)
+
+except Exception as e:
+    print "Failed to get video information: %s " \
           "Check your settings:\nAPI_KEY: %s\nAPI_SECRET: %s" % \
-          (client._api_key, client._api_secret)
+          (e.message, client._api_key, client._api_secret)

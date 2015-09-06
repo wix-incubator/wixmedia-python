@@ -5,12 +5,7 @@ import json
 
 class Video(Media):
     def __init__(self, video_id, service_host, client):
-        super(Video, self).__init__(video_id, client)
-
-        self.service_host = service_host
-
-    def get_url(self):
-        return "/".join(['http://%s' % self.service_host, self.id])
+        super(Video, self).__init__(video_id, service_host, client)
 
     # returns: video encoding status: 'IN-QUEUE', 'INPROGRESS', 'READY', 'FAILED'
     def get_video_status(self, timeout=60):
@@ -31,5 +26,9 @@ class Video(Media):
     def get_encoded_videos(self, refresh=False):
         metadata = self.get_metadata(refresh=refresh)
 
-        file_info = json.loads(metadata['file_info'])
-        return {k: Video(id, self.service_host, self.client) for k, id in file_info['ready_videos'].iteritems()}
+        ready_videos = list()
+        for video_info in metadata['file_output']['video']:
+            video_info['url'] = "/".join(['http://%s' % self.service_host, video_info['url']])
+            ready_videos.append(video_info)
+
+        return ready_videos
