@@ -59,7 +59,12 @@ class Client(object):
         self._wix_media_image_upload_url = 'http://%s/files/upload/url' % self._metadata_service_host
         self._wix_media_audio_upload_url = 'http://%s/files/upload/url' % self._metadata_service_host
         self._wix_media_video_upload_url = 'http://%s/files/video/upload/url' % self._metadata_service_host
-        self._wix_media_auth_token_url   = 'http://%s/auth/tenant/token' % self._metadata_service_host
+
+        if auth_service == 'WIXTENANT':
+            self._wix_media_auth_token_url   = 'http://%s/auth/tenant/token' % self._metadata_service_host
+        else:
+            self._wix_media_auth_token_url   = 'http://%s/auth/token' % self._metadata_service_host
+
         self._wix_media_get_file_info_url_prefix = 'http://%s/files/' % self._metadata_service_host
 
     @property
